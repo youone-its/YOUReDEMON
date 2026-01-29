@@ -1,14 +1,15 @@
-[gd_scene load_steps=17 format=4 uid="uid://c6xytwy2b07sv"]
+[gd_scene load_steps=18 format=4 uid="uid://c6xytwy2b07sv"]
 
-[ext_resource type="Texture2D" uid="uid://c2bb1g0d3g1gt" path="res://map/TX Tileset Grass.png" id="1_epypp"]
-[ext_resource type="Texture2D" uid="uid://di1brhu018nxn" path="res://map/TX Tileset Stone Ground.png" id="1_wtcfe"]
-[ext_resource type="Texture2D" uid="uid://8wpwool4sb16" path="res://map/Full Spritesheet.png" id="2_kdubu"]
-[ext_resource type="Texture2D" uid="uid://dwy82hndi3tlk" path="res://map/TX Tileset Wall.png" id="3_0hol4"]
-[ext_resource type="Texture2D" uid="uid://dpt13gpmrnob8" path="res://map/TX Props.png" id="4_0hol4"]
-[ext_resource type="Texture2D" uid="uid://mru1k7wll3pp" path="res://map/TX Struct.png" id="4_q6r6c"]
+[ext_resource type="Texture2D" path="res://map/TX Tileset Grass.png" id="1_anofm"]
+[ext_resource type="Texture2D" path="res://map/Full Spritesheet.png" id="2_t4xaq"]
+[ext_resource type="Texture2D" path="res://map/TX Tileset Stone Ground.png" id="3_mh2tb"]
+[ext_resource type="Texture2D" path="res://map/TX Tileset Wall.png" id="4_3gftx"]
+[ext_resource type="Texture2D" path="res://map/TX Struct.png" id="5_cvsiy"]
+[ext_resource type="Texture2D" path="res://map/TX Props.png" id="6_wx82q"]
+[ext_resource type="PackedScene" uid="uid://b5w8qxm7ymjfd" path="res://characters/player/player.tscn" id="7_4h7uv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epypp"]
-texture = ExtResource("1_epypp")
+texture = ExtResource("1_anofm")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -600,7 +601,7 @@ texture_region_size = Vector2i(32, 32)
 7:7/0/terrain_set = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rj586"]
-texture = ExtResource("2_kdubu")
+texture = ExtResource("2_t4xaq")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -2078,7 +2079,7 @@ sources/0 = SubResource("TileSetAtlasSource_epypp")
 sources/3 = SubResource("TileSetAtlasSource_rj586")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e48y"]
-texture = ExtResource("1_wtcfe")
+texture = ExtResource("3_mh2tb")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -2439,7 +2440,7 @@ terrain_set_0/terrain_0/color = Color(0.65834004, 0.6583399, 0.6583399, 1)
 sources/5 = SubResource("TileSetAtlasSource_0e48y")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kdubu"]
-texture = ExtResource("3_0hol4")
+texture = ExtResource("4_3gftx")
 texture_region_size = Vector2i(32, 32)
 1:1/0 = 0
 1:1/0/terrain_set = 0
@@ -2826,7 +2827,7 @@ texture_region_size = Vector2i(32, 32)
 6:6/0/terrain_set = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d21ai"]
-texture = ExtResource("4_q6r6c")
+texture = ExtResource("5_cvsiy")
 texture_region_size = Vector2i(32, 32)
 12:0/size_in_atlas = Vector2i(4, 3)
 12:0/0 = 0
@@ -2869,7 +2870,7 @@ sources/0 = SubResource("TileSetAtlasSource_kdubu")
 sources/1 = SubResource("TileSetAtlasSource_d21ai")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q6r6c"]
-texture = ExtResource("4_0hol4")
+texture = ExtResource("6_wx82q")
 texture_region_size = Vector2i(32, 32)
 1:0/size_in_atlas = Vector2i(1, 2)
 1:0/0 = 0
@@ -2996,3 +2997,6 @@ tile_set = SubResource("TileSet_d21ai")
 [node name="propsTileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAARAAoAAgAJAAIAAAAHAA4AAgALAAUAAAAMAA4AAgALAAUAAAAMAAwAAgALAAUAAAAVAA0AAgANAAYAAAAVAAcAAgANAAYAAAAHAAYAAgALAAUAAAAJAAkAAgANAAAAAAAYABIAAgAOAAMAAAAYABEAAgAOAAMAAAA=")
 tile_set = SubResource("TileSet_kdubu")
+
+[node name="Player" parent="." instance=ExtResource("7_4h7uv")]
+position = Vector2(417, 323)
