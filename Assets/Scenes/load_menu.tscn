@@ -1,0 +1,109 @@
+[gd_scene load_steps=3 format=3 uid="uid://v1s6jea7hlcr"]
+
+[ext_resource type="Script" uid="uid://c3p8q6xmnjdo0" path="res://Assets/Scripts/load_menu.gd" id="1_0al05"]
+[ext_resource type="Texture2D" uid="uid://11payjxkcnof" path="res://Assets/Background/mainmenu.jpg" id="2_15hup"]
+
+[node name="LoadMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_0al05")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_15hup")
+
+[node name="MainHBox" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="LeftPanel" type="ScrollContainer" parent="MainHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+
+[node name="PanelContent" type="VBoxContainer" parent="MainHBox/LeftPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MainHBox/LeftPanel/PanelContent"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+
+[node name="BackButton" type="Button" parent="MainHBox/LeftPanel/PanelContent/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "back"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MainHBox/LeftPanel/PanelContent"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="SaveList" type="VBoxContainer" parent="MainHBox/LeftPanel/PanelContent/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_constants/separation = 10
+
+[node name="RightPanel" type="VBoxContainer" parent="MainHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="RightMargin" type="MarginContainer" parent="MainHBox/RightPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+
+[node name="ContentLayout" type="VBoxContainer" parent="MainHBox/RightPanel/RightMargin"]
+layout_mode = 2
+
+[node name="DataLabel" type="Label" parent="MainHBox/RightPanel/RightMargin/ContentLayout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Pilih Slot untuk Melihat Detail"
+horizontal_alignment = 1
+
+[node name="spacer" type="Control" parent="MainHBox/RightPanel/RightMargin/ContentLayout"]
+layout_mode = 2
+
+[node name="Thumbnail" type="TextureRect" parent="MainHBox/RightPanel/RightMargin/ContentLayout"]
+custom_minimum_size = Vector2(400, 225)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="spacer2" type="Control" parent="MainHBox/RightPanel/RightMargin/ContentLayout"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainHBox/RightPanel/RightMargin/ContentLayout"]
+layout_mode = 2
+
+[node name="ConfirmLoadBtn" type="Button" parent="MainHBox/RightPanel/RightMargin/ContentLayout/MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Select"
+icon_alignment = 1

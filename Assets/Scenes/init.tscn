@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://bae2wiyqxmjrm"]
+
+[ext_resource type="Script" uid="uid://dim48v67bq8ta" path="res://Assets/Scripts/init.gd" id="1_l5jql"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_l5jql")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "xcfhgvjhbkjn"
+
+[node name="save" type="Button" parent="."]
+offset_left = 9.0
+offset_top = 64.0
+offset_right = 52.0
+offset_bottom = 95.0
+text = "save"
+
+[node name="back" type="Button" parent="."]
+offset_left = 8.0
+offset_top = 136.0
+offset_right = 53.0
+offset_bottom = 167.0
+text = "back"
