@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5i2pusq47g3u"
-path="res://.godot/imported/decorative.png-de2bfbac81f86c201ae856cd1f1a4aab.ctex"
+uid="uid://8wpwool4sb16"
+path="res://.godot/imported/Full Spritesheet.png-80ed55ae5f938a655dcab2a609f7cdaa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://map/decorative.png"
-dest_files=["res://.godot/imported/decorative.png-de2bfbac81f86c201ae856cd1f1a4aab.ctex"]
+source_file="res://assets/sprites/world/Full Spritesheet.png"
+dest_files=["res://.godot/imported/Full Spritesheet.png-80ed55ae5f938a655dcab2a609f7cdaa.ctex"]
 
 [params]
 

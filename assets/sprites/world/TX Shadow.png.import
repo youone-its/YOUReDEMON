@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cvs0utsx828ja"
-path="res://.godot/imported/TX Shadow.png-ca03056a513c86382b60a2a4b855ce2e.ctex"
+path="res://.godot/imported/TX Shadow.png-90f18fda8270cd7ccdf6a07ec7b7f87e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://map/TX Shadow.png"
-dest_files=["res://.godot/imported/TX Shadow.png-ca03056a513c86382b60a2a4b855ce2e.ctex"]
+source_file="res://assets/sprites/world/TX Shadow.png"
+dest_files=["res://.godot/imported/TX Shadow.png-90f18fda8270cd7ccdf6a07ec7b7f87e.ctex"]
 
 [params]
 

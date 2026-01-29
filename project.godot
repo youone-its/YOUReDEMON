@@ -14,6 +14,10 @@ config/name="YOURe_DEMON"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[dotnet]
+
+project/assembly_name="YOURe_DEMON"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/GodotTogether/plugin.cfg")

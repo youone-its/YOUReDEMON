@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gcs0ohbghtfo"
-path="res://.godot/imported/TX Plant.png-d7ad22fba1948e9bd601e92c67ca235d.ctex"
+uid="uid://dlxh3nomedxh"
+path="res://.godot/imported/TX Props with Shadow.png-c398bd3012601e7db925365d7dc0642d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://map/TX Plant.png"
-dest_files=["res://.godot/imported/TX Plant.png-d7ad22fba1948e9bd601e92c67ca235d.ctex"]
+source_file="res://assets/sprites/world/Extra/TX Props with Shadow.png"
+dest_files=["res://.godot/imported/TX Props with Shadow.png-c398bd3012601e7db925365d7dc0642d.ctex"]
 
 [params]
 
