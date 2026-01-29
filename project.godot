@@ -20,7 +20,7 @@ project/assembly_name="YOURe_DEMON"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GodotTogether/plugin.cfg")
+enabled=PackedStringArray()
 
 [rendering]
 
