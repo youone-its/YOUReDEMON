@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b5w8qxm7ymjfd" path="res://characters/player/player.tscn" id="7_4h7uv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epypp"]
-texture = ExtResource("1_anofm")
+texture = ExtResource("1_epypp")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -602,7 +602,7 @@ texture_region_size = Vector2i(32, 32)
 7:7/0/terrain_set = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rj586"]
-texture = ExtResource("2_t4xaq")
+texture = ExtResource("2_kdubu")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -2086,7 +2086,7 @@ sources/3 = SubResource("TileSetAtlasSource_rj586")
 sources/4 = SubResource("TileSetAtlasSource_4d7sh")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e48y"]
-texture = ExtResource("3_mh2tb")
+texture = ExtResource("1_wtcfe")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -2447,7 +2447,7 @@ terrain_set_0/terrain_0/color = Color(0.65834004, 0.6583399, 0.6583399, 1)
 sources/5 = SubResource("TileSetAtlasSource_0e48y")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kdubu"]
-texture = ExtResource("4_3gftx")
+texture = ExtResource("3_0hol4")
 texture_region_size = Vector2i(32, 32)
 1:1/0 = 0
 1:1/0/terrain_set = 0
@@ -2834,7 +2834,7 @@ texture_region_size = Vector2i(32, 32)
 6:6/0/terrain_set = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d21ai"]
-texture = ExtResource("5_cvsiy")
+texture = ExtResource("4_q6r6c")
 texture_region_size = Vector2i(32, 32)
 12:0/size_in_atlas = Vector2i(4, 3)
 12:0/0 = 0
@@ -2877,7 +2877,7 @@ sources/0 = SubResource("TileSetAtlasSource_kdubu")
 sources/1 = SubResource("TileSetAtlasSource_d21ai")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q6r6c"]
-texture = ExtResource("6_wx82q")
+texture = ExtResource("4_0hol4")
 texture_region_size = Vector2i(32, 32)
 1:0/size_in_atlas = Vector2i(1, 2)
 1:0/0 = 0
