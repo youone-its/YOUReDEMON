@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://clx82ah4fjpi2"
-path="res://.godot/imported/TX Plant with Shadow.png-883ffee3e413cca0d0107ba6318e412a.ctex"
+path="res://.godot/imported/TX Plant with Shadow.png-a4113d1e56265ae4938de9697c65fc24.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/world/Extra/TX Plant with Shadow.png"
-dest_files=["res://.godot/imported/TX Plant with Shadow.png-883ffee3e413cca0d0107ba6318e412a.ctex"]
+source_file="res://Assets/sprites/world/Extra/TX Plant with Shadow.png"
+dest_files=["res://.godot/imported/TX Plant with Shadow.png-a4113d1e56265ae4938de9697c65fc24.ctex"]
 
 [params]
 
