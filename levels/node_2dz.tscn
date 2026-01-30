@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=4 uid="uid://cpw3bnl47ynj1"]
+[gd_scene load_steps=88 format=4 uid="uid://cpw3bnl47ynj1"]
 
 [ext_resource type="Texture2D" uid="uid://c2bb1g0d3g1gt" path="res://Assets/sprites/world/TX Tileset Grass.png" id="1_epypp"]
 [ext_resource type="Texture2D" uid="uid://di1brhu018nxn" path="res://Assets/sprites/world/TX Tileset Stone Ground.png" id="1_wtcfe"]
@@ -1676,6 +1676,12 @@ polygon = PackedVector2Array(8, -16, 16, -16, 16, 16, 16, 80, 8, 80)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pp4l5"]
 polygon = PackedVector2Array(-40, -16, -40, 80, -48, 80, -48, -16)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_apr00"]
+polygon = PackedVector2Array(9.0809765, -72.64781, 16.409483, -73.92233, 16, 16, 9.22068, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nd6n1"]
+polygon = PackedVector2Array(-40.62542, -73.28507, -42.005325, 21.85643, -48.204838, 20.021873, -48.27256, -71.69192)
+
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8u05n"]
 polygon = PackedVector2Array(64, 56, -16, 16, -24, 16, -24, 72, -16, 72, -16, 60, -16, 20, -16, 20, 48, 52, 64, 60)
 
@@ -1687,6 +1693,12 @@ polygon = PackedVector2Array(8, -16, 16, -16, 16, 16, 16, 80, 8, 80)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ry2ou"]
 polygon = PackedVector2Array(-40, -16, -40, 80, -48, 80, -48, -16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ums2i"]
+polygon = PackedVector2Array(9.0809765, -72.64781, 16.409483, -73.92233, 16, 16, 9.22068, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lc8ad"]
+polygon = PackedVector2Array(-40.62542, -73.28507, -42.005325, 21.85643, -48.204838, 20.021873, -48.27256, -71.69192)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cbrfc"]
 polygon = PackedVector2Array(-64, 56, 16, 16, 24, 16, 24, 72, 16, 72, 16, 60, 16, 20, 16, 20, -48, 52, -64, 60)
@@ -1752,6 +1764,8 @@ texture_region_size = Vector2i(32, 32)
 1:1/1 = 1
 1:1/1/flip_v = true
 1:1/1/texture_origin = Vector2i(16, 27)
+1:1/1/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_apr00")
+1:1/1/occlusion_layer_0/polygon_1/polygon = SubResource("OccluderPolygon2D_nd6n1")
 4:1/size_in_atlas = Vector2i(3, 3)
 4:1/0 = 0
 4:1/0/texture_origin = Vector2i(0, -32)
@@ -1777,6 +1791,8 @@ texture_region_size = Vector2i(32, 32)
 1:5/1 = 1
 1:5/1/flip_v = true
 1:5/1/texture_origin = Vector2i(16, 27)
+1:5/1/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ums2i")
+1:5/1/occlusion_layer_0/polygon_1/polygon = SubResource("OccluderPolygon2D_lc8ad")
 1:9/size_in_atlas = Vector2i(4, 3)
 1:9/0 = 0
 1:9/0/texture_origin = Vector2i(16, -24)
@@ -1991,9 +2007,9 @@ fill = 1
 fill_from = Vector2(0.47863248, 0.50427353)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_lbmqg"]
-vertices = PackedVector2Array(1512.8984, 196.71875, 1506.0781, 909.8125, 1187.7188, 936.9922, 155.21094, 916.2031, 171.77344, 159.28125)
+vertices = PackedVector2Array(8944.867, 215.92969, 8840.117, 8701.93, 259.85938, 8649.0625, 155, 926.21875, 171.78125, 159.0625)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(162, 149, 145, 926, 1188, 947, 1516, 919, 1523, 187)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(162, 149, 145, 926, 250, 8659, 8850, 8712, 8955, 206)])
 
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
@@ -2035,7 +2051,7 @@ position = Vector2(887, 680)
 position = Vector2(622, 290)
 
 [node name="Player" parent="." instance=ExtResource("7_4h7uv")]
-position = Vector2(364, 321)
+position = Vector2(5919, 881)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.11858135, 0.11858139, 0.11858138, 1)
