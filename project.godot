@@ -18,6 +18,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameData="*res://Assets/Scripts/GameData.gd"
+LiveChat="*res://characters/LiveChat/live_chat.tscn"
+ChatData="*res://characters/LiveChat/ChatData.gd"
+
 [dotnet]
 
 project/assembly_name="YOURe_DEMON"
@@ -25,6 +28,10 @@ project/assembly_name="YOURe_DEMON"
 [editor_plugins]
 
 enabled=PackedStringArray()
+
+[global_group]
+
+hide_chat_global=""
 
 [rendering]
 

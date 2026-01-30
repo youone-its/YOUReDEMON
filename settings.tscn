@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b84q3xa2eidmk" path="res://Assets/Scripts/settings_menu.gd" id="1_x2hje"]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" groups=["hide_chat", "hide_chat_global"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,5 +49,16 @@ layout_mode = 2
 text = "Quit"
 
 [node name="TriggerBtn" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Q"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Chat"
+
+[node name="ChatTriggerBtn" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Q"

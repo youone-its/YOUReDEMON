@@ -54,7 +54,7 @@ turbulence_enabled = true
 turbulence_noise_strength = 3.0
 turbulence_influence_min = 0.05
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" groups=["hide_chat_global"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

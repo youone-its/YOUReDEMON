@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhb7cc3s2aawk"]
+
+[ext_resource type="Script" uid="uid://c88iyth4qttr" path="res://characters/LiveChat/LiveChat.gd" id="1_lox3f"]
+
+[node name="LiveChat" type="CanvasLayer"]
+layer = 1000
+script = ExtResource("1_lox3f")
+metadata/_edit_horizontal_guides_ = [-108.0]
+
+[node name="Control" type="MarginContainer" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+layout_mode = 2
+
+[node name="ChatBox" type="VBoxContainer" parent="Control/ScrollContainer"]
+layout_mode = 2

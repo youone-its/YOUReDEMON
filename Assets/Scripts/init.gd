@@ -5,11 +5,18 @@ extends Node2D
 @onready var label = $Label # Tambahkan ini agar debug muncul
 
 func _ready():
-	# Menghubungkan signal ke fungsi
-	save_btn.pressed.connect(_on_save_pressed)
-	back_btn.pressed.connect(_on_back_pressed) # Baris ke-9 yang error
+	# Munculkan chat lama yang tersimpan di memori save (tanpa animasi)
+	if LiveChat.has_method("reload_history"):
+		LiveChat.reload_history()
 	
-	_update_debug_label() # Memanggil fungsi debug saat awal
+	save_btn.pressed.connect(_on_save_pressed)
+	back_btn.pressed.connect(_on_back_pressed)
+	
+	_update_debug_label()
+	
+	# Trigger chat baru HANYA jika ID-nya belum pernah ada
+	if LiveChat.has_method("trigger_chat"):
+		LiveChat.trigger_chat("welcome_event")
 
 func _update_debug_label():
 	# Menampilkan data sesuai permintaanmu
@@ -35,3 +42,8 @@ func _on_save_pressed():
 func _on_back_pressed():
 	# Gunakan UID atau path res://
 	get_tree().change_scene_to_file("uid://cnw4e8w572xwd")
+
+func _input(event):
+	GameData.check_quit_input(event)
+	if has_node("/root/LiveChat"):
+		get_node("/root/LiveChat").check_chat_input(event)

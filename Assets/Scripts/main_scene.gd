@@ -13,6 +13,8 @@ func _ready():
 			# Signal untuk animasi hover (geser ke kanan)
 			btn.mouse_entered.connect(_on_button_hover.bind(btn, true))
 			btn.mouse_exited.connect(_on_button_hover.bind(btn, false))
+	if has_node("/root/LiveChat"):
+		get_node("/root/LiveChat").visible = false
 
 # --- SISTEM ANIMASI HOVER ---
 func _on_button_hover(btn: Button, is_hover: bool):
