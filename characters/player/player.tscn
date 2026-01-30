@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b5w8qxm7ymjfd"]
+[gd_scene load_steps=19 format=3 uid="uid://b5w8qxm7ymjfd"]
 
 [ext_resource type="Script" uid="uid://cf4l2nrlnyflk" path="res://characters/player/player.gd" id="1_p8wc7"]
 [ext_resource type="Texture2D" uid="uid://dv05m2wpdvjcf" path="res://assets/sprites/player/TX Player.png" id="2_xxgcw"]
@@ -135,10 +135,22 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xm3v"]
-size = Vector2(21, 44)
+[sub_resource type="CircleShape2D" id="CircleShape2D_xxgcw"]
+
+[sub_resource type="Gradient" id="Gradient_t4xaq"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.086021505, 0.65232974)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xxgcw"]
+gradient = SubResource("Gradient_t4xaq")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.47863248, 0.50427353)
 
 [node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_mask = 9
 script = ExtResource("1_p8wc7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -147,8 +159,21 @@ animation = &"idle_down"
 autoplay = "idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 4)
-shape = SubResource("RectangleShape2D_8xm3v")
+position = Vector2(0.5, 13)
+shape = SubResource("CircleShape2D_xxgcw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0.5, 13)
+target_position = Vector2(-0.5, 30)
+collision_mask = 4
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, 7.885)
+scale = Vector2(4.22, 4.22)
+energy = 0.5
+shadow_enabled = true
+shadow_filter = 2
+texture = SubResource("GradientTexture2D_xxgcw")

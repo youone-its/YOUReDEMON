@@ -33,6 +33,18 @@ enabled=PackedStringArray()
 
 hide_chat_global=""
 
+[layer_names]
+
+2d_render/layer_1="Environment"
+2d_render/layer_2="Player"
+2d_render/layer_3="Interactions"
+2d_render/layer_8="Props"
+2d_physics/layer_1="Environment"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Interactions"
+2d_physics/layer_4="Enemies"
+2d_physics/layer_8="Props"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
