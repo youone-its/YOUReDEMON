@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5bego3noluuu"]
+
+[ext_resource type="Texture2D" uid="uid://dpt13gpmrnob8" path="res://assets/sprites/world/TX Props.png" id="1_c6ejp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bjj5"]
+atlas = ExtResource("1_c6ejp")
+region = Rect2(448, 96, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nuly5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4bjj5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_t4xaq"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.086021505, 0.65232974)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c6ejp"]
+gradient = SubResource("Gradient_t4xaq")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.47863248, 0.50427353)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c6ejp"]
+size = Vector2(22, 16)
+
+[node name="lantern" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nuly5")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, 7.885)
+scale = Vector2(4.22, 4.22)
+energy = 0.5
+shadow_enabled = true
+shadow_filter = 2
+texture = SubResource("GradientTexture2D_c6ejp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 19)
+shape = SubResource("RectangleShape2D_c6ejp")
