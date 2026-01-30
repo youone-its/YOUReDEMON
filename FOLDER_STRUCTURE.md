@@ -10,10 +10,16 @@ YOUReDEMON/
 ├── icon.svg
 ├── characters/
 │   ├── player/
-│   └── enemies/
+│   ├── enemies/
+│   └── LiveChat/
 ├── levels/
+├── ui/
+│   └── menus/
+├── autoload/
+├── shader/
 └── assets/
-    └── sprites/
+    ├── sprites/
+    └── textures/
 ```
 
 ## Folder Descriptions
@@ -38,19 +44,42 @@ Contains game levels, maps, and world scenes.
 - Example: `/levels/town.tscn` - Town level
 - Keep level-specific assets close to the level scene when possible
 
+### `/ui/`
+User interface elements, menus, and HUD components.
+
+- **`/ui/menus/`** - Main menu, pause menu, settings, load screens
+  - `init.tscn` - Initialization scene
+  - `load_menu.tscn` - Load game menu
+  - Scene scripts kept together with their `.tscn` files
+
+### `/autoload/`
+Global singleton scripts that auto-load with the game.
+
+- `GameData.gd` - Global game state and save data management
+- Add other autoload scripts here (audio manager, scene manager, etc.)
+
+### `/shader/`
+Custom shader files for visual effects.
+
+- `light.gdshader` - Lighting shader
+- Keep shader-related resources here
+
 ### `/assets/`
 Shared resources used across multiple scenes.
 
 - **`/assets/sprites/`** - Sprite sheets and textures
+  - **`/assets/sprites/player/`** - Player character sprites
+  - **`/assets/sprites/world/`** - World tiles, props, decorations
+  - **`/assets/sprites/ui/`** - UI backgrounds and icons
   - `TX Player.png` - Player sprite sheet
   - `TX Props.png` - Props sprite sheet
   - `TX Tileset Grass.png` - Tileset for grass
-  - Organize by type if needed: `/assets/sprites/world/`, `/assets/sprites/ui/`
+
+- **`/assets/textures/`** - Non-sprite textures (lighting, effects)
 
 - **Future folders**:
   - `/assets/audio/` - Music and sound effects
   - `/assets/fonts/` - Font files
-  - `/assets/shaders/` - Custom shader files
 
 ### `/addons/` (when needed)
 Third-party plugins and extensions from the Asset Library.
@@ -87,6 +116,19 @@ Third-party plugins and extensions from the Asset Library.
 /levels/
 ├── dungeon_01.tscn
 └── dungeon_01_tilemap.png (if level-specific)
+```
+
+### New UI Menu
+```
+/ui/menus/
+├── inventory_menu.tscn
+└── inventory_menu.gd
+```
+
+### New Autoload Script
+```
+/autoload/
+└── audio_manager.gd
 ```
 
 ### Shared Asset
