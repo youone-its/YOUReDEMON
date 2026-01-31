@@ -41,21 +41,39 @@ func _physics_process(delta):
 	# Check WASD keys
 	if Input.is_action_pressed("ui_up") or Input.is_key_pressed(KEY_W):
 		input_direction.y -= 1
-		current_direction = "up"
 	if Input.is_action_pressed("ui_down") or Input.is_key_pressed(KEY_S):
 		input_direction.y += 1
-		current_direction = "down"
 	if Input.is_action_pressed("ui_left") or Input.is_key_pressed(KEY_A):
 		input_direction.x -= 1
-		current_direction = "left"
 	if Input.is_action_pressed("ui_right") or Input.is_key_pressed(KEY_D):
 		input_direction.x += 1
-		current_direction = "right"
 	
-	# Normalize diagonal movement so it's not faster
+	# Determine direction based on input (8 directions)
 	if input_direction.length() > 0:
-		input_direction = input_direction.normalized()
 		is_moving = true
+		
+		# Normalize for consistent speed
+		input_direction = input_direction.normalized()
+		
+		# Determine 8-directional facing
+		var angle = rad_to_deg(input_direction.angle())
+		
+		if angle >= -22.5 and angle < 22.5:
+			current_direction = "right"
+		elif angle >= 22.5 and angle < 67.5:
+			current_direction = "downright"
+		elif angle >= 67.5 and angle < 112.5:
+			current_direction = "down"
+		elif angle >= 112.5 and angle < 157.5:
+			current_direction = "downleft"
+		elif angle >= 157.5 or angle < -157.5:
+			current_direction = "left"
+		elif angle >= -157.5 and angle < -112.5:
+			current_direction = "topleft"
+		elif angle >= -112.5 and angle < -67.5:
+			current_direction = "up"
+		elif angle >= -67.5 and angle < -22.5:
+			current_direction = "topright"
 	else:
 		is_moving = false
 	
@@ -93,7 +111,7 @@ func update_raycast():
 	
 	var raycast_length = 30  # Distance the raycast extends
 	
-	# Update raycast direction based on player facing
+	# Update raycast direction based on player facing (8 directions)
 	match current_direction:
 		"down":
 			raycast.target_position = Vector2(0, raycast_length)
@@ -103,6 +121,14 @@ func update_raycast():
 			raycast.target_position = Vector2(-raycast_length, 0)
 		"right":
 			raycast.target_position = Vector2(raycast_length, 0)
+		"downright":
+			raycast.target_position = Vector2(raycast_length, raycast_length).normalized() * raycast_length
+		"downleft":
+			raycast.target_position = Vector2(-raycast_length, raycast_length).normalized() * raycast_length
+		"topright":
+			raycast.target_position = Vector2(raycast_length, -raycast_length).normalized() * raycast_length
+		"topleft":
+			raycast.target_position = Vector2(-raycast_length, -raycast_length).normalized() * raycast_length
 
 func take_damage(amount: int):
 	GameData.hp -= amount

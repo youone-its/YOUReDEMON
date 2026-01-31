@@ -2064,7 +2064,6 @@ position = Vector2(2, -18)
 position = Vector2(464, 272)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0.11858138, 0.11858138, 0.11858138, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
@@ -2075,7 +2074,6 @@ shadow_filter = 2
 texture = SubResource("GradientTexture2D_e50u4")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_lbmqg")
 
 [node name="Enemy" parent="." instance=ExtResource("9_j081x")]
