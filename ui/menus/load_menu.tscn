@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://v1s6jea7hlcr"]
 
-[ext_resource type="Script" uid="uid://c3p8q6xmnjdo0" path="res://Assets/Scripts/load_menu.gd" id="1_0al05"]
-[ext_resource type="Texture2D" uid="uid://11payjxkcnof" path="res://Assets/Background/mainmenu.jpg" id="2_15hup"]
+[ext_resource type="Script" uid="uid://c3p8q6xmnjdo0" path="res://ui/menus/load_menu.gd" id="1_0al05"]
+[ext_resource type="Texture2D" uid="uid://11payjxkcnof" path="res://assets/sprites/ui/mainmenu.jpg" id="2_15hup"]
 
 [node name="LoadMenu" type="Control" groups=["hide_chat_global"]]
 layout_mode = 3

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di1brhu018nxn"
-path="res://.godot/imported/TX Tileset Stone Ground.png-4bd146a0c62b7f57546ecbcc309b4e25.ctex"
+uid="uid://c2yto0di0iueo"
+path="res://.godot/imported/TX Struct - transparant.png-14e3500806c8b8157e49c662d78110e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/world/TX Tileset Stone Ground.png"
-dest_files=["res://.godot/imported/TX Tileset Stone Ground.png-4bd146a0c62b7f57546ecbcc309b4e25.ctex"]
+source_file="res://Assets/sprites/world/TX Struct - transparant.png"
+dest_files=["res://.godot/imported/TX Struct - transparant.png-14e3500806c8b8157e49c662d78110e2.ctex"]
 
 [params]
 

@@ -10,6 +10,29 @@ var is_moving: bool = false
 func _ready():
 	# Add the player to the "player" group for easy reference
 	add_to_group("player")
+	
+	# Setup raycast for interactions
+	setup_raycast()
+
+func setup_raycast():
+	# Check if raycast exists, if not skip
+	if not has_node("CollisionShape2D/RayCast2D"):
+		if not has_node("RayCast2D"):
+			return
+	
+	var raycast = null
+	if has_node("CollisionShape2D/RayCast2D"):
+		raycast = $CollisionShape2D/RayCast2D
+	elif has_node("RayCast2D"):
+		raycast = $RayCast2D
+	
+	if raycast:
+		# Enable the raycast
+		raycast.enabled = true
+		# Set to only detect layer 3 (interactions)
+		raycast.collision_mask = 4  # Layer 3 = bit 2 = 2^2 = 4
+		# Set initial target position
+		raycast.target_position = Vector2(0, 30)
 
 func _physics_process(delta):
 	# Get input direction
@@ -42,8 +65,9 @@ func _physics_process(delta):
 	# Move the character
 	move_and_slide()
 	
-	# Update animation
+	# Update animation and raycast
 	update_animation()
+	update_raycast()
 
 func update_animation():
 	var anim_sprite = $AnimatedSprite2D
@@ -54,3 +78,28 @@ func update_animation():
 	else:
 		# Play idle animation for current direction
 		anim_sprite.play("idle_" + current_direction)
+
+func update_raycast():
+	# Try to find the raycast node
+	var raycast = null
+	if has_node("CollisionShape2D/RayCast2D"):
+		raycast = $CollisionShape2D/RayCast2D
+	elif has_node("RayCast2D"):
+		raycast = $RayCast2D
+	
+	# If raycast doesn't exist, skip
+	if not raycast:
+		return
+	
+	var raycast_length = 30  # Distance the raycast extends
+	
+	# Update raycast direction based on player facing
+	match current_direction:
+		"down":
+			raycast.target_position = Vector2(0, raycast_length)
+		"up":
+			raycast.target_position = Vector2(0, -raycast_length)
+		"left":
+			raycast.target_position = Vector2(-raycast_length, 0)
+		"right":
+			raycast.target_position = Vector2(raycast_length, 0)
