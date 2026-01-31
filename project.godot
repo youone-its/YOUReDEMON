@@ -32,6 +32,7 @@ enabled=PackedStringArray()
 [global_group]
 
 hide_chat_global=""
+altars=""
 
 [layer_names]
 

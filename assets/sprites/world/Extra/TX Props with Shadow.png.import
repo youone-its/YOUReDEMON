@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dlxh3nomedxh"
-path="res://.godot/imported/TX Props with Shadow.png-d169cd6126b428fe43b8165006c90508.ctex"
+path="res://.godot/imported/TX Props with Shadow.png-c398bd3012601e7db925365d7dc0642d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/world/Extra/TX Props with Shadow.png"
-dest_files=["res://.godot/imported/TX Props with Shadow.png-d169cd6126b428fe43b8165006c90508.ctex"]
+source_file="res://assets/sprites/world/Extra/TX Props with Shadow.png"
+dest_files=["res://.godot/imported/TX Props with Shadow.png-c398bd3012601e7db925365d7dc0642d.ctex"]
 
 [params]
 

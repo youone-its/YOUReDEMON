@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b4t265s2ga6ew"
-path="res://.godot/imported/TX Struct - for stone.png-c748cc9a1567a7c081848e393b60c0e5.ctex"
+path="res://.godot/imported/TX Struct - for stone.png-525761acfdc4f3a421b3599012507d74.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/world/TX Struct - for stone.png"
-dest_files=["res://.godot/imported/TX Struct - for stone.png-c748cc9a1567a7c081848e393b60c0e5.ctex"]
+source_file="res://assets/sprites/world/TX Struct - for stone.png"
+dest_files=["res://.godot/imported/TX Struct - for stone.png-525761acfdc4f3a421b3599012507d74.ctex"]
 
 [params]
 

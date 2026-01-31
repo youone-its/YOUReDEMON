@@ -1,0 +1,162 @@
+[gd_scene load_steps=21 format=3 uid="uid://2ef8mkemiypm"]
+
+[ext_resource type="Script" uid="uid://bsiisbeeuggj7" path="res://levels/props/altar.gd" id="1_q7220"]
+[ext_resource type="Texture2D" uid="uid://ysb0k4wa0xa0" path="res://assets/sprites/altar/FlyingObelisk_no_lightnings_no_letter.png" id="2_cyxg3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myiwk"]
+atlas = ExtResource("2_cyxg3")
+region = Rect2(0, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yn4r1"]
+atlas = ExtResource("2_cyxg3")
+region = Rect2(200, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ae0oo"]
+atlas = ExtResource("2_cyxg3")
+region = Rect2(400, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk01a"]
+atlas = ExtResource("2_cyxg3")
+region = Rect2(600, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_toqxo"]
+atlas = ExtResource("2_cyxg3")
+region = Rect2(800, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0ivw"]
+atlas = ExtResource("2_cyxg3")
+region = Rect2(1000, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl1iy"]
+atlas = ExtResource("2_cyxg3")
+region = Rect2(1200, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qolxi"]
+atlas = ExtResource("2_cyxg3")
+region = Rect2(1400, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbq0d"]
+atlas = ExtResource("2_cyxg3")
+region = Rect2(1600, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yy0h8"]
+atlas = ExtResource("2_cyxg3")
+region = Rect2(1800, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8n7l"]
+atlas = ExtResource("2_cyxg3")
+region = Rect2(2000, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55yfb"]
+atlas = ExtResource("2_cyxg3")
+region = Rect2(2200, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ra7n3"]
+atlas = ExtResource("2_cyxg3")
+region = Rect2(2400, 0, 200, 400)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fnbfb"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_myiwk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yn4r1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ae0oo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk01a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_toqxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0ivw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl1iy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qolxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbq0d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yy0h8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8n7l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55yfb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ra7n3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cyxg3"]
+radius = 41.0
+height = 202.0
+
+[sub_resource type="Gradient" id="Gradient_4all5"]
+offsets = PackedFloat32Array(0, 0.7214765)
+colors = PackedColorArray(0.6968204, 0.9999997, 0.9954528, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sxarv"]
+gradient = SubResource("Gradient_4all5")
+width = 500
+height = 500
+fill = 1
+fill_from = Vector2(0.479, 0.504)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_35m0q"]
+radius = 231.10603
+
+[node name="Altar" type="CharacterBody2D" groups=["altars"]]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_q7220")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fnbfb")
+frame_progress = 0.42610684
+speed_scale = 1.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, 89)
+shape = SubResource("CapsuleShape2D_cyxg3")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(1, 40)
+color = Color(0.6847421, 0.92212564, 0.99999994, 1)
+energy = 0.64
+shadow_enabled = true
+shadow_filter = 1
+texture = SubResource("GradientTexture2D_sxarv")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(2, 42)
+shape = SubResource("CircleShape2D_35m0q")
+
+[node name="HoldTimer" type="Timer" parent="."]
+
+[node name="InteractionUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PromptLabel" type="Label" parent="InteractionUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

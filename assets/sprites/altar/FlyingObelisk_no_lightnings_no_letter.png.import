@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8wpwool4sb16"
-path="res://.godot/imported/Full Spritesheet.png-80ed55ae5f938a655dcab2a609f7cdaa.ctex"
+uid="uid://ysb0k4wa0xa0"
+path="res://.godot/imported/FlyingObelisk_no_lightnings_no_letter.png-6e52b9e754172d417d20a27bedcf7955.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/world/Full Spritesheet.png"
-dest_files=["res://.godot/imported/Full Spritesheet.png-80ed55ae5f938a655dcab2a609f7cdaa.ctex"]
+source_file="res://assets/sprites/altar/FlyingObelisk_no_lightnings_no_letter.png"
+dest_files=["res://.godot/imported/FlyingObelisk_no_lightnings_no_letter.png-6e52b9e754172d417d20a27bedcf7955.ctex"]
 
 [params]
 

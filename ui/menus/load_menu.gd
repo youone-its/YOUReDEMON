@@ -86,8 +86,14 @@ func _show_preview(slot_num: int):
 
 func _on_confirm_load_btn_pressed():
 	if selected_slot > 0:
-		GameData.current_slot = selected_slot # Kunci slot yang dipilih
-		get_tree().change_scene_to_file("uid://bae2wiyqxmjrm")
+		# Panggil ulang load untuk memastikan is_loading_from_save = true
+		GameData.load_data_from_slot(selected_slot)
+		
+		if GameData.current_scene_path != "":
+			get_tree().change_scene_to_file(GameData.current_scene_path)
+		else:
+			# Scene fallback
+			get_tree().change_scene_to_file("uid://bae2wiyqxmjrm")
 
 func _on_delete_pressed():
 	if selected_slot > 0:

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwy82hndi3tlk"
-path="res://.godot/imported/TX Tileset Wall.png-e4a6cdf3e551bc114e6b70e99b29a013.ctex"
+path="res://.godot/imported/TX Tileset Wall.png-c203f0e90dd2ebeb1fe60ccb3937a3e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/world/TX Tileset Wall.png"
-dest_files=["res://.godot/imported/TX Tileset Wall.png-e4a6cdf3e551bc114e6b70e99b29a013.ctex"]
+source_file="res://assets/sprites/world/TX Tileset Wall.png"
+dest_files=["res://.godot/imported/TX Tileset Wall.png-c203f0e90dd2ebeb1fe60ccb3937a3e7.ctex"]
 
 [params]
 
