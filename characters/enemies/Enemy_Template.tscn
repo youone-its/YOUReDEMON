@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://31vg3g8kq5eq"]
+[gd_scene load_steps=7 format=3 uid="uid://31vg3g8kq5eq"]
 
 [ext_resource type="Texture2D" uid="uid://dv05m2wpdvjcf" path="res://assets/sprites/player/TX Player.png" id="1_rlia4"]
+[ext_resource type="Script" uid="uid://cos2iwdhfc6r3" path="res://characters/enemies/enemy_roaming.gd" id="1_roaming"]
 [ext_resource type="Texture2D" uid="uid://b2cs37btheqif" path="res://assets/textures/flashlight_beam.jpg" id="2_i16us"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i16us"]
@@ -21,9 +22,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_uyegb"]
 radius = 12.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 3
+script = ExtResource("1_roaming")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ldlpo")
@@ -31,15 +33,21 @@ sprite_frames = SubResource("SpriteFrames_ldlpo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_uyegb")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(0, 59)
-collision_mask = 2
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(0, 71.255)
+position = Vector2(0, 90)
 color = Color(1, 1, 0.7254902, 1)
 energy = 0.4
 shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("2_i16us")
-texture_scale = 0.1
+texture_scale = 0.14
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 2.0
+
+[node name="Flashlight area" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="light collider" type="CollisionPolygon2D" parent="Flashlight area"]
+polygon = PackedVector2Array(0, 0, 37, 132, -37, 132)

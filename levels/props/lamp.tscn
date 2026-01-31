@@ -31,7 +31,7 @@ fill_from = Vector2(0.47863248, 0.50427353)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c6ejp"]
 size = Vector2(22, 16)
 
-[node name="lantern" type="CharacterBody2D"]
+[node name="StaticBody2D" type="StaticBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nuly5")
@@ -45,6 +45,7 @@ shadow_filter = 2
 texture = SubResource("GradientTexture2D_c6ejp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 129
 y_sort_enabled = true
 position = Vector2(0, 19)
 shape = SubResource("RectangleShape2D_c6ejp")

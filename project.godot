@@ -38,6 +38,7 @@ enabled=PackedStringArray()
 
 hide_chat_global=""
 altars=""
+navigation_polygon_source_geometry_group=""
 
 [layer_names]
 
