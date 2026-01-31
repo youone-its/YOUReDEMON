@@ -2,8 +2,11 @@ extends Node2D
 
 # Variabel untuk melacak jumlah ritual
 var ritual_count: int = 0
-var total_altars: int = 4
+var total_altars: int = 5
+var total_altars_to_win: int = 5
 var is_loading: bool = false
+var boss_node = null
+@onready var boss_spawn_pos = $map/BossSpawnPoint # Letakkan Marker2D di map
 
 # Variabel untuk Save Log (bisa diakses script lain)
 var boss_save_log: Dictionary = {
@@ -16,7 +19,7 @@ var boss_save_log: Dictionary = {
 func _ready():
 	var altars = get_tree().get_nodes_in_group("altars")
 	for i in range(altars.size()):
-		altars[i].ritual_finished.connect(_on_altar_activated.bind(i + 1))
+		altars[i].ritual_finished.connect(_on_altar_activated)
 
 	await get_tree().process_frame
 	
@@ -33,15 +36,10 @@ func _ready():
 		GameData.is_loading_from_save = false
 	
 
-func _on_altar_activated(altar_index: int):
-	# Jika sedang loading, kita tetap tambah ritual_count tapi jangan trigger event di sini
-	ritual_count += 1
-	print("Altar %d activated. Total: %d" % [altar_index, ritual_count])
-	
-	# Trigger event hanya jika TIDAK sedang loading
-	if not is_loading and ritual_count >= total_altars:
-		_trigger_boss_event()
-
+func _victory():
+	if boss_node:
+		boss_node.die()
+	print("BOSS DEFEATED BY RITUAL!")
 func _trigger_boss_event():
 	boss_save_log["is_boss_spawned"] = true
 	print("LOG: Semua altar aktif. Memulai Boss Event!")
@@ -102,3 +100,54 @@ func sync_to_gamedata():
 	
 	GameData.altars_status = current_status
 	GameData.current_scene_path = get_tree().current_scene.scene_file_path
+
+
+# Ganti semua fungsi _on_altar_activated yang ada dengan ini:
+func _on_altar_activated():
+	# Jika sedang loading, kita abaikan dulu signalnya supaya tidak spawn double
+	if GameData.is_loading_from_save: 
+		return 
+
+	var active_count = 0
+	var special_altar_is_on = false
+	var all_altars = get_tree().get_nodes_in_group("altars")
+	
+	for a in all_altars:
+		if a.is_active: 
+			active_count += 1
+			# Cek jika Altar5 (Special) sedang aktif
+			if a.get("is_special_altar") == true:
+				special_altar_is_on = true
+	
+	ritual_count = active_count
+	print("LOG: Altar Aktif = ", active_count, " | Special Altar = ", special_altar_is_on)
+
+	# 1. LOGIK SPAWN: Jika Altar5 aktif DAN boss belum ada di scene
+	if special_altar_is_on and boss_node == null:
+		_spawn_boss()
+	
+	# 2. LOGIK MENANG: Jika jumlah yang nyala sudah sampai target (misal 5 atau 9)
+	if active_count >= total_altars_to_win:
+		_victory()
+
+# Update fungsi spawn agar menyimpan referensi ke boss_node
+func _spawn_boss():
+	var boss_scene = load("uid://b3061r4mto8s8") 
+	if boss_scene:
+		boss_node = boss_scene.instantiate()
+		# Masukkan ke dalam NavigationRegion2D agar navigasinya jalan
+		var nav_region = get_node_or_null("NavigationRegion2D")
+		if nav_region:
+			nav_region.add_child(boss_node)
+		else:
+			add_child(boss_node)
+			
+		boss_node.global_position = boss_spawn_pos.global_position
+		_trigger_boss_event() # Panggil efek visual merah
+		print("BOSS SPAWNED!")
+
+func _on_victory():
+	if has_node("EnemyBoss"):
+		get_node("EnemyBoss").die()
+	print("Selamat! Kamu menang!")
+	

@@ -105,12 +105,15 @@ func update_raycast():
 			raycast.target_position = Vector2(raycast_length, 0)
 
 func take_damage(amount: int):
-	# Mengurangi HP di GameData secara langsung
 	GameData.hp -= amount
+	print("Player kena hit! HP sisa: ", GameData.hp)
 	
-	# Pastikan HP tidak minus
-	if GameData.hp < 0:
-		GameData.hp = 0
+	# Tambahkan efek visual (opsional)
+	var tw = create_tween()
+	tw.tween_property($Sprite2D, "modulate", Color.RED, 0.1)
+	tw.tween_property($Sprite2D, "modulate", Color.WHITE, 0.1)
+	
+	if GameData.hp <= 0:
 		die()
 
 func heal(amount: int):

@@ -7,8 +7,9 @@ var is_active: bool = false
 
 @onready var ui = $InteractionUI 
 @onready var label = $InteractionUI/PromptLabel
-@onready var timer = $HoldTimer
+@onready var timer = $HoldTimer 
 @onready var light = $PointLight2D 
+@export var is_special_altar: bool = false
 
 func _ready():
 	ui.hide()
@@ -80,4 +81,20 @@ func _complete_ritual():
 		area.monitoring = false
 		area.monitorable = false
 		
+	ritual_finished.emit()
+
+func deactivate_altar():
+	is_active = false
+	is_player_near = false
+	ui.hide()
+	
+	# Kembalikan visual ke biru (default)
+	light.color = Color.BLUE
+	light.energy = 1.0
+	$AnimatedSprite2D.self_modulate = Color(1, 1, 1) # Normal
+	
+	$InteractionArea.monitoring = true
+	$InteractionArea.monitorable = true
+	
+	# Kabari boss.gd bahwa jumlah ritual berkurang
 	ritual_finished.emit()

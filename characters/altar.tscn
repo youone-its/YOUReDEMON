@@ -126,7 +126,7 @@ script = ExtResource("1_q7220")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fnbfb")
-frame_progress = 0.42610684
+frame_progress = 0.42078373
 speed_scale = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

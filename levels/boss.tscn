@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=4 uid="uid://c1owv7wqit87p"]
+[gd_scene load_steps=88 format=4 uid="uid://c1owv7wqit87p"]
 
 [ext_resource type="Script" uid="uid://dclvax316cxbs" path="res://levels/boss.gd" id="1_nk28f"]
 [ext_resource type="Texture2D" uid="uid://c2bb1g0d3g1gt" path="res://assets/sprites/world/TX Tileset Grass.png" id="1_rl6qf"]
@@ -1982,6 +1982,11 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_q6r6c")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_nk28f"]
+vertices = PackedVector2Array(1019.28906, 959.96875, 19.070313, 1885.2969, -975.5078, 944.9219, -2.8828125, 8.7578125)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-3, -5, -990, 945, 19, 1899, 1034, 960)])
+
 [sub_resource type="Gradient" id="Gradient_t4xaq"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0.086021505, 0.65232974)
@@ -2036,8 +2041,16 @@ position = Vector2(4002.0002, 1774)
 [node name="Altar4" parent="map" instance=ExtResource("9_u280h")]
 position = Vector2(3170, 2581)
 
+[node name="Altar5" parent="map" instance=ExtResource("9_u280h")]
+position = Vector2(3170, 1714)
+is_special_altar = true
+
 [node name="BossSpawnPoint" type="Marker2D" parent="map"]
 position = Vector2(3166, 1578)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="map"]
+position = Vector2(3153, 864)
+navigation_polygon = SubResource("NavigationPolygon_nk28f")
 
 [node name="Player" parent="." instance=ExtResource("9_nefgu")]
 position = Vector2(3159, 1772)
