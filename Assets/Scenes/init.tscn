@@ -23,3 +23,44 @@ offset_top = 136.0
 offset_right = 53.0
 offset_bottom = 167.0
 text = "back"
+
+[node name="QuitConfirmation" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(300, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 246.0
+offset_top = 79.0
+offset_right = 546.0
+offset_bottom = 248.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatusLabel" type="Label" parent="QuitConfirmation"]
+layout_mode = 0
+offset_right = 301.0
+offset_bottom = 23.0
+text = "Are You Sure Want to quit?"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QuitConfirmation"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 40.0
+offset_right = 159.0
+offset_bottom = 80.0
+
+[node name="SaveExitBtn" type="Button" parent="QuitConfirmation/VBoxContainer"]
+layout_mode = 2
+text = "Save"
+
+[node name="JustExitBtn" type="Button" parent="QuitConfirmation/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="CancelBtn" type="Button" parent="QuitConfirmation/VBoxContainer"]
+layout_mode = 2
+text = "Cancel"

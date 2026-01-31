@@ -7,12 +7,19 @@ var items: Array = []
 var player_position: Vector2 = Vector2(0, 0)
 var quit_shortcut_key: int = KEY_Q # Defaultnya tombol Q
 var chat_toggle_key: int = KEY_TAB
-var current_slot: int = 1 
-
+var current_slot: int = -1 
 # --- DATA LIVE CHAT ---
 var completed_chats: Array = [] # Menyimpan ID trigger/offer yang sudah selesai
 var chat_history: Array = []    # Menyimpan isi pesan (teks & tipe) yang sudah muncul
 
+signal quit_requested
+
+func find_empty_slot() -> int:
+	for i in range(1, 4):
+		if not FileAccess.file_exists(get_save_path(i)):
+			return i
+	return 0 # Penuh
+	
 # --- FUNGSI PATH DINAMIS ---
 func get_save_path(slot: int) -> String:
 	return "user://save_game_%d.dat" % slot
@@ -28,9 +35,19 @@ func reset_data():
 	player_position = Vector2(0, 0)
 	completed_chats = []
 	chat_history = [] # Reset history saat New Game agar bersih
+	current_slot = -1
 
 func save_game():
+	if current_slot == -1:
+		var empty_slot = find_empty_slot()
+		if empty_slot > 0:
+			current_slot = empty_slot
+		else:
+			print("Semua slot penuh! Silakan hapus satu di Load Menu.")
+			return false
+			
 	var file = FileAccess.open(get_save_path(current_slot), FileAccess.WRITE)
+
 	if file:
 		var data = {
 			"hp": hp,
@@ -44,7 +61,23 @@ func save_game():
 		file.store_var(data)
 		file.close()
 		print("Game saved to slot: ", current_slot)
+		return true
+	return false
 
+func delete_save_slot(slot: int):
+	var save_path = get_save_path(slot)
+	var thumb_path = get_thumb_path(slot)
+	
+	# Hapus file data jika ada
+	if FileAccess.file_exists(save_path):
+		DirAccess.remove_absolute(save_path)
+		
+	# Hapus file thumbnail jika ada
+	if FileAccess.file_exists(thumb_path):
+		DirAccess.remove_absolute(thumb_path)
+	
+	print("Slot %d berhasil dihapus." % slot)
+	
 func load_data_from_slot(slot: int):
 	var path = get_save_path(slot)
 	if FileAccess.file_exists(path):
@@ -94,7 +127,16 @@ func load_settings():
 func check_quit_input(event: InputEvent):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == quit_shortcut_key:
-			if get_tree().current_scene.name == "MainScene":
+			var scene_name = get_tree().current_scene.name
+			if scene_name == "Init": 
+				quit_requested.emit()
+			elif scene_name == "MainMenu" or scene_name == "Control": 
 				get_tree().quit()
 			else:
 				get_tree().change_scene_to_file("uid://cnw4e8w572xwd")
+
+func is_quit_pressed(event: InputEvent) -> bool:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == quit_shortcut_key:
+			return true
+	return false

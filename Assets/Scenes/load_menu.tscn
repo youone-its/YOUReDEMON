@@ -100,10 +100,20 @@ layout_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="MainHBox/RightPanel/RightMargin/ContentLayout"]
 layout_mode = 2
 
-[node name="ConfirmLoadBtn" type="Button" parent="MainHBox/RightPanel/RightMargin/ContentLayout/MarginContainer"]
-visible = false
+[node name="VBoxContainer" type="VBoxContainer" parent="MainHBox/RightPanel/RightMargin/ContentLayout/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ConfirmLoadBtn" type="Button" parent="MainHBox/RightPanel/RightMargin/ContentLayout/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Select"
+icon_alignment = 1
+
+[node name="DeleteSlotBtn" type="Button" parent="MainHBox/RightPanel/RightMargin/ContentLayout/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Delete"
 icon_alignment = 1

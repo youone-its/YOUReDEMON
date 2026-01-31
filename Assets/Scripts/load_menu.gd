@@ -7,13 +7,21 @@ extends Control
 # Detail Panel Kanan
 @onready var data_label = $MainHBox/RightPanel/RightMargin/ContentLayout/DataLabel
 @onready var thumbnail = $MainHBox/RightPanel/RightMargin/ContentLayout/Thumbnail
-@onready var confirm_btn = $MainHBox/RightPanel/RightMargin/ContentLayout/MarginContainer/ConfirmLoadBtn
+@onready var confirm_btn = $MainHBox/RightPanel/RightMargin/ContentLayout/MarginContainer/VBoxContainer/ConfirmLoadBtn
+@onready var delete_btn = $MainHBox/RightPanel/RightMargin/ContentLayout/MarginContainer/VBoxContainer/DeleteSlotBtn
+
+# Variabel untuk melacak slot yang sedang dilihat
+var selected_slot: int = 0
 
 func _ready():
 	# Inisialisasi tampilan
-	confirm_btn.visible = false # Sembunyikan tombol Select di awal
+	confirm_btn.visible = false 
 	data_label.text = "Pilih Slot untuk Melihat Detail"
 	thumbnail.texture = null
+	
+	# Sembunyikan tombol delete di awal
+	delete_btn.hide()
+	delete_btn.pressed.connect(_on_delete_pressed)
 	
 	# Connect Button Statis
 	confirm_btn.pressed.connect(_on_confirm_load_btn_pressed)
@@ -30,8 +38,8 @@ func refresh_save_list():
 	
 	var found_any = false
 	
-	# Cek Slot 1 sampai 5 (bisa ditambah sesuai kebutuhan)
-	for i in range(1, 6):
+	# Cek Slot 1 sampai 3 (Sesuai batas maksimal 3 slot)
+	for i in range(1, 4):
 		if FileAccess.file_exists(GameData.get_save_path(i)):
 			_create_slot_button(i)
 			found_any = true
@@ -41,17 +49,18 @@ func refresh_save_list():
 		empty_label.text = "Tidak ada data simpanan."
 		empty_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		save_list.add_child(empty_label)
+		# Sembunyikan UI detail jika tidak ada data sama sekali
+		_reset_preview_ui()
 
 func _create_slot_button(slot_num: int):
 	var btn = Button.new()
 	btn.text = "Save Slot %d" % slot_num
 	btn.custom_minimum_size.y = 80
-	# Gunakan bind untuk mengirim nomor slot saat ditekan
 	btn.pressed.connect(_show_preview.bind(slot_num))
 	save_list.add_child(btn)
 
 func _show_preview(slot_num: int):
-	# Ambil data tanpa mengubah scene dulu
+	selected_slot = slot_num
 	var data = GameData.load_data_from_slot(slot_num)
 	
 	if data:
@@ -70,34 +79,34 @@ func _show_preview(slot_num: int):
 		else:
 			thumbnail.texture = null
 		
-		# Munculkan tombol Select
+		# Munculkan tombol navigasi dan hapus
 		confirm_btn.visible = true
+		delete_btn.show()
 		confirm_btn.grab_focus()
 
 func _on_confirm_load_btn_pressed():
-	# GameData.current_slot sudah ter-update di _show_preview
-	get_tree().change_scene_to_file("uid://bae2wiyqxmjrm")
+	if selected_slot > 0:
+		GameData.current_slot = selected_slot # Kunci slot yang dipilih
+		get_tree().change_scene_to_file("uid://bae2wiyqxmjrm")
+
+func _on_delete_pressed():
+	if selected_slot > 0:
+		# Jalankan penghapusan file
+		GameData.delete_save_slot(selected_slot)
+		
+		# Reset pilihan dan refresh UI
+		selected_slot = 0
+		_reset_preview_ui()
+		refresh_save_list()
+
+func _reset_preview_ui():
+	data_label.text = "Pilih Slot untuk Melihat Detail"
+	thumbnail.texture = null
+	confirm_btn.visible = false
+	delete_btn.hide()
 
 func _on_back_btn_pressed():
 	get_tree().change_scene_to_file("uid://cnw4e8w572xwd")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 func _input(event):
 	GameData.check_quit_input(event)
