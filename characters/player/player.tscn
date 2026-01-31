@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://b5w8qxm7ymjfd"]
+[gd_scene load_steps=20 format=3 uid="uid://b5w8qxm7ymjfd"]
 
 [ext_resource type="Script" uid="uid://cf4l2nrlnyflk" path="res://characters/player/player.gd" id="1_p8wc7"]
 [ext_resource type="Texture2D" uid="uid://dv05m2wpdvjcf" path="res://Assets/sprites/player/TX Player.png" id="2_xxgcw"]
+[ext_resource type="PackedScene" uid="uid://qgeka7oktumh" path="res://levels/props/fog.tscn" id="3_exd8k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_exd8k"]
 atlas = ExtResource("2_xxgcw")
@@ -163,7 +164,7 @@ position = Vector2(0.5, 13)
 shape = SubResource("CircleShape2D_xxgcw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(2, 2)
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(0.5, 13)
@@ -177,3 +178,6 @@ energy = 0.5
 shadow_enabled = true
 shadow_filter = 2
 texture = SubResource("GradientTexture2D_xxgcw")
+texture_scale = 1.73
+
+[node name="fog" parent="." instance=ExtResource("3_exd8k")]

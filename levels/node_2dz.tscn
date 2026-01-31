@@ -1766,6 +1766,8 @@ texture_region_size = Vector2i(32, 32)
 1:1/1/texture_origin = Vector2i(16, 27)
 1:1/1/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_apr00")
 1:1/1/occlusion_layer_0/polygon_1/polygon = SubResource("OccluderPolygon2D_nd6n1")
+1:1/1/physics_layer_0/polygon_0/points = PackedVector2Array(8.4265995, -75.57606, 15.799871, -75.31273, 16.02004, -13.692847, 16.326534, 21.59316, 8.953262, 19.749842)
+1:1/1/physics_layer_0/polygon_1/points = PackedVector2Array(-40.914265, -74.21151, -40.827934, 20.324036, -48.382, 20.683754, -48.57844, -74.02429)
 4:1/size_in_atlas = Vector2i(3, 3)
 4:1/0 = 0
 4:1/0/texture_origin = Vector2i(0, -32)
@@ -1793,6 +1795,8 @@ texture_region_size = Vector2i(32, 32)
 1:5/1/texture_origin = Vector2i(16, 27)
 1:5/1/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ums2i")
 1:5/1/occlusion_layer_0/polygon_1/polygon = SubResource("OccluderPolygon2D_lc8ad")
+1:5/1/physics_layer_0/polygon_0/points = PackedVector2Array(8.4265995, -75.57606, 15.799871, -75.31273, 16.02004, -13.692847, 16.326534, 21.59316, 8.953262, 19.749842)
+1:5/1/physics_layer_0/polygon_1/points = PackedVector2Array(-40.914265, -74.21151, -40.827934, 20.324036, -48.382, 20.683754, -48.57844, -74.02429)
 1:9/size_in_atlas = Vector2i(4, 3)
 1:9/0 = 0
 1:9/0/texture_origin = Vector2i(16, -24)
@@ -2054,8 +2058,7 @@ position = Vector2(622, 290)
 position = Vector2(5919, 881)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-color = Color(0.11858135, 0.11858139, 0.11858138, 1)
+color = Color(0.11858138, 0.11858138, 0.11858138, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(312, 296)

@@ -21,6 +21,11 @@ GameData="*res://autoload/GameData.gd"
 LiveChat="*res://characters/LiveChat/live_chat.tscn"
 ChatData="*res://characters/LiveChat/ChatData.gd"
 
+[display]
+
+window/size/viewport_width=1902
+window/size/viewport_height=1080
+
 [dotnet]
 
 project/assembly_name="YOURe_DEMON"
