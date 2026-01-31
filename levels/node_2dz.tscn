@@ -2060,9 +2060,6 @@ position = Vector2(265, 390)
 [node name="lamp5" parent="map/lamp" instance=ExtResource("10_e50u4")]
 position = Vector2(2, -18)
 
-[node name="Player" parent="." instance=ExtResource("7_4h7uv")]
-position = Vector2(464, 272)
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.11858138, 0.11858138, 0.11858138, 1)
 
@@ -2078,3 +2075,6 @@ navigation_polygon = SubResource("NavigationPolygon_lbmqg")
 
 [node name="Enemy" parent="." instance=ExtResource("9_j081x")]
 position = Vector2(488, 336)
+
+[node name="Player" parent="." instance=ExtResource("7_4h7uv")]
+position = Vector2(436, 257)

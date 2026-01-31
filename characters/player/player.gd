@@ -1,11 +1,23 @@
 extends CharacterBody2D
 
 # Movement speed in pixels per second
-@export var speed: float = 150.0
+@export var speed: float = 100.0
+@export var run_speed: float = 150.0
+
+# Stamina system
+@export var max_stamina: float = 5.0  # 5 seconds of running
+var current_stamina: float = 5.0
+var stamina_drain_rate: float = 1.0  # Drains 1 per second
+var stamina_recharge_rate: float = 0.5  # Recharges 0.5 per second
+var is_running: bool = false
 
 # Current direction for animations
 var current_direction: String = "down"
 var is_moving: bool = false
+
+# Stamina bar UI (ProgressBars)
+var stamina_bar_left: ProgressBar = null
+var stamina_bar_right: ProgressBar = null
 
 func _ready():
 	# Add the player to the "player" group for easy reference
@@ -13,6 +25,9 @@ func _ready():
 	
 	# Setup raycast for interactions
 	setup_raycast()
+	
+	# Get existing stamina bars
+	get_stamina_bars()
 
 func setup_raycast():
 	# Check if raycast exists, if not skip
@@ -34,7 +49,22 @@ func setup_raycast():
 		# Set initial target position
 		raycast.target_position = Vector2(0, 30)
 
+func get_stamina_bars():
+	# Get the existing ProgressBar nodes inside CanvasLayer
+	if has_node("StaminaUI/StaminaBarLeft"):
+		stamina_bar_left = $StaminaUI/StaminaBarLeft
+		stamina_bar_left.max_value = max_stamina
+		stamina_bar_left.value = current_stamina
+	
+	if has_node("StaminaUI/StaminaBarRight"):
+		stamina_bar_right = $StaminaUI/StaminaBarRight
+		stamina_bar_right.max_value = max_stamina
+		stamina_bar_right.value = current_stamina
+
 func _physics_process(delta):
+	# Check if player wants to run (Shift key)
+	var want_to_run = Input.is_key_pressed(KEY_SHIFT)
+	
 	# Get input direction
 	var input_direction = Vector2.ZERO
 	
@@ -77,8 +107,30 @@ func _physics_process(delta):
 	else:
 		is_moving = false
 	
+	# Determine actual speed based on running and stamina
+	var actual_speed = speed
+	is_running = false
+	
+	if want_to_run and is_moving and current_stamina > 0:
+		actual_speed = run_speed
+		is_running = true
+		# Drain stamina
+		current_stamina -= stamina_drain_rate * delta
+		if current_stamina < 0:
+			current_stamina = 0
+		# No stamina regeneration while running
+	else:
+		# Recharge stamina only when not running
+		if not is_running and current_stamina < max_stamina:
+			current_stamina += stamina_recharge_rate * delta
+			if current_stamina > max_stamina:
+				current_stamina = max_stamina
+	
+	# Update stamina bar
+	update_stamina_bar()
+	
 	# Set velocity
-	velocity = input_direction * speed
+	velocity = input_direction * actual_speed
 	
 	# Move the character
 	move_and_slide()
@@ -93,9 +145,16 @@ func update_animation():
 	if is_moving:
 		# Play walk animation for current direction
 		anim_sprite.play("walk_" + current_direction)
+		
+		# Speed up animation when running
+		if is_running:
+			anim_sprite.speed_scale = 1.5  # 10 FPS (base 6.6 * 1.5 ≈ 10)
+		else:
+			anim_sprite.speed_scale = 1.0  # Normal speed
 	else:
 		# Play idle animation for current direction
 		anim_sprite.play("idle_" + current_direction)
+		anim_sprite.speed_scale = 1.0  # Reset to normal
 
 func update_raycast():
 	# Try to find the raycast node
@@ -129,6 +188,24 @@ func update_raycast():
 			raycast.target_position = Vector2(raycast_length, -raycast_length).normalized() * raycast_length
 		"topleft":
 			raycast.target_position = Vector2(-raycast_length, -raycast_length).normalized() * raycast_length
+
+func update_stamina_bar():
+	if not stamina_bar_left or not stamina_bar_right:
+		return
+	
+	var stamina_percent = current_stamina / max_stamina
+	
+	# Hide bars if stamina is full
+	if stamina_percent >= 1.0:
+		stamina_bar_left.visible = false
+		stamina_bar_right.visible = false
+	else:
+		stamina_bar_left.visible = true
+		stamina_bar_right.visible = true
+	
+	# Update both progress bars
+	stamina_bar_left.value = current_stamina
+	stamina_bar_right.value = current_stamina
 
 func take_damage(amount: int):
 	GameData.hp -= amount

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://b5w8qxm7ymjfd"]
+[gd_scene load_steps=51 format=3 uid="uid://b5w8qxm7ymjfd"]
 
 [ext_resource type="Script" uid="uid://cf4l2nrlnyflk" path="res://characters/player/player.gd" id="1_p8wc7"]
 [ext_resource type="Texture2D" uid="uid://dv05m2wpdvjcf" path="res://assets/sprites/player/TX Player.png" id="2_xxgcw"]
@@ -398,6 +398,11 @@ use_hdr = true
 fill = 1
 fill_from = Vector2(0.47863248, 0.50427353)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5dc8e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ixbpm"]
+bg_color = Color(1, 1, 1, 1)
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_mask = 9
@@ -432,3 +437,41 @@ texture_scale = 1.73
 
 [node name="fog" parent="." instance=ExtResource("3_exd8k")]
 visible = false
+
+[node name="StaminaUI" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="StaminaBarRight" type="ProgressBar" parent="StaminaUI"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 960.0
+offset_top = -170.0
+offset_right = -442.0
+offset_bottom = -163.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxEmpty_5dc8e")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ixbpm")
+max_value = 5.0
+value = 5.0
+show_percentage = false
+
+[node name="StaminaBarLeft" type="ProgressBar" parent="StaminaUI"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 460.0
+offset_top = -170.0
+offset_right = -942.0
+offset_bottom = -163.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxEmpty_5dc8e")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ixbpm")
+max_value = 5.0
+value = 5.0
+fill_mode = 1
+show_percentage = false
