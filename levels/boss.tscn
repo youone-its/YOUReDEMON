@@ -1,15 +1,18 @@
-[gd_scene load_steps=84 format=4 uid="uid://c1owv7wqit87p"]
+[gd_scene load_steps=88 format=4 uid="uid://c1owv7wqit87p"]
 
-[ext_resource type="Texture2D" uid="uid://c2bb1g0d3g1gt" path="res://Assets/sprites/world/TX Tileset Grass.png" id="1_rl6qf"]
-[ext_resource type="Texture2D" uid="uid://8wpwool4sb16" path="res://Assets/sprites/world/Full Spritesheet.png" id="2_t3skf"]
-[ext_resource type="Texture2D" uid="uid://ba2py3jqxcpa" path="res://Assets/sprites/world/black.png" id="3_u280h"]
-[ext_resource type="Texture2D" uid="uid://di1brhu018nxn" path="res://Assets/sprites/world/TX Tileset Stone Ground.png" id="4_nk28f"]
-[ext_resource type="Texture2D" uid="uid://dwy82hndi3tlk" path="res://Assets/sprites/world/TX Tileset Wall.png" id="5_2nepc"]
-[ext_resource type="Texture2D" uid="uid://mru1k7wll3pp" path="res://Assets/sprites/world/TX Struct.png" id="6_4jjya"]
-[ext_resource type="Texture2D" uid="uid://dpt13gpmrnob8" path="res://Assets/sprites/world/TX Props.png" id="7_tl0uo"]
+[ext_resource type="Script" uid="uid://dclvax316cxbs" path="res://levels/boss.gd" id="1_nk28f"]
+[ext_resource type="Texture2D" uid="uid://c2bb1g0d3g1gt" path="res://assets/sprites/world/TX Tileset Grass.png" id="1_rl6qf"]
+[ext_resource type="Texture2D" uid="uid://8wpwool4sb16" path="res://assets/sprites/world/Full Spritesheet.png" id="2_t3skf"]
+[ext_resource type="Texture2D" uid="uid://ba2py3jqxcpa" path="res://assets/sprites/world/black.png" id="3_u280h"]
+[ext_resource type="Texture2D" uid="uid://di1brhu018nxn" path="res://assets/sprites/world/TX Tileset Stone Ground.png" id="4_nk28f"]
+[ext_resource type="Texture2D" uid="uid://dwy82hndi3tlk" path="res://assets/sprites/world/TX Tileset Wall.png" id="5_2nepc"]
+[ext_resource type="Texture2D" uid="uid://mru1k7wll3pp" path="res://assets/sprites/world/TX Struct.png" id="6_4jjya"]
+[ext_resource type="Texture2D" uid="uid://dpt13gpmrnob8" path="res://assets/sprites/world/TX Props.png" id="7_tl0uo"]
 [ext_resource type="PackedScene" uid="uid://c5bego3noluuu" path="res://levels/props/lamp.tscn" id="8_4bi8h"]
 [ext_resource type="PackedScene" uid="uid://b5w8qxm7ymjfd" path="res://characters/player/player.tscn" id="9_nefgu"]
+[ext_resource type="PackedScene" uid="uid://2ef8mkemiypm" path="res://characters/altar.tscn" id="9_u280h"]
 [ext_resource type="PackedScene" uid="uid://31vg3g8kq5eq" path="res://characters/enemies/Enemy_Template.tscn" id="10_7iuwb"]
+[ext_resource type="PackedScene" uid="uid://bae2wiyqxmjrm" path="res://ui/menus/init.tscn" id="11_t3skf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epypp"]
 texture = ExtResource("1_rl6qf")
@@ -1979,6 +1982,11 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_q6r6c")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_nk28f"]
+vertices = PackedVector2Array(1019.28906, 959.96875, 19.070313, 1885.2969, -975.5078, 944.9219, -2.8828125, 8.7578125)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-3, -5, -990, 945, 19, 1899, 1034, 960)])
+
 [sub_resource type="Gradient" id="Gradient_t4xaq"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0.086021505, 0.65232974)
@@ -1997,6 +2005,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(1824, 524, 1804, 1798, 
 
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_nk28f")
 
 [node name="map" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -2017,20 +2026,31 @@ tile_set = SubResource("TileSet_d21ai")
 y_sort_enabled = true
 tile_set = SubResource("TileSet_kdubu")
 
-[node name="CharacterBody2D" parent="map" instance=ExtResource("8_4bi8h")]
-position = Vector2(3170, 2278)
-
-[node name="CharacterBody2D2" parent="map" instance=ExtResource("8_4bi8h")]
-position = Vector2(3602, 1793)
-
-[node name="CharacterBody2D3" parent="map" instance=ExtResource("8_4bi8h")]
-position = Vector2(3187, 1193)
-
-[node name="CharacterBody2D4" parent="map" instance=ExtResource("8_4bi8h")]
-position = Vector2(2500, 1804)
-
 [node name="Lamp" parent="map" instance=ExtResource("8_4bi8h")]
 position = Vector2(622, 290)
+
+[node name="Altar" parent="map" instance=ExtResource("9_u280h")]
+position = Vector2(3173, 979)
+
+[node name="Altar2" parent="map" instance=ExtResource("9_u280h")]
+position = Vector2(2303, 1787.0001)
+
+[node name="Altar3" parent="map" instance=ExtResource("9_u280h")]
+position = Vector2(4002.0002, 1774)
+
+[node name="Altar4" parent="map" instance=ExtResource("9_u280h")]
+position = Vector2(3170, 2581)
+
+[node name="Altar5" parent="map" instance=ExtResource("9_u280h")]
+position = Vector2(3170, 1714)
+is_special_altar = true
+
+[node name="BossSpawnPoint" type="Marker2D" parent="map"]
+position = Vector2(3166, 1578)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="map"]
+position = Vector2(3153, 864)
+navigation_polygon = SubResource("NavigationPolygon_nk28f")
 
 [node name="Player" parent="." instance=ExtResource("9_nefgu")]
 position = Vector2(3159, 1772)
@@ -2050,3 +2070,7 @@ position = Vector2(364, 768)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_lbmqg")
+
+[node name="Node2D" parent="." instance=ExtResource("11_t3skf")]
+offset_left = 1.0
+offset_right = 1.0

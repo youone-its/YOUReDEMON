@@ -103,3 +103,39 @@ func update_raycast():
 			raycast.target_position = Vector2(-raycast_length, 0)
 		"right":
 			raycast.target_position = Vector2(raycast_length, 0)
+
+func take_damage(amount: int):
+	GameData.hp -= amount
+	print("Player kena hit! HP sisa: ", GameData.hp)
+	
+	# Tambahkan efek visual (opsional)
+	var tw = create_tween()
+	tw.tween_property($Sprite2D, "modulate", Color.RED, 0.1)
+	tw.tween_property($Sprite2D, "modulate", Color.WHITE, 0.1)
+	
+	if GameData.hp <= 0:
+		die()
+
+func heal(amount: int):
+	GameData.hp += amount
+	if GameData.hp > 100:
+		GameData.hp = 100
+
+func demonized(amount: int):
+	# Mengurangi HP di GameData secara langsung
+	GameData.demonized_level -= amount
+	
+	# Pastikan HP tidak minus
+	if GameData.demonized_level > 100:
+		GameData.demonized_level = 100
+		die()
+
+func undemonized(amount: int):
+	GameData.demonized_level += amount
+	if GameData.demonized_level < 0:
+		GameData.demonized_level = 0
+		
+func die():
+	print("Player Mati!")
+	# Logika mati bisa memunculkan popup quit atau restart
+	GameData.quit_requested.emit()

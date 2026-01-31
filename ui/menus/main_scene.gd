@@ -2,6 +2,7 @@ extends Control
 
 # Pastikan path ini sesuai dengan VBoxContainer tempat tombol-tombol kamu berada
 @onready var buttons_container = $MarginContainer/VBoxContainer
+@onready var slot_full_dialog = $SlotFullDialog
 
 func _ready():
 	# Inisialisasi setiap tombol di dalam container
@@ -31,10 +32,16 @@ func _on_button_hover(btn: Button, is_hover: bool):
 func _on_button_pressed(button_name: String):
 	match button_name:
 		"NewGameBtn":
-			# Reset data pemain sebelum mulai baru
-			GameData.reset_data()
-			# Pindah ke scene awal game
-			get_tree().change_scene_to_file("uid://bae2wiyqxmjrm")
+			var empty_slot = GameData.find_empty_slot()
+			if empty_slot > 0:
+				GameData.reset_data() # Ini sudah mengeset posisi ke (3159, 1772)
+				GameData.current_slot = empty_slot # Set slot aktif
+				GameData.is_loading_from_save = false # Pastikan mode bukan loading
+				
+				# Pindah ke scene pertama
+				get_tree().change_scene_to_file("uid://c1owv7wqit87p")
+			else:
+				slot_full_dialog.popup_centered()
 		
 		"LoadGameBtn":
 			# Pindah ke scene Load Game

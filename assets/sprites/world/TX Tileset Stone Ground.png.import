@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://di1brhu018nxn"
-path="res://.godot/imported/TX Tileset Stone Ground.png-4bd146a0c62b7f57546ecbcc309b4e25.ctex"
+path="res://.godot/imported/TX Tileset Stone Ground.png-cfcb7274d9629153e3316ab53b29dd62.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/world/TX Tileset Stone Ground.png"
-dest_files=["res://.godot/imported/TX Tileset Stone Ground.png-4bd146a0c62b7f57546ecbcc309b4e25.ctex"]
+source_file="res://assets/sprites/world/TX Tileset Stone Ground.png"
+dest_files=["res://.godot/imported/TX Tileset Stone Ground.png-cfcb7274d9629153e3316ab53b29dd62.ctex"]
 
 [params]
 
