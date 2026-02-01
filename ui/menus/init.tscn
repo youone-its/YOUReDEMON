@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://bae2wiyqxmjrm"]
+[gd_scene load_steps=6 format=3 uid="uid://bae2wiyqxmjrm"]
 
 [ext_resource type="Script" uid="uid://dim48v67bq8ta" path="res://ui/menus/init.gd" id="1_l5jql"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_67vpw"]
+bg_color = Color(0.43107378, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_q245y"]
+ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 1)
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_67vpw")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ggcy8"]
+bg_color = Color(0.2410156, 0.08625394, 0.67543423, 1)
+
+[sub_resource type="Theme" id="Theme_hft3m"]
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_ggcy8")
 
 [node name="Node2D" type="Control"]
 process_mode = 3
@@ -56,7 +69,43 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="HPBar" type="ProgressBar" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme = SubResource("Theme_q245y")
+step = 0.1
+rounded = true
 
 [node name="DemonBar" type="ProgressBar" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_hft3m")
+
+[node name="InventoryBar" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -100.0
+offset_right = 148.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 3
+
+[node name="Slot_L" type="TextureRect" parent="CanvasLayer/InventoryBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="ItemIcon_L" type="Sprite2D" parent="CanvasLayer/InventoryBar/Slot_L"]
+
+[node name="Control" type="Control" parent="CanvasLayer/InventoryBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Slot_R" type="TextureRect" parent="CanvasLayer/InventoryBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="ItemIcon_R" type="Sprite2D" parent="CanvasLayer/InventoryBar/Slot_R"]
