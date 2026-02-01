@@ -104,14 +104,31 @@ func create_message_label(data: Dictionary, use_animation: bool = true):
 	if scroll is ScrollContainer:
 		scroll.scroll_vertical = scroll.get_v_scroll_bar().max_value
 
-func _on_offer_responded(id: String, _accepted: bool, node_wrapper: Node):
+func _on_offer_responded(id: String, accepted: bool, node_wrapper: Node):
 	node_wrapper.modulate = Color(0.6, 0.6, 0.6, 0.7)
 	for child in node_wrapper.get_children():
 		if child is HBoxContainer:
 			for btn in child.get_children():
 				if btn is Button: btn.disabled = true
+	
 	if not id in GameData.completed_chats:
 		GameData.completed_chats.append(id)
+	
+	if accepted:
+		print("DEBUG: Player ACCEPT: ", id)
+		if GameData.has_method("execute_offer_effect"):
+			GameData.execute_offer_effect(id)
+		
+		# TRIGGER RESPON POSITIF
+		# Kita panggil chat baru setelah delay singkat
+		trigger_chat(id + "_accepted", 0.5) 
+	else:
+		print("DEBUG: Player REJECT: ", id)
+		if GameData.has_method("execute_offer_effect_rejection"):
+			GameData.execute_offer_effect_rejection(id)
+		
+		# TRIGGER RESPON NEGATIF
+		trigger_chat(id + "_rejected", 0.5)
 
 func clear_chat():
 	current_trigger_task = ""

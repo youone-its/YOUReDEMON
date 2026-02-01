@@ -5,6 +5,7 @@ var hp: int = 100
 var demonized_level: int = 0
 var items: Array = []
 var player_position: Vector2 = Vector2(-1, -1)
+var boss_position: Vector2 = Vector2(-1, -1)
 var quit_shortcut_key: int = KEY_Q # Defaultnya tombol Q
 var chat_toggle_key: int = KEY_TAB
 var current_slot: int = -1 
@@ -14,6 +15,7 @@ var completed_chats: Array = [] # Menyimpan ID trigger/offer yang sudah selesai
 var chat_history: Array = []    # Menyimpan isi pesan (teks & tipe) yang sudah muncul
 var altars_status: Array = [false, false, false, false] # Simpan status 4 altar
 signal quit_requested
+signal stats_changed
 var is_loading_from_save: bool = false
 var item_left: String = "none"
 var item_right: String = "none"
@@ -37,6 +39,7 @@ func reset_data():
 	demonized_level = 0
 	items = []
 	player_position = Vector2(3159, 1772)
+	boss_position = Vector2(3159, 1700)
 	completed_chats = []
 	chat_history = [] # Reset history saat New Game agar bersih
 	current_slot = -1
@@ -62,6 +65,8 @@ func save_game():
 			"items": items,
 			"pos_x": player_position.x,
 			"pos_y": player_position.y,
+			"pos_y_boss": boss_position.y,
+			"pos_x_boss": boss_position.x,
 			"completed_chats": completed_chats,
 			"chat_history": chat_history,
 			"scene_path": current_scene_path, # TAMBAHKAN INI
@@ -96,6 +101,7 @@ func load_data_from_slot(slot: int):
 		demonized_level = data["demonized_level"]
 		items = data["items"]
 		player_position = Vector2(data["pos_x"], data["pos_y"])
+		boss_position = Vector2(data["pos_x_boss"], data["pos_y_boss"])
 		completed_chats = data.get("completed_chats", []) 
 		chat_history = data.get("chat_history", []) # Ambil data history
 		current_scene_path = data.get("scene_path", "")
@@ -151,3 +157,27 @@ func is_quit_pressed(event: InputEvent) -> bool:
 		if event.keycode == quit_shortcut_key:
 			return true
 	return false
+
+func execute_offer_effect(offer_id: String):
+	match offer_id:
+		"soul_trade_01":
+			var player = get_tree().current_scene.find_child("Player", true, false)
+			if player:
+				player.demonized(10) # Memanggil fungsi di player.gd
+				print("Efek dieksekusi ke Player")
+		"TROLL_1":
+			var player = get_tree().current_scene.find_child("Player", true, false)
+			if player:
+				player.take_damage(10)
+		"TROLL_2":
+			var player = get_tree().current_scene.find_child("Player", true, false)
+			if player:
+				player.take_damage(5)
+				
+func execute_offer_effect_rejection(offer_id: String):
+	match offer_id:
+		"soul_trade_01":
+			var player = get_tree().current_scene.find_child("Player", true, false)
+			if player:
+				player.take_damage(100) # Memanggil fungsi di player.gd
+				print("Efek dieksekusi ke Player")

@@ -104,14 +104,28 @@ func update_raycast():
 		"right":
 			raycast.target_position = Vector2(raycast_length, 0)
 
+#func take_damage(amount: int):
+	#GameData.hp -= amount
+	#print("Player kena hit! HP sisa: ", GameData.hp)
+	#
+	## Tambahkan efek visual (opsional)
+	#var tw = create_tween()
+	#tw.tween_property($Sprite2D, "modulate", Color.RED, 0.1)
+	#tw.tween_property($Sprite2D, "modulate", Color.WHITE, 0.1)
+	#
+	#if GameData.hp <= 0:
+		#die()
+
 func take_damage(amount: int):
 	GameData.hp -= amount
 	print("Player kena hit! HP sisa: ", GameData.hp)
 	
-	# Tambahkan efek visual (opsional)
+	# Efek visual - Pastikan namanya sesuai dengan node di Player kamu
 	var tw = create_tween()
-	tw.tween_property($Sprite2D, "modulate", Color.RED, 0.1)
-	tw.tween_property($Sprite2D, "modulate", Color.WHITE, 0.1)
+	# Ganti $Sprite2D menjadi $AnimatedSprite2D
+	if has_node("AnimatedSprite2D"):
+		tw.tween_property($AnimatedSprite2D, "modulate", Color.RED, 0.1)
+		tw.tween_property($AnimatedSprite2D, "modulate", Color.WHITE, 0.1)
 	
 	if GameData.hp <= 0:
 		die()
@@ -122,10 +136,13 @@ func heal(amount: int):
 		GameData.hp = 100
 
 func demonized(amount: int):
-	# Mengurangi HP di GameData secara langsung
-	GameData.demonized_level -= amount
+	# GANTI -= MENJADI +=
+	GameData.demonized_level += amount
 	
-	# Pastikan HP tidak minus
+	# Tambahkan print untuk memastikan nilainya masuk di konsol
+	print("LOG: Demonized Level bertambah! Sekarang: ", GameData.demonized_level)
+	
+	# Batasi maksimal 100
 	if GameData.demonized_level > 100:
 		GameData.demonized_level = 100
 		die()
