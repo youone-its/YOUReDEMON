@@ -14,6 +14,36 @@ const MESSAGES = {
 			"offer_id": "soul_trade_01"
 		}
 	],
+	"tutorial_flashlight": [
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "Welcome dear Desmond..."},
+		{
+			"type": Type.TROLL, 
+			"user": "Stranger", 
+			"text": "Mau HP gratis? Cukup bayar pakai jiwamu.",
+			"is_offer": true,
+			"offer_id": "soul_trade_01"
+		}
+	],
+	"tutorial_chat": [
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "Welcome dear Desmond..."},
+		{
+			"type": Type.TROLL, 
+			"user": "Stranger", 
+			"text": "Mau HP gratis? Cukup bayar pakai jiwamu.",
+			"is_offer": true,
+			"offer_id": "soul_trade_01"
+		}
+	],
+	"tutorial_final_objective": [
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "Welcome dear Desmond..."},
+		{
+			"type": Type.TROLL, 
+			"user": "Stranger", 
+			"text": "Mau HP gratis? Cukup bayar pakai jiwamu.",
+			"is_offer": true,
+			"offer_id": "soul_trade_01"
+		}
+	],
 	"room_entry_1": [
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "Kau akan mati di sini, itu fakta."},
 		{"type": Type.TROLL, "user": "u_mad_bro", "text": "Lari aja bang, cupu amat."}

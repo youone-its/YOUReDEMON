@@ -15,6 +15,8 @@ var chat_history: Array = []    # Menyimpan isi pesan (teks & tipe) yang sudah m
 var altars_status: Array = [false, false, false, false] # Simpan status 4 altar
 signal quit_requested
 var is_loading_from_save: bool = false
+var item_left: String = "none"
+var item_right: String = "none"
 
 func find_empty_slot() -> int:
 	for i in range(1, 4):

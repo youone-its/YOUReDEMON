@@ -1,8 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://cnw4e8w572xwd"]
+[gd_scene load_steps=19 format=3 uid="uid://cnw4e8w572xwd"]
 
-[ext_resource type="Texture2D" uid="uid://11payjxkcnof" path="res://assets/sprites/ui/mainmenu.jpg" id="1_2c62f"]
 [ext_resource type="Script" uid="uid://c3pla6o3yhm30" path="res://ui/menus/main_scene.gd" id="1_gyfs4"]
+[ext_resource type="Texture2D" uid="uid://bcn2nqa6yu1b7" path="res://assets/sprites/ui/_ (1).jpeg" id="2_66tet"]
 [ext_resource type="Script" uid="uid://cqhfnym1ly5qk" path="res://ui/menus/background.gd" id="3_d5x1h"]
+[ext_resource type="Texture2D" uid="uid://b6ccpfv8bjp48" path="res://assets/sprites/world/logo.png" id="4_7ycvg"]
+[ext_resource type="Texture2D" uid="uid://bmayshqbpo34w" path="res://assets/sprites/world/button/btn-newgame.png" id="4_d5x1h"]
+[ext_resource type="Texture2D" uid="uid://ban027huabiuy" path="res://assets/sprites/world/button/btn-continue.png" id="6_wr18j"]
+[ext_resource type="Texture2D" uid="uid://g5l51ygofprg" path="res://assets/sprites/world/button/btn-setting.png" id="7_qwutr"]
+[ext_resource type="Texture2D" uid="uid://bfhpwyqq7vwks" path="res://assets/sprites/world/button/btn-quit.png" id="8_671wp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d5x1h"]
 
@@ -67,9 +72,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -30.0
+offset_right = -60.0
+offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_2c62f")
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2_66tet")
 script = ExtResource("3_d5x1h")
 
 [node name="Logo" type="TextureRect" parent="."]
@@ -78,6 +88,8 @@ offset_left = 139.0
 offset_top = 97.0
 offset_right = 362.0
 offset_bottom = 225.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_7ycvg")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
@@ -97,7 +109,16 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_8mm7a")
 theme_override_styles/hover = SubResource("StyleBoxFlat_hq1ik")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_nfk4m")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_66tet")
-text = "New Game"
+text = "
+
+"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/NewGameBtn"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("4_d5x1h")
 
 [node name="LoadGameBtn" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -106,7 +127,16 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_8mm7a")
 theme_override_styles/hover = SubResource("StyleBoxFlat_hq1ik")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_nfk4m")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_66tet")
-text = "Load Game"
+text = "
+
+"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/LoadGameBtn"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("6_wr18j")
 
 [node name="OptionsBtn" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -115,7 +145,16 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_8mm7a")
 theme_override_styles/hover = SubResource("StyleBoxFlat_hq1ik")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_nfk4m")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_66tet")
-text = "Setting"
+text = "
+
+"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/OptionsBtn"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("7_qwutr")
 
 [node name="QuitBtn" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -124,8 +163,13 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_8mm7a")
 theme_override_styles/hover = SubResource("StyleBoxFlat_hq1ik")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_nfk4m")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_66tet")
-text = "Quit
-"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/QuitBtn"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("8_671wp")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(575, 300)

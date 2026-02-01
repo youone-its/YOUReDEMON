@@ -39,7 +39,9 @@ func _on_button_pressed(button_name: String):
 				GameData.is_loading_from_save = false # Pastikan mode bukan loading
 				
 				# Pindah ke scene pertama
-				get_tree().change_scene_to_file("uid://c1owv7wqit87p")
+				#get_tree().change_scene_to_file("uid://c1owv7wqit87p")
+				#get_tree().change_scene_to_file("uid://cpw3bnl47ynj1")
+				get_tree().change_scene_to_file("uid://c8npqb1pmfosw")
 			else:
 				slot_full_dialog.popup_centered()
 		
