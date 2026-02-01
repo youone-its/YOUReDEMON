@@ -27,13 +27,15 @@ expand_mode = 1
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 0
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="ChatBox" type="VBoxContainer" parent="Control/MarginContainer/ScrollContainer"]
 layout_mode = 2

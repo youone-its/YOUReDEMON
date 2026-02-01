@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=4 uid="uid://c8npqb1pmfosw"]
+[gd_scene load_steps=53 format=4 uid="uid://c8npqb1pmfosw"]
 
 [ext_resource type="Texture2D" uid="uid://c2bb1g0d3g1gt" path="res://assets/sprites/world/TX Tileset Grass.png" id="1_7scr2"]
 [ext_resource type="Texture2D" uid="uid://8wpwool4sb16" path="res://assets/sprites/world/Full Spritesheet.png" id="2_sgm40"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://31vg3g8kq5eq" path="res://characters/enemies/Enemy_Template.tscn" id="9_jteos"]
 [ext_resource type="PackedScene" uid="uid://bae2wiyqxmjrm" path="res://ui/menus/init.tscn" id="10_sgm40"]
 [ext_resource type="Script" uid="uid://ceg7r2kum2a3g" path="res://levels/Tutorial/tutorial_trigger.gd" id="11_w3ful"]
+[ext_resource type="Script" uid="uid://dds5id3mdjh04" path="res://levels/Tutorial/switch_scene.gd" id="12_47t2l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8sewv"]
 texture = ExtResource("1_7scr2")
@@ -3199,6 +3200,9 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(162, 149, 145, 926, 118
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sgm40"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_w3ful"]
+radius = 36.05551
+
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
 
@@ -3275,3 +3279,28 @@ chat_event_id = "tutorial_final_objective"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger3"]
 shape = SubResource("RectangleShape2D_sgm40")
+
+[node name="TutorialTrigger4" type="Area2D" parent="."]
+position = Vector2(301, 748)
+collision_mask = 3
+script = ExtResource("11_w3ful")
+chat_event_id = "found_torch"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger4"]
+shape = SubResource("RectangleShape2D_sgm40")
+
+[node name="TutorialTrigger5" type="Area2D" parent="."]
+position = Vector2(1215, 868)
+collision_mask = 3
+script = ExtResource("12_47t2l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger5"]
+shape = SubResource("CircleShape2D_w3ful")
+
+[node name="InteractionLabel" type="Label" parent="TutorialTrigger5"]
+z_index = 100
+offset_left = 20.0
+offset_top = -49.0
+offset_right = 60.0
+offset_bottom = -26.0
+text = "M"

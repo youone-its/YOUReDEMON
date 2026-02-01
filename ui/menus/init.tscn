@@ -155,12 +155,13 @@ offset_bottom = 40.0
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = SubResource("Theme_q245y")
-step = 0.1
+step = 1.0
 rounded = true
 
 [node name="DemonBar" type="ProgressBar" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_hft3m")
+step = 1.0
 
 [node name="InventoryBar" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 7

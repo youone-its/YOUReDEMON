@@ -36,8 +36,8 @@ func _ready():
 	$CanvasLayer/QuitConfirmation/VBoxContainer/CancelBtn.pressed.connect(_on_cancel_pressed)
 	
 	if not GameData.quit_requested.is_connected(_show_quit_popup):
-		GameData.quit_requested.connect(_show_quit_popup)
-
+		GameData.quit_requested.connect(func(): _show_quit_popup(GameData.hp <= 0 || GameData.demonized_level>=100))
+		
 func _process(_delta):
 	_update_hud_visuals()
 	_update_inventory_visuals()
@@ -118,14 +118,17 @@ func _spawn_item_on_ground(item_name: String):
 
 # --- LOGIKA SYSTEM (SAVE/EXIT) ---
 
-func _show_quit_popup():
+func _show_quit_popup(is_death: bool = false):
+	var cancel_btn = $CanvasLayer/QuitConfirmation/VBoxContainer/CancelBtn
 	var status_label = $CanvasLayer/QuitConfirmation/StatusLabel
-	if GameData.current_slot == -1:
-		var empty = GameData.find_empty_slot()
-		status_label.text = "Slot Penuh! Timpa Slot 1?" if empty == 0 else "Simpan ke Slot Baru (%d)?" % empty
-	else:
-		status_label.text = "Simpan progress ke Slot %d?" % GameData.current_slot
 	
+	if is_death:
+		status_label.text = "YOU ARE DEMONIZED / DEAD"
+		cancel_btn.hide() # Sembunyikan tombol cancel
+	else:
+		status_label.text = "Pause Game"
+		cancel_btn.show()
+		
 	get_tree().paused = true
 	quit_confirm_popup.show()
 
@@ -156,3 +159,4 @@ func _save_process():
 func _on_cancel_pressed():
 	get_tree().paused = false
 	quit_confirm_popup.hide()
+	$CanvasLayer/QuitConfirmation/VBoxContainer/CancelBtn.show()
