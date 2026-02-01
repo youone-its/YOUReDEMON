@@ -19,6 +19,12 @@ var is_moving: bool = false
 var stamina_bar_left: ProgressBar = null
 var stamina_bar_right: ProgressBar = null
 
+# Flashlight
+var flashlight: PointLight2D = null
+var flashlight_enabled: bool = false
+var f_key_was_pressed: bool = false
+@export var flashlight_rotation_speed: float = 10.0
+
 func _ready():
 	# Add the player to the "player" group for easy reference
 	add_to_group("player")
@@ -28,6 +34,9 @@ func _ready():
 	
 	# Get existing stamina bars
 	get_stamina_bars()
+	
+	# Setup flashlight
+	setup_flashlight()
 
 func setup_raycast():
 	# Check if raycast exists, if not skip
@@ -61,7 +70,31 @@ func get_stamina_bars():
 		stamina_bar_right.max_value = max_stamina
 		stamina_bar_right.value = current_stamina
 
+func setup_flashlight():
+	# Get the PointLight2D2 node
+	if has_node("PointLight2D2"):
+		flashlight = $PointLight2D2
+		print("Flashlight found at position: ", flashlight.position)
+		# Reset position to be at player center
+		flashlight.position = Vector2(0, 10)
+		# Start with flashlight disabled
+		flashlight.visible = false
+		flashlight_enabled = false
+	else:
+		print("ERROR: PointLight2D2 not found!")
+
 func _physics_process(delta):
+	# Toggle flashlight with F key (detect single press)
+	if Input.is_key_pressed(KEY_F):
+		if not f_key_was_pressed:
+			toggle_flashlight()
+			f_key_was_pressed = true
+	else:
+		f_key_was_pressed = false
+	
+	# Update flashlight rotation to follow mouse
+	update_flashlight_rotation(delta)
+	
 	# Check if player wants to run (Shift key)
 	var want_to_run = Input.is_key_pressed(KEY_SHIFT)
 	
@@ -242,3 +275,27 @@ func die():
 	print("Player Mati!")
 	# Logika mati bisa memunculkan popup quit atau restart
 	GameData.quit_requested.emit()
+
+func toggle_flashlight():
+	if not flashlight:
+		return
+	
+	flashlight_enabled = !flashlight_enabled
+	flashlight.visible = flashlight_enabled
+	print("Flashlight: ", "ON" if flashlight_enabled else "OFF")
+
+func update_flashlight_rotation(delta):
+	if not flashlight or not flashlight_enabled:
+		return
+	
+	# Get mouse position in global coordinates
+	var mouse_pos = get_global_mouse_position()
+	
+	# Calculate direction from flashlight's global position to mouse
+	var direction = (mouse_pos - flashlight.global_position).normalized()
+	
+	# Calculate angle in radians (subtract PI/2 to correct for default orientation)
+	var target_angle = direction.angle() - PI / 2
+	
+	# Smoothly interpolate the flashlight rotation
+	flashlight.rotation = lerp_angle(flashlight.rotation, target_angle, flashlight_rotation_speed * delta)

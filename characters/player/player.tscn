@@ -1,9 +1,10 @@
-[gd_scene load_steps=51 format=3 uid="uid://b5w8qxm7ymjfd"]
+[gd_scene load_steps=52 format=3 uid="uid://b5w8qxm7ymjfd"]
 
 [ext_resource type="Script" uid="uid://cf4l2nrlnyflk" path="res://characters/player/player.gd" id="1_p8wc7"]
 [ext_resource type="Texture2D" uid="uid://dv05m2wpdvjcf" path="res://assets/sprites/player/TX Player.png" id="2_xxgcw"]
 [ext_resource type="Texture2D" uid="uid://baxo735q36v7u" path="res://assets/sprites/player/drive-download-20260131T152402Z-3-001/p.png" id="3_5dc8e"]
 [ext_resource type="PackedScene" uid="uid://qgeka7oktumh" path="res://levels/props/fog.tscn" id="3_exd8k"]
+[ext_resource type="Texture2D" uid="uid://b2cs37btheqif" path="res://assets/textures/flashlight_beam.jpg" id="5_ixbpm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_exd8k"]
 atlas = ExtResource("2_xxgcw")
@@ -437,6 +438,23 @@ texture_scale = 1.73
 
 [node name="fog" parent="." instance=ExtResource("3_exd8k")]
 visible = false
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(0, 13)
+color = Color(1, 1, 0.7254902, 1)
+energy = 0.8
+shadow_enabled = true
+shadow_filter = 2
+texture = ExtResource("5_ixbpm")
+offset = Vector2(0, 96.87)
+texture_scale = 0.14
+
+[node name="Flashlight area" type="Area2D" parent="PointLight2D2"]
+position = Vector2(0, 6.8700027)
+collision_layer = 16
+
+[node name="light collider" type="CollisionPolygon2D" parent="PointLight2D2/Flashlight area"]
+polygon = PackedVector2Array(0, 0, 37, 132, -37, 132)
 
 [node name="StaminaUI" type="CanvasLayer" parent="."]
 layer = 100

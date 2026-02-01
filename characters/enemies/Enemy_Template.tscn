@@ -34,12 +34,12 @@ sprite_frames = SubResource("SpriteFrames_ldlpo")
 shape = SubResource("CircleShape2D_uyegb")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(0, 90)
 color = Color(1, 1, 0.7254902, 1)
-energy = 0.4
+energy = 0.8
 shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("2_i16us")
+offset = Vector2(0, 90)
 texture_scale = 0.14
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
