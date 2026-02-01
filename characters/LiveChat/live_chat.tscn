@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhb7cc3s2aawk"]
+[gd_scene load_steps=3 format=3 uid="uid://dhb7cc3s2aawk"]
 
 [ext_resource type="Script" uid="uid://c88iyth4qttr" path="res://characters/LiveChat/LiveChat.gd" id="1_lox3f"]
+[ext_resource type="Texture2D" uid="uid://drh748m2t4mxf" path="res://assets/sprites/world/button/bg-chat.png" id="2_k3lil"]
 
 [node name="LiveChat" type="CanvasLayer"]
 layer = 1000
@@ -16,8 +17,25 @@ offset_left = -300.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+[node name="TextureRect" type="TextureRect" parent="Control"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("2_k3lil")
+expand_mode = 1
 
-[node name="ChatBox" type="VBoxContainer" parent="Control/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
 layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+horizontal_scroll_mode = 0
+
+[node name="ChatBox" type="VBoxContainer" parent="Control/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1

@@ -1,11 +1,11 @@
 extends CanvasLayer
 
-@onready var chat_container = $Control/ScrollContainer/ChatBox
+@onready var chat_container = $Control/MarginContainer/ScrollContainer/ChatBox
 @onready var ui_shell = $Control
 var current_trigger_task: String = ""
 var is_chat_showing: bool = true
 var default_x: float = 852.0 # Posisi X awal kamu
-var hidden_offset: float = 300.0 # Lebar UI kamu
+var hidden_offset: float = 500.0 # Lebar UI kamu
 
 const COLORS = {
 	ChatData.Type.DEVIL: Color.RED,
@@ -18,7 +18,9 @@ func _ready():
 	self.visible = false
 	default_x = ui_shell.position.x
 	
-func trigger_chat(trigger_id: String):
+# Tambahkan parameter delay dengan nilai default (misal 1.0) 
+# agar script lama tidak error jika tidak mengirim parameter ini.
+func trigger_chat(trigger_id: String, initial_delay: float = 4.0):
 	# Jika ID sudah ada, artinya sudah pernah muncul, jangan buat baru
 	if trigger_id in GameData.completed_chats:
 		return 
@@ -28,14 +30,16 @@ func trigger_chat(trigger_id: String):
 	
 	if ChatData.MESSAGES.has(trigger_id):
 		var messages = ChatData.MESSAGES[trigger_id]
-		await get_tree().create_timer(5.0).timeout
+		
+		# Gunakan parameter initial_delay di sini
+		await get_tree().create_timer(initial_delay).timeout
 		
 		if current_trigger_task != trigger_id: return
 
 		for msg in messages:
 			# SIMPAN KE HISTORY agar terbawa saat Save/Load
 			GameData.chat_history.append(msg)
-			create_message_label(msg, true) # Pakai animasi untuk pesan baru
+			create_message_label(msg, true) 
 			await get_tree().create_timer(1.5).timeout
 
 # FUNGSI BARU: Dipanggil saat Load Game agar chat lama muncul instan

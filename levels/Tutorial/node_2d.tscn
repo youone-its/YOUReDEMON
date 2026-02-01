@@ -1,19 +1,19 @@
-[gd_scene load_steps=49 format=4 uid="uid://c6xytwy2b07sv"]
+[gd_scene load_steps=51 format=4 uid="uid://c8npqb1pmfosw"]
 
-[ext_resource type="Script" uid="uid://b7n3gau2rwg41" path="res://levels/Tutorial/tutorial_scene.gd" id="1_cvsiy"]
-[ext_resource type="Texture2D" uid="uid://c2bb1g0d3g1gt" path="res://assets/sprites/world/TX Tileset Grass.png" id="1_epypp"]
-[ext_resource type="Texture2D" uid="uid://di1brhu018nxn" path="res://assets/sprites/world/TX Tileset Stone Ground.png" id="1_wtcfe"]
-[ext_resource type="Texture2D" uid="uid://8wpwool4sb16" path="res://assets/sprites/world/Full Spritesheet.png" id="2_kdubu"]
-[ext_resource type="Texture2D" uid="uid://dwy82hndi3tlk" path="res://assets/sprites/world/TX Tileset Wall.png" id="3_0hol4"]
-[ext_resource type="Texture2D" uid="uid://ba2py3jqxcpa" path="res://assets/sprites/world/black.png" id="3_d21ai"]
-[ext_resource type="Texture2D" uid="uid://dpt13gpmrnob8" path="res://assets/sprites/world/TX Props.png" id="4_0hol4"]
-[ext_resource type="Texture2D" uid="uid://mru1k7wll3pp" path="res://assets/sprites/world/TX Struct.png" id="4_q6r6c"]
-[ext_resource type="PackedScene" uid="uid://b5w8qxm7ymjfd" path="res://characters/player/player.tscn" id="7_4h7uv"]
-[ext_resource type="PackedScene" uid="uid://31vg3g8kq5eq" path="res://characters/enemies/Enemy_Template.tscn" id="9_mh2tb"]
-[ext_resource type="Texture2D" uid="uid://drh748m2t4mxf" path="res://assets/sprites/world/button/bg-chat.png" id="11_4h7uv"]
+[ext_resource type="Texture2D" uid="uid://c2bb1g0d3g1gt" path="res://assets/sprites/world/TX Tileset Grass.png" id="1_7scr2"]
+[ext_resource type="Texture2D" uid="uid://8wpwool4sb16" path="res://assets/sprites/world/Full Spritesheet.png" id="2_sgm40"]
+[ext_resource type="Texture2D" uid="uid://ba2py3jqxcpa" path="res://assets/sprites/world/black.png" id="3_w3ful"]
+[ext_resource type="Texture2D" uid="uid://di1brhu018nxn" path="res://assets/sprites/world/TX Tileset Stone Ground.png" id="4_47t2l"]
+[ext_resource type="Texture2D" uid="uid://dwy82hndi3tlk" path="res://assets/sprites/world/TX Tileset Wall.png" id="5_wgxvx"]
+[ext_resource type="Texture2D" uid="uid://mru1k7wll3pp" path="res://assets/sprites/world/TX Struct.png" id="6_mdlsj"]
+[ext_resource type="Texture2D" uid="uid://dpt13gpmrnob8" path="res://assets/sprites/world/TX Props.png" id="7_tpko4"]
+[ext_resource type="PackedScene" uid="uid://b5w8qxm7ymjfd" path="res://characters/player/player.tscn" id="8_c074l"]
+[ext_resource type="PackedScene" uid="uid://31vg3g8kq5eq" path="res://characters/enemies/Enemy_Template.tscn" id="9_jteos"]
+[ext_resource type="PackedScene" uid="uid://bae2wiyqxmjrm" path="res://ui/menus/init.tscn" id="10_sgm40"]
+[ext_resource type="Script" uid="uid://ceg7r2kum2a3g" path="res://levels/Tutorial/tutorial_trigger.gd" id="11_w3ful"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8sewv"]
-texture = ExtResource("1_epypp")
+texture = ExtResource("1_7scr2")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -605,7 +605,7 @@ texture_region_size = Vector2i(32, 32)
 7:7/0/terrain_set = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ttnfn"]
-texture = ExtResource("2_kdubu")
+texture = ExtResource("2_sgm40")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -2070,7 +2070,7 @@ texture_region_size = Vector2i(32, 32)
 39:36/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_amv5h"]
-texture = ExtResource("3_d21ai")
+texture = ExtResource("3_w3ful")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
@@ -2089,7 +2089,7 @@ sources/3 = SubResource("TileSetAtlasSource_ttnfn")
 sources/4 = SubResource("TileSetAtlasSource_amv5h")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mh2tb"]
-texture = ExtResource("1_wtcfe")
+texture = ExtResource("4_47t2l")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -2516,7 +2516,7 @@ polygon = PackedVector2Array(-8, -16, -8, -8, -16, -8, -16, -16)
 polygon = PackedVector2Array(-8, -16, -8, 16, -16, 16, -16, -16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3gftx"]
-texture = ExtResource("3_0hol4")
+texture = ExtResource("5_wgxvx")
 texture_region_size = Vector2i(32, 32)
 1:1/0 = 0
 1:1/0/terrain_set = 0
@@ -2991,7 +2991,7 @@ texture_region_size = Vector2i(32, 32)
 6:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 40, 16, 40, 16, 48, -16, 48)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cvsiy"]
-texture = ExtResource("4_q6r6c")
+texture = ExtResource("6_mdlsj")
 texture_region_size = Vector2i(32, 32)
 12:0/size_in_atlas = Vector2i(4, 3)
 12:0/0 = 0
@@ -3041,7 +3041,7 @@ sources/1 = SubResource("TileSetAtlasSource_cvsiy")
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wx82q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4h7uv"]
-texture = ExtResource("4_0hol4")
+texture = ExtResource("7_tpko4")
 texture_region_size = Vector2i(32, 32)
 1:0/size_in_atlas = Vector2i(1, 2)
 1:0/0 = 0
@@ -3195,9 +3195,12 @@ vertices = PackedVector2Array(1512.8984, 196.71875, 1506.0781, 909.8125, 1187.71
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(162, 149, 145, 926, 1188, 947, 1516, 919, 1523, 187)])
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3ful"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgm40"]
+
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_cvsiy")
 
 [node name="Tilemap" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -3222,7 +3225,7 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAARAAoAAgAJAAIAAAAHAA4AAgALAAUAAAAMAA4AAgALAAUAAAAMAAwAAgALAAUAAAAVAA0AAgANAAYAAAAVAAcAAgANAAYAAAAHAAYAAgALAAUAAAAJAAkAAgANAAAAAAAYABIAAgAOAAMAAAAYABEAAgAOAAMAAAA=")
 tile_set = SubResource("TileSet_kdubu")
 
-[node name="Player" parent="." instance=ExtResource("7_4h7uv")]
+[node name="Player" parent="." instance=ExtResource("8_c074l")]
 position = Vector2(417, 323)
 collision_layer = 2
 collision_mask = 129
@@ -3238,13 +3241,37 @@ shadow_enabled = true
 shadow_filter = 2
 texture = SubResource("GradientTexture2D_mh2tb")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("9_mh2tb")]
+[node name="CharacterBody2D" parent="." instance=ExtResource("9_jteos")]
 position = Vector2(364, 768)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_mh2tb")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-texture = ExtResource("11_4h7uv")
-expand_mode = 1
+[node name="Node2D" parent="." instance=ExtResource("10_sgm40")]
+
+[node name="TutorialTrigger" type="Area2D" parent="."]
+position = Vector2(590, 512)
+collision_mask = 3
+script = ExtResource("11_w3ful")
+chat_event_id = "tutorial_flashlight"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger"]
+shape = SubResource("RectangleShape2D_w3ful")
+
+[node name="TutorialTrigger2" type="Area2D" parent="."]
+position = Vector2(1230, 619)
+collision_mask = 3
+script = ExtResource("11_w3ful")
+chat_event_id = "tutorial_chat"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger2"]
+shape = SubResource("RectangleShape2D_sgm40")
+
+[node name="TutorialTrigger3" type="Area2D" parent="."]
+position = Vector2(1215, 867)
+collision_mask = 3
+script = ExtResource("11_w3ful")
+chat_event_id = "tutorial_final_objective"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger3"]
+shape = SubResource("RectangleShape2D_sgm40")
