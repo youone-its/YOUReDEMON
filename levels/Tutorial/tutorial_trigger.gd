@@ -9,17 +9,16 @@ func _ready():
 	print("Trigger ", name, " siap. Menunggu Player...")
 
 func _on_body_entered(body: Node2D):
-	# DEBUG: Cetak nama objek apa saja yang masuk ke area
-	print("Ada objek masuk: ", body.name, " (Group: ", body.get_groups(), ")")
-
-	# Kita buat pengecekan lebih fleksibel
-	if body.name == "Player" or body.is_in_group("player"):
-		print("Player terdeteksi! Mengirim chat: ", chat_event_id)
+	if body.is_in_group("player"):
+		# 1. Aktifkan kemampuan senter di script player
+		#body.can_use_flashlight = true
 		
+		# 2. Beri feedback di konsol
+		print("Senter Terbuka! Sekarang Player bisa menekan F.")
+		
+		# 3. Trigger Chat Event jika ada
 		if get_node_or_null("/root/LiveChat"):
 			LiveChat.trigger_chat(chat_event_id, 1.0)
-		else:
-			print("ERROR: Singleton 'LiveChat' tidak ditemukan!")
-		
-		# Hapus setelah jalan
+			
+		# 4. Hapus trigger agar tidak terjadi double event
 		queue_free()

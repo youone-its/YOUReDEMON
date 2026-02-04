@@ -1,6 +1,7 @@
-[gd_scene load_steps=90 format=4 uid="uid://cpw3bnl47ynj1"]
+[gd_scene load_steps=98 format=4 uid="uid://cpw3bnl47ynj1"]
 
 [ext_resource type="Texture2D" uid="uid://c2bb1g0d3g1gt" path="res://assets/sprites/world/TX Tileset Grass.png" id="1_epypp"]
+[ext_resource type="Script" uid="uid://b7n3gau2rwg41" path="res://levels/Tutorial/tutorial_scene.gd" id="1_lbmqg"]
 [ext_resource type="Texture2D" uid="uid://di1brhu018nxn" path="res://assets/sprites/world/TX Tileset Stone Ground.png" id="1_wtcfe"]
 [ext_resource type="Texture2D" uid="uid://8wpwool4sb16" path="res://assets/sprites/world/Full Spritesheet.png" id="2_kdubu"]
 [ext_resource type="Texture2D" uid="uid://dwy82hndi3tlk" path="res://assets/sprites/world/TX Tileset Wall.png" id="3_0hol4"]
@@ -11,6 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://sqvqpt2r7j8v" path="res://assets/sprites/world/Sprite-0001.png" id="7_lbmqg"]
 [ext_resource type="PackedScene" uid="uid://31vg3g8kq5eq" path="res://characters/enemies/Enemy_Template.tscn" id="9_j081x"]
 [ext_resource type="PackedScene" uid="uid://c5bego3noluuu" path="res://levels/props/lamp.tscn" id="10_e50u4"]
+[ext_resource type="PackedScene" uid="uid://bae2wiyqxmjrm" path="res://ui/menus/init.tscn" id="12_sri32"]
+[ext_resource type="Script" uid="uid://ceg7r2kum2a3g" path="res://levels/Tutorial/tutorial_trigger.gd" id="13_uij8h"]
+[ext_resource type="Script" uid="uid://dds5id3mdjh04" path="res://levels/Tutorial/switch_scene.gd" id="14_vehym"]
+[ext_resource type="Texture2D" uid="uid://cyqhyv4sk8tyb" path="res://assets/items/flashlight.jpeg" id="15_vwe11"]
+[ext_resource type="PackedScene" uid="uid://c0dwq7bt16vvq" path="res://levels/props/collectible_item.tscn" id="16_3mmta"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epypp"]
 texture = ExtResource("1_epypp")
@@ -2027,8 +2033,14 @@ parsed_collision_mask = 4294901893
 source_geometry_mode = 1
 agent_radius = 8.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mdvu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3mmta"]
+radius = 36.05551
+
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_lbmqg")
 
 [node name="map" type="Node2D" parent="." groups=["navigation_polygon_source_geometry_group"]]
 y_sort_enabled = true
@@ -2070,7 +2082,6 @@ position = Vector2(265, 390)
 position = Vector2(2, -18)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0.11858138, 0.11858138, 0.11858138, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
@@ -2086,5 +2097,62 @@ navigation_polygon = SubResource("NavigationPolygon_lbmqg")
 [node name="Player" parent="." instance=ExtResource("7_4h7uv")]
 position = Vector2(336, 706)
 
+[node name="Node2D" parent="." instance=ExtResource("12_sri32")]
+
+[node name="TutorialTrigger" type="Area2D" parent="." groups=["player"]]
+position = Vector2(574, 587)
+collision_mask = 3
+script = ExtResource("13_uij8h")
+chat_event_id = "tutorial_flashlight"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger2" type="Area2D" parent="." groups=["player"]]
+position = Vector2(646, 292)
+collision_mask = 3
+script = ExtResource("13_uij8h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger2"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger3" type="Area2D" parent="." groups=["player"]]
+position = Vector2(1322, 623)
+collision_mask = 3
+script = ExtResource("13_uij8h")
+chat_event_id = "tutorial_chat"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger3"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger4" type="Area2D" parent="." groups=["player"]]
+position = Vector2(1210, 844)
+collision_mask = 3
+script = ExtResource("13_uij8h")
+chat_event_id = "tutorial_final_objective"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger4"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger5" type="Area2D" parent="." groups=["player"]]
+position = Vector2(1215, 868)
+collision_mask = 3
+script = ExtResource("14_vehym")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger5"]
+shape = SubResource("CircleShape2D_3mmta")
+
 [node name="Enemy" parent="." instance=ExtResource("9_j081x")]
-position = Vector2(404, 632)
+position = Vector2(434, 301)
+
+[node name="CollectibleItem" parent="." instance=ExtResource("16_3mmta")]
+position = Vector2(275, 277)
+scale = Vector2(0.6537564, 0.6394761)
+collision_layer = 2
+collision_mask = 11
+item_id = "flashlight"
+item_name = "flashlight"
+texture_icon = ExtResource("15_vwe11")
+chat_event_id = "found_flashlight"
+
+[connection signal="body_entered" from="TutorialTrigger2" to="Player" method="_on_tutorial_trigger_2_body_entered"]

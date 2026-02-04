@@ -24,6 +24,7 @@ var flashlight: PointLight2D = null
 var flashlight_enabled: bool = false
 var f_key_was_pressed: bool = false
 @export var flashlight_rotation_speed: float = 10.0
+var can_use_flashlight: bool = false
 
 func _ready():
 	# Add the player to the "player" group for easy reference
@@ -37,6 +38,9 @@ func _ready():
 	
 	# Setup flashlight
 	setup_flashlight()
+	can_use_flashlight = GameData.has_flashlight
+	if can_use_flashlight:
+		print("Senter dipulihkan dari Save Data")
 
 func setup_raycast():
 	# Check if raycast exists, if not skip
@@ -297,6 +301,11 @@ func toggle_flashlight():
 	if not flashlight:
 		return
 	
+	# CEK: Jika belum kena trigger, jangan biarkan menyala
+	if not can_use_flashlight:
+		print("Flashlight belum ditemukan/diaktifkan!")
+		return
+	
 	flashlight_enabled = !flashlight_enabled
 	flashlight.visible = flashlight_enabled
 	print("Flashlight: ", "ON" if flashlight_enabled else "OFF")
@@ -316,3 +325,12 @@ func update_flashlight_rotation(delta):
 	
 	# Smoothly interpolate the flashlight rotation
 	flashlight.rotation = lerp_angle(flashlight.rotation, target_angle, flashlight_rotation_speed * delta)
+
+func ambil_item(tipe, jumlah, icon_path):
+	# Pastikan node target namanya "SurvivalSystem" di Scene Tree
+	var ss = get_tree().current_scene.find_child("SurvivalSystem", true, false)
+	if ss and ss.has_method("tambah_item_ke_tas"):
+		return ss.tambah_item_ke_tas(tipe, jumlah, icon_path)
+	
+	print("Error: SurvivalSystem tidak ditemukan!")
+	return false

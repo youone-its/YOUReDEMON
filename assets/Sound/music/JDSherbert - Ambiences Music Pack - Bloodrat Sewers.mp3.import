@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bhl5g2dkjsrgn"
+path="res://.godot/imported/JDSherbert - Ambiences Music Pack - Bloodrat Sewers.mp3-068381d7eb410c02d06786038c1aae65.mp3str"
+
+[deps]
+
+source_file="res://assets/Sound/music/JDSherbert - Ambiences Music Pack - Bloodrat Sewers.mp3"
+dest_files=["res://.godot/imported/JDSherbert - Ambiences Music Pack - Bloodrat Sewers.mp3-068381d7eb410c02d06786038c1aae65.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

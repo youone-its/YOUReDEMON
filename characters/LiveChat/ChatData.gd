@@ -34,12 +34,12 @@ const MESSAGES = {
 		{"type": Type.TROLL, "user": "Huli Jing", "text": "such a foolish"},
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "hahaha, not all offer is good for you"},
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "anyway let's move, i'm sure you wan't to quit this realm right?"},
-		{"type": Type.OBSERVER, "user": "Lilith", "text": "that's right, give me some good movies to watch, why don't you move to the door down there?"},
+		{"type": Type.OBSERVER, "user": "Lilith", "text": "that's right, give me some good movies to watch, why don't you search for some flashlight? maybe it somewhere up there"},
 	],
 	"TROLL_1_rejected": [
 		{"type": Type.TROLL, "user": "Huli Jing", "text": "what a clever boy we have here"},
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "hahaha, i knew it, anyway let's move, i'm sure you wan't to quit this realm right?"},
-		{"type": Type.OBSERVER, "user": "Lilith", "text": "that's right, give me some good movies to watch, why don't you move to the door down there?"},
+		{"type": Type.OBSERVER, "user": "Lilith", "text": "that's right, give me some good movies to watch, why don't you search for some flashlight? maybe it somewhere up there"},
 	],
 	"found_torch": [
 		{"type": Type.OBSERVER, "user": "Hades", "text": "There you are, now try to get used to the torch and try to go to the right end of this realm"},
@@ -60,19 +60,20 @@ const MESSAGES = {
 			"text": "Anyway, i probably not unknown where the torch is not supposed to be, do you want some hint?",
 			"is_offer": true,
 			"offer_id": "TROLL_2"
-		}
+		},
+		{"type": Type.OBSERVER, "user": "Ghul", "text": "Maybe someone there could help you found the flashlight"},
 	],
 	
 	"TROLL_2_accepted": [
 		{"type": Type.TROLL, "user": "Hecate", "text": "It' probably not on the left, or maybe not on the right"},
 		{"type": Type.TROLL, "user": "Hecate", "text": "Or... maybe its up or down"},
 		{"type": Type.OBSERVER, "user": "Lilith", "text": "Ow, cmon guys, don't make fool of him!"},
-		{"type": Type.OBSERVER, "user": "Lilith", "text": "just after you found it, you can use it by clicking space"},
+		{"type": Type.OBSERVER, "user": "Lilith", "text": "just after you found it, you can use it by clicking 'F'"},
 		{"type": Type.OBSERVER, "user": "Lilith", "text": "And you can control it with your mouse"},
 	],
 	"TROLL_2_rejected": [
 		{"type": Type.TROLL, "user": "Hecate", "text": "saus tartar"},
-		{"type": Type.OBSERVER, "user": "Hades", "text": "hmph, just after you found it, you can use it by clicking space"},
+		{"type": Type.OBSERVER, "user": "Hades", "text": "hmph, just after you found it, you can use it by clicking 'F'"},
 	],
 	
 	#tutorial kedua:

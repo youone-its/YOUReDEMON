@@ -405,9 +405,10 @@ fill_from = Vector2(0.47863248, 0.50427353)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ixbpm"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
-collision_mask = 9
+collision_layer = 10
+collision_mask = 11
 script = ExtResource("1_p8wc7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

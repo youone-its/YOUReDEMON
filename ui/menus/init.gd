@@ -1,162 +1,179 @@
 extends Control
 
+# --- HUD & SYSTEM ---
 @onready var hp_bar = $CanvasLayer/VBoxContainer/HPBar
 @onready var demon_bar = $CanvasLayer/VBoxContainer/DemonBar
 @onready var quit_confirm_popup = $CanvasLayer/QuitConfirmation
 
-# --- UI INVENTORY ---
-@onready var icon_l = $CanvasLayer/InventoryBar/Slot_L/ItemIcon_L
-@onready var icon_r = $CanvasLayer/InventoryBar/Slot_R/ItemIcon_R
-
-# Mapping Item ke Gambar (Gunakan .jpeg sesuai filemu)
-var item_textures = {
-	"flashlight": preload("res://assets/items/flashlight.jpeg"),
-	"key": preload("res://assets/items/key.jpeg"),
-	"potion": preload("res://assets/items/potion.jpeg"),
-	"none": null
-}
+# --- UI INVENTORY BARU ---
+@onready var inventory_window = $CanvasLayer/InventoryWindow # Background Tas
+@onready var grid_barang = $CanvasLayer/InventoryWindow/GridBarang # GridContainer
 
 func _ready():
 	# 1. Inisialisasi Visual
 	_update_hud_visuals()
-	_update_inventory_visuals()
+	inventory_window.hide()
 	quit_confirm_popup.hide()
 	
-	# 2. Setup LiveChat
+	# Pastikan script ini tetap berjalan saat game di-Pause (untuk UI)
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	# 2. Setup LiveChat (Fitur Lamamu)
 	if has_node("/root/LiveChat"):
 		get_node("/root/LiveChat").visible = true
 		if LiveChat.has_method("reload_history"):
 			LiveChat.reload_history()
-		if LiveChat.has_method("trigger_chat"):
-			LiveChat.trigger_chat("welcome_event")
 	
-	# 3. Koneksi Signal Popup
+	# 3. Koneksi Signal Popup (Fitur Lamamu)
 	$CanvasLayer/QuitConfirmation/VBoxContainer/SaveExitBtn.pressed.connect(_on_save_and_exit)
 	$CanvasLayer/QuitConfirmation/VBoxContainer/JustExitBtn.pressed.connect(_on_just_exit)
 	$CanvasLayer/QuitConfirmation/VBoxContainer/CancelBtn.pressed.connect(_on_cancel_pressed)
 	
+	if GameData.is_loading_from_save:
+		# items di init.gd = items di GameData
+		_refresh_inventory_ui()
 	if not GameData.quit_requested.is_connected(_show_quit_popup):
-		GameData.quit_requested.connect(func(): _show_quit_popup(GameData.hp <= 0 || GameData.demonized_level>=100))
-		
+		GameData.quit_requested.connect(func(): _show_quit_popup(GameData.hp <= 0 || GameData.demonized_level >= 100))
+
 func _process(_delta):
 	_update_hud_visuals()
-	_update_inventory_visuals()
+	
+	# Shortcut Angka 1: Menggunakan item yang sedang di-Fokus (WASD)
+	if inventory_window.visible and Input.is_action_just_pressed("ui_accept"): # Atau ganti KEY_1
+		var fokus = get_viewport().gui_get_focus_owner()
+		if fokus and fokus.get_parent() == grid_barang:
+			_pakai_item_terpilih(fokus)
 
 func _update_hud_visuals():
 	hp_bar.value = GameData.hp
 	demon_bar.value = GameData.demonized_level
 
-func _update_inventory_visuals():
-	# Update icon berdasarkan string yang tersimpan di GameData
-	icon_l.texture = item_textures.get(GameData.item_left, null)
-	icon_r.texture = item_textures.get(GameData.item_right, null)
-
 func _input(event):
-	# 1. Shortcut Quit (Q)
+	# 1. Shortcut Quit (Q) - Fitur Lamamu
 	if GameData.is_quit_pressed(event):
 		get_viewport().set_input_as_handled()
 		_show_quit_popup()
-	
-	# 2. Logika LiveChat & Inventory Shortcut
+		return
+
+	# 2. Toggle Inventory (SPACE) - Fitur Baru
+	if event.is_action_pressed("toggle_inventory"):
+		_toggle_inventory()
+		get_viewport().set_input_as_handled()
+		return
+
+	# 3. Logika Chat (TAB) - Fitur Lamamu
 	if event is InputEventKey and event.pressed:
-		# Toggle Chat (TAB)
-		if has_node("/root/LiveChat"):
-			var chat = get_node("/root/LiveChat")
-			if event.keycode == GameData.chat_toggle_key:
+		if event.keycode == GameData.chat_toggle_key:
+			if has_node("/root/LiveChat"):
+				var chat = get_node("/root/LiveChat")
 				chat.visible = !chat.visible
 				get_viewport().set_input_as_handled()
+				return
+
+# --- LOGIKA INVENTORY ---
+
+func _toggle_inventory():
+	inventory_window.visible = !inventory_window.visible
+	get_tree().paused = inventory_window.visible # Pause game saat buka tas
+	
+	if inventory_window.visible:
+		_refresh_inventory_ui()
+		# Auto-fokus ke item pertama agar WASD langsung jalan
+		if grid_barang.get_child_count() > 0:
+			grid_barang.get_child(0).grab_focus()
+
+func tambah_item_ke_tas(item_id: String, icon_path: String) -> bool:
+	if GameData.items.size() >= 12: # Misal max 12 slot
+		print("Tas Penuh!")
+		return false
+	
+	GameData.items.append({"id": item_id, "path": icon_path})
+	print("Berhasil mengambil: ", item_id)
+	return true
+
+func _refresh_inventory_ui():
+	# Bersihkan visual grid lama
+	for n in grid_barang.get_children():
+		n.queue_free()
+	
+	# Buat button baru untuk tiap item di GameData
+	for data in GameData.items:
+		var btn = Button.new()
+		btn.icon = load(data["path"])
+		btn.expand_icon = true
+		btn.custom_minimum_size = Vector2(80, 80)
+		btn.focus_mode = Control.FOCUS_ALL # Penting untuk WASD
 		
-		# --- LOGIKA INVENTORY ---
-		# Tekan 1: Buang/Gunakan tangan kiri
-		if event.keycode == KEY_1:
-			_handle_item_interaction("left")
-		# Tekan 2: Buang/Gunakan tangan kanan
-		elif event.keycode == KEY_2:
-			_handle_item_interaction("right")
+		btn.set_meta("item_id", data["id"])
+		btn.pressed.connect(func(): _pakai_item_terpilih(btn))
+		
+		grid_barang.add_child(btn)
 
-	# Proses input internal chat
-	if has_node("/root/LiveChat"):
-		var chat = get_node("/root/LiveChat")
-		if chat.has_method("check_chat_input"):
-			chat.check_chat_input(event)
-
-# Fungsi untuk menangani apakah item mau dipakai (Potion) atau dibuang
-func _handle_item_interaction(side: String):
-	var item_name = GameData.item_left if side == "left" else GameData.item_right
+func _pakai_item_terpilih(btn_node: Button):
+	var id = btn_node.get_meta("item_id")
+	print("Menggunakan: ", id)
+	var player = get_tree().get_first_node_in_group("player")
 	
-	if item_name == "none": return
+	if id == "flashlight":
+		if player:
+			player.toggle_flashlight()
 	
-	# Jika Potion, maka gunakan (Heal)
-	if item_name == "potion":
+	# Contoh Logika Potion
+	if id == "potion":
 		if GameData.hp < 100:
 			GameData.hp = min(GameData.hp + 30, 100)
-			_remove_item(side)
-			print("Healed! HP: ", GameData.hp)
-	# Jika item lain (Senter/Kunci), maka buang ke lantai
-	else:
-		_drop_item(side)
+			GameData.items.remove_at(btn_node.get_index())
+			_refresh_inventory_ui()
+	
+	# Jika item masih ada, kembalikan fokus agar WASD tidak hilang
+	if grid_barang.get_child_count() > 0:
+		grid_barang.get_child(0).grab_focus()
 
-func _drop_item(side: String):
-	var item_name = GameData.item_left if side == "left" else GameData.item_right
-	_spawn_item_on_ground(item_name)
-	_remove_item(side)
-
-func _remove_item(side: String):
-	if side == "left": GameData.item_left = "none"
-	else: GameData.item_right = "none"
-
-func _spawn_item_on_ground(item_name: String):
-	var player = get_tree().current_scene.find_child("Player", true, false)
-	if player:
-		var drop_scene = load("res://scenes/items/ItemDrop.tscn")
-		if drop_scene:
-			var drop = drop_scene.instantiate()
-			drop.item_type = item_name
-			# Munculkan di depan player sedikit
-			drop.global_position = player.global_position + Vector2(25, 0)
-			get_tree().current_scene.add_child(drop)
-
-# --- LOGIKA SYSTEM (SAVE/EXIT) ---
+# --- LOGIKA SYSTEM (SAVE/EXIT) - Fitur Lamamu ---
 
 func _show_quit_popup(is_death: bool = false):
-	var cancel_btn = $CanvasLayer/QuitConfirmation/VBoxContainer/CancelBtn
-	var status_label = $CanvasLayer/QuitConfirmation/StatusLabel
-	
-	if is_death:
-		status_label.text = "YOU ARE DEMONIZED / DEAD"
-		cancel_btn.hide() # Sembunyikan tombol cancel
-	else:
-		status_label.text = "Pause Game"
-		cancel_btn.show()
-		
 	get_tree().paused = true
 	quit_confirm_popup.show()
+	if is_death:
+		$CanvasLayer/QuitConfirmation/StatusLabel.text = "YOU ARE DEAD"
+		$CanvasLayer/QuitConfirmation/VBoxContainer/CancelBtn.hide()
+	else:
+		$CanvasLayer/QuitConfirmation/StatusLabel.text = "Pause Game"
+		$CanvasLayer/QuitConfirmation/VBoxContainer/CancelBtn.show()
 
 func _on_save_and_exit():
-	get_tree().paused = false
-	await _save_process()
-	get_tree().change_scene_to_file("uid://cnw4e8w572xwd")
+	# 1. Cari Root Node untuk sinkronisasi posisi terakhir
+	var root = get_tree().current_scene
+	if root.has_method("prepare_save_data"):
+		root.prepare_save_data()
+	
+	# 2. Ambil screenshot thumbnail (opsional tapi keren buat Load Menu)
+	await _take_screenshot()
+	
+	# 3. Eksekusi Save Game yang sebenarnya ke file .dat
+	if GameData.save_game():
+		print("Save Berhasil!")
+		get_tree().paused = false
+		get_tree().change_scene_to_file("uid://cnw4e8w572xwd")
 
 func _on_just_exit():
 	get_tree().paused = false
 	get_tree().change_scene_to_file("uid://cnw4e8w572xwd")
 
-func _save_process():
-	var current_scene = get_tree().current_scene
-	if current_scene.has_method("sync_to_gamedata"):
-		current_scene.sync_to_gamedata()
-	
-	var player = current_scene.find_child("Player", true, false)
-	if player:
-		GameData.player_position = player.global_position
-		
-	await RenderingServer.frame_post_draw
-	if GameData.save_game():
-		var img = get_viewport().get_texture().get_image()
-		var path = GameData.get_thumb_path(GameData.current_slot)
-		img.save_png(path)
-
 func _on_cancel_pressed():
 	get_tree().paused = false
 	quit_confirm_popup.hide()
-	$CanvasLayer/QuitConfirmation/VBoxContainer/CancelBtn.show()
+
+func _take_screenshot():
+	# Menunggu frame selesai digambar agar screenshot tidak hitam
+	await RenderingServer.frame_post_draw
+	
+	# Mengambil gambar dari viewport
+	var img = get_viewport().get_texture().get_image()
+	
+	# Mengambil path slot dari GameData
+	var path = GameData.get_thumb_path(GameData.current_slot)
+	
+	# Simpan sebagai PNG
+	img.save_png(path)
+	print("Thumbnail tersimpan di: ", path)
