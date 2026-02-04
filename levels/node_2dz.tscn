@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=4 uid="uid://cpw3bnl47ynj1"]
+[gd_scene load_steps=90 format=4 uid="uid://cpw3bnl47ynj1"]
 
 [ext_resource type="Texture2D" uid="uid://c2bb1g0d3g1gt" path="res://assets/sprites/world/TX Tileset Grass.png" id="1_epypp"]
 [ext_resource type="Texture2D" uid="uid://di1brhu018nxn" path="res://assets/sprites/world/TX Tileset Stone Ground.png" id="1_wtcfe"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dpt13gpmrnob8" path="res://assets/sprites/world/TX Props.png" id="4_0hol4"]
 [ext_resource type="Texture2D" uid="uid://c2yto0di0iueo" path="res://assets/sprites/world/TX Struct - transparant.png" id="6_e50u4"]
 [ext_resource type="PackedScene" uid="uid://b5w8qxm7ymjfd" path="res://characters/player/player.tscn" id="7_4h7uv"]
+[ext_resource type="Texture2D" uid="uid://sqvqpt2r7j8v" path="res://assets/sprites/world/Sprite-0001.png" id="7_lbmqg"]
 [ext_resource type="PackedScene" uid="uid://31vg3g8kq5eq" path="res://characters/enemies/Enemy_Template.tscn" id="9_j081x"]
 [ext_resource type="PackedScene" uid="uid://c5bego3noluuu" path="res://levels/props/lamp.tscn" id="10_e50u4"]
 
@@ -1663,6 +1664,7 @@ texture_region_size = Vector2i(32, 32)
 6:6/0/terrain_set = 0
 6:6/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tpqst")
 6:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 48, -16, 48)
+7:5/0 = 0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_as8ch"]
 polygon = PackedVector2Array(-16, -16, 48, -16, 48, 48, 32, 48, 32, 12, 24, 4, 8, 4, 0, 12, 0, 48, -16, 48, -16, 16)
@@ -1840,6 +1842,12 @@ texture_region_size = Vector2i(32, 32)
 7:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(16, -16, 8, -16, 8, 80, 16, 80)
 7:5/0/physics_layer_0/polygon_1/points = PackedVector2Array(-40, -16, -48, -16, -40, -16, -40, 80, -48, 80, -48, -16)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sri32"]
+texture = ExtResource("7_lbmqg")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
 [sub_resource type="TileSet" id="TileSet_d21ai"]
 tile_size = Vector2i(32, 32)
 occlusion_layer_0/light_mask = 1
@@ -1851,6 +1859,7 @@ terrain_set_0/terrain_1/name = "wall"
 terrain_set_0/terrain_1/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_kdubu")
 sources/1 = SubResource("TileSetAtlasSource_d21ai")
+sources/2 = SubResource("TileSetAtlasSource_sri32")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q6r6c"]
 texture = ExtResource("4_0hol4")
@@ -2061,6 +2070,7 @@ position = Vector2(265, 390)
 position = Vector2(2, -18)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.11858138, 0.11858138, 0.11858138, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
@@ -2073,8 +2083,8 @@ texture = SubResource("GradientTexture2D_e50u4")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_lbmqg")
 
-[node name="Enemy" parent="." instance=ExtResource("9_j081x")]
-position = Vector2(488, 336)
-
 [node name="Player" parent="." instance=ExtResource("7_4h7uv")]
 position = Vector2(336, 706)
+
+[node name="Enemy" parent="." instance=ExtResource("9_j081x")]
+position = Vector2(404, 632)

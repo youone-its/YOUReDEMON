@@ -3229,6 +3229,7 @@ collision_mask = 129
 floor_constant_speed = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.11858135, 0.11858139, 0.11858138, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]

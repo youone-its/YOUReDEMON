@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 # States
-enum State { ROAMING, CHASING, SEARCHING }
+enum State { ROAMING, CHASING, SEARCHING, STUNNED }
 var current_state: State = State.ROAMING
+var previous_state: State = State.ROAMING
 
 # Movement
 @export var roam_speed: float = 50.0
@@ -28,6 +29,8 @@ var current_light_angle: float = 0.0
 var search_timer: float = 0.0
 var roam_wait_timer: float = 0.0
 var roam_wait_duration: float = 2.0
+var is_stunned: bool = false
+var player_flashlight_area: Area2D = null
 
 func _ready():
 	spawn_position = global_position
@@ -44,8 +47,9 @@ func _ready():
 	# Start roaming
 	_set_random_roam_target()
 	
-	# Wait for navigation to be ready
+	# Find player's flashlight area
 	await get_tree().process_frame
+	_find_player_flashlight()
 	call_deferred("_setup_navigation")
 
 func _setup_navigation():
@@ -54,6 +58,9 @@ func _setup_navigation():
 		nav_agent.target_desired_distance = 4.0
 
 func _physics_process(delta):
+	# Check if stunned by player's flashlight
+	_check_flashlight_stun()
+	
 	match current_state:
 		State.ROAMING:
 			_process_roaming(delta)
@@ -61,12 +68,15 @@ func _physics_process(delta):
 			_process_chasing(delta)
 		State.SEARCHING:
 			_process_searching(delta)
+		State.STUNNED:
+			_process_stunned(delta)
 	
 	# Smooth light rotation
 	_update_light_rotation(delta)
 	
-	# Move based on navigation
-	_move_toward_target(delta)
+	# Move based on navigation (skip if stunned)
+	if current_state != State.STUNNED:
+		_move_toward_target(delta)
 
 func _process_roaming(delta):
 	# Slowly rotate light while roaming
@@ -123,6 +133,15 @@ func _move_toward_target(delta):
 	if nav_agent.is_navigation_finished():
 		velocity = Vector2.ZERO
 		move_and_slide()
+		# Stop or play idle animation when not moving
+		if sprite:
+			if sprite.animation.begins_with("walk_"):
+				var direction = sprite.animation.replace("walk_", "")
+				if sprite.sprite_frames.has_animation("idle_" + direction):
+					sprite.play("idle_" + direction)
+				else:
+					# Just stop on first frame if no idle animation
+					sprite.stop()
 		
 		# Set new target if in roaming state and wait is over
 		if current_state == State.ROAMING and roam_wait_timer <= 0:
@@ -135,6 +154,10 @@ func _move_toward_target(delta):
 	var speed = chase_speed if current_state == State.CHASING else roam_speed
 	velocity = direction * speed
 	move_and_slide()
+	
+	# Update animation based on movement direction
+	if sprite and velocity.length() > 0:
+		_update_movement_animation(direction)
 
 func _update_light_rotation(delta):
 	# Normalize angles to 0-360
@@ -199,21 +222,23 @@ func _has_line_of_sight_to_player() -> bool:
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position)
 	
-	# Check collision with walls (layer 2) and props (layer 3)
-	# Layer 2 = bit 1 = 2, Layer 3 = bit 2 = 4, Layer 4 = bit 3 = 8
-	query.collision_mask = 2 | 4 | 8  # Layers 2, 3, and 4 (walls, props, interactions)
+	# Check collision with walls and obstacles
+	# Layer 1 = bit 0 = 1 (Environment/Walls), Layer 2 = bit 1 = 2 (Player layer)
+	# We want to detect walls (layer 1) that would block line of sight
+	query.collision_mask = 1  # Only check layer 1 (walls/environment)
 	query.exclude = [self]
 	
 	var result = space_state.intersect_ray(query)
 	
 	# If ray hit nothing, we have clear line of sight
-	# If ray hit something, check if it's past the player (means player is in front)
+	# If ray hit something, there's an obstacle blocking the view
 	if result.is_empty():
 		return true
 	else:
-		# Check if collision point is beyond the player
+		# Check if collision point is beyond the player (means player is closer)
 		var collision_distance = global_position.distance_to(result.position)
 		var player_distance = global_position.distance_to(player.global_position)
+		# If the obstacle is further than the player, we can see the player
 		return collision_distance > player_distance
 
 func _on_detection_area_body_entered(body: Node2D):
@@ -246,3 +271,80 @@ func _enter_roaming_state():
 	_set_random_roam_target()
 	roam_wait_timer = 0
 	print("Enemy: Back to roaming")
+
+func _find_player_flashlight():
+	var players = get_tree().get_nodes_in_group("player")
+	if players.size() > 0:
+		var player_node = players[0]
+		player = player_node  # Store player reference
+		if player_node.has_node("PointLight2D2/Flashlight area"):
+			player_flashlight_area = player_node.get_node("PointLight2D2/Flashlight area")
+			print("Found player flashlight area")
+		else:
+			print("ERROR: Player flashlight area not found!")
+
+func _check_flashlight_stun():
+	if not player_flashlight_area or not player:
+		return
+	
+	# Check if this enemy is overlapping with the player's flashlight area
+	var overlapping_bodies = player_flashlight_area.get_overlapping_bodies()
+	var is_in_light = self in overlapping_bodies
+	
+	# If in light, also check line of sight to player
+	if is_in_light:
+		is_in_light = _has_line_of_sight_to_player()
+	
+	if is_in_light and not is_stunned:
+		print("Enemy detected in flashlight with line of sight!")
+		_enter_stunned_state()
+	elif not is_in_light and is_stunned:
+		print("Enemy left flashlight or lost line of sight")
+		_exit_stunned_state()
+
+func _process_stunned(delta):
+	# Stand still - don't move, force velocity to zero
+	velocity = Vector2.ZERO
+	move_and_slide()
+	
+	# Stop animation or play idle when stunned
+	if sprite and sprite.animation.begins_with("walk_"):
+		var direction = sprite.animation.replace("walk_", "")
+		if sprite.sprite_frames.has_animation("idle_" + direction):
+			sprite.play("idle_" + direction)
+		else:
+			sprite.stop()
+
+func _enter_stunned_state():
+	previous_state = current_state
+	current_state = State.STUNNED
+	is_stunned = true
+	print("Enemy: Stunned by flashlight!")
+
+func _exit_stunned_state():
+	current_state = previous_state
+	is_stunned = false
+	print("Enemy: Recovered from stun")
+
+func _update_movement_animation(direction: Vector2):
+	if not sprite:
+		return
+	
+	# Determine animation based on movement direction (4 directions)
+	var angle = rad_to_deg(direction.angle())
+	
+	var anim_name = "walk_down"
+	
+	if angle >= -45 and angle < 45:
+		anim_name = "walk_right"
+	elif angle >= 45 and angle < 135:
+		anim_name = "walk_down"
+	elif angle >= -135 and angle < -45:
+		anim_name = "walk_up"
+	else:
+		anim_name = "walk_left"
+	
+	# Only change animation if it's different from current
+	if sprite.sprite_frames.has_animation(anim_name):
+		if sprite.animation != anim_name:
+			sprite.play(anim_name)
