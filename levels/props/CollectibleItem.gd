@@ -48,7 +48,7 @@ func _on_body_entered(body):
 			print("Label [C] seharusnya muncul sekarang.")
 		if get_node_or_null("/root/LiveChat"):
 			LiveChat.trigger_chat(chat_event_id, 1.0)
-		queue_free()
+		#queue_free()
 			
 func _on_body_exited(body):
 	if body.is_in_group("player"):

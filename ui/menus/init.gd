@@ -23,6 +23,7 @@ func _ready():
 		get_node("/root/LiveChat").visible = true
 		if LiveChat.has_method("reload_history"):
 			LiveChat.reload_history()
+		
 	
 	# 3. Koneksi Signal Popup (Fitur Lamamu)
 	$CanvasLayer/QuitConfirmation/VBoxContainer/SaveExitBtn.pressed.connect(_on_save_and_exit)
@@ -63,12 +64,17 @@ func _input(event):
 
 	# 3. Logika Chat (TAB) - Fitur Lamamu
 	if event is InputEventKey and event.pressed:
-		if event.keycode == GameData.chat_toggle_key:
-			if has_node("/root/LiveChat"):
-				var chat = get_node("/root/LiveChat")
+		# Toggle Chat (TAB)
+		if has_node("/root/LiveChat"):
+			var chat = get_node("/root/LiveChat")
+			if event.keycode == GameData.chat_toggle_key:
 				chat.visible = !chat.visible
 				get_viewport().set_input_as_handled()
-				return
+				
+	if has_node("/root/LiveChat"):
+		var chat = get_node("/root/LiveChat")
+		if chat.has_method("check_chat_input"):
+			chat.check_chat_input(event)
 
 # --- LOGIKA INVENTORY ---
 

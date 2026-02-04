@@ -34,15 +34,16 @@ const MESSAGES = {
 		{"type": Type.TROLL, "user": "Huli Jing", "text": "such a foolish"},
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "hahaha, not all offer is good for you"},
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "anyway let's move, i'm sure you wan't to quit this realm right?"},
-		{"type": Type.OBSERVER, "user": "Lilith", "text": "that's right, give me some good movies to watch, why don't you search for some flashlight? maybe it somewhere up there"},
+		{"type": Type.OBSERVER, "user": "Lilith", "text": "that's right, give me some good movies to watch, why don't you search for some torch? maybe it somewhere up there"},
 	],
 	"TROLL_1_rejected": [
 		{"type": Type.TROLL, "user": "Huli Jing", "text": "what a clever boy we have here"},
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "hahaha, i knew it, anyway let's move, i'm sure you wan't to quit this realm right?"},
-		{"type": Type.OBSERVER, "user": "Lilith", "text": "that's right, give me some good movies to watch, why don't you search for some flashlight? maybe it somewhere up there"},
+		{"type": Type.OBSERVER, "user": "Lilith", "text": "that's right, give me some good movies to watch, why don't you search for some torch? maybe it somewhere up there"},
 	],
 	"found_torch": [
 		{"type": Type.OBSERVER, "user": "Hades", "text": "There you are, now try to get used to the torch and try to go to the right end of this realm"},
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "By the way, you can use the torch to make some enemies stunt"},
 	],
 	# RESPON JIKA TOLAK
 	"soul_trade_01_rejected": [
@@ -50,7 +51,7 @@ const MESSAGES = {
 	],
 	
 	#tutorial pertama:
-	"tutorial_flashlight": [
+	"tutorial_torch": [
 		{"type": Type.OBSERVER, "user": "Lilith", "text": "There you are, it still dark isn't it ?"},
 		{"type": Type.OBSERVER, "user": "Lilith", "text": "Go find some torch so you can see me clearly~"},
 		{"type": Type.TROLL, "user": "Hecate", "text": "Ugh, disgusting"},
@@ -61,7 +62,6 @@ const MESSAGES = {
 			"is_offer": true,
 			"offer_id": "TROLL_2"
 		},
-		{"type": Type.OBSERVER, "user": "Ghul", "text": "Maybe someone there could help you found the flashlight"},
 	],
 	
 	"TROLL_2_accepted": [
@@ -70,10 +70,13 @@ const MESSAGES = {
 		{"type": Type.OBSERVER, "user": "Lilith", "text": "Ow, cmon guys, don't make fool of him!"},
 		{"type": Type.OBSERVER, "user": "Lilith", "text": "just after you found it, you can use it by clicking 'F'"},
 		{"type": Type.OBSERVER, "user": "Lilith", "text": "And you can control it with your mouse"},
+		{"type": Type.TROLL, "user": "Ghul", "text": "Maybe someone there could help you found the torch"},
 	],
 	"TROLL_2_rejected": [
 		{"type": Type.TROLL, "user": "Hecate", "text": "saus tartar"},
 		{"type": Type.OBSERVER, "user": "Hades", "text": "hmph, just after you found it, you can use it by clicking 'F'"},
+		{"type": Type.OBSERVER, "user": "Hades", "text": "and control it with your mouse"},
+		{"type": Type.TROLL, "user": "Ghul", "text": "Maybe someone there could help you found the torch"},
 	],
 	
 	#tutorial kedua:

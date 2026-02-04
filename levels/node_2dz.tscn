@@ -2103,13 +2103,13 @@ position = Vector2(336, 706)
 position = Vector2(574, 587)
 collision_mask = 3
 script = ExtResource("13_uij8h")
-chat_event_id = "tutorial_flashlight"
+chat_event_id = "tutorial_torch"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger"]
 shape = SubResource("RectangleShape2D_3mdvu")
 
 [node name="TutorialTrigger2" type="Area2D" parent="." groups=["player"]]
-position = Vector2(646, 292)
+position = Vector2(337, 708)
 collision_mask = 3
 script = ExtResource("13_uij8h")
 
@@ -2153,6 +2153,6 @@ collision_mask = 11
 item_id = "flashlight"
 item_name = "flashlight"
 texture_icon = ExtResource("15_vwe11")
-chat_event_id = "found_flashlight"
+chat_event_id = "found_torch"
 
 [connection signal="body_entered" from="TutorialTrigger2" to="Player" method="_on_tutorial_trigger_2_body_entered"]
