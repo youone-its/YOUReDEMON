@@ -183,6 +183,10 @@ func execute_offer_effect(offer_id: String):
 			var player = get_tree().current_scene.find_child("Player", true, false)
 			if player:
 				player.take_damage(5)
+		"TROLL_M_1":
+			var player = get_tree().current_scene.find_child("Player", true, false)
+			if player:
+				player.demonized(5)
 				
 func execute_offer_effect_rejection(offer_id: String):
 	match offer_id:

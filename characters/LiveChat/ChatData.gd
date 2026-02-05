@@ -93,15 +93,95 @@ const MESSAGES = {
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "Maybe you wanna find some more stuff before you leave, but you can just leave this realm"},
 	],
 
-	"start_main_map":[
+	"beginning":[
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "Did i mention you can just leave from hell like you go out of your nanny's house?"},
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "GAHAHAHAHAHAH, you fool"},
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "You are Indonesian, you must've some attitude right? go find the owner of the house and have his permission to leave"},
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "Where you say??"},
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "I don't know, goodluck boy"},
 	],
-	"begining":[
+	"Pengecoh1":[
 		{"type": Type.OBSERVER, "user": "Ereshkigal", "text": "I heard it from old man zeus back them, the Helheim is one of the most danger place in over realm, moreover there is tartarus there, where Nidat, the ancestor of Titan was trapped in"},
 		{"type": Type.OBSERVER, "user": "Ereshkigal", "text": "I didn't know much about this place, but i'm sure you have to turn your torch always on"},
+		{
+			"type": Type.TROLL, 
+			"user": "Ghul", 
+			"text": "Hi, aku mau kasih tau ruangan bos nya, kali ini ril no fek"
+			"is_offer": true,
+			"offer_id": "TROLL_M_1"
+		},
 	],
+	"TROLL_M_1_accepted":[
+		{"type": Type.TROLL, "user": "Ghul", "text": "wise choice"},
+		{"type": Type.TROLL, "user": "Ghul", "text": "Oke, jadi ruangan bos nya kurang lebih ada si barat dayamu, ciri cirinya, ada tembok yang kaya tangga"},
+		{"type": Type.OBSERVER, "user": "Hades", "text": "Tetap waspada dengan monster nya, itu bisa nyerang kamu"},
+	],
+	"TROLL_M_1_rejected":[
+		{"type": Type.TROLL, "user": "Ghul", "text": "yaudah, kayanya bakal ada yang tua di jalan nih"},
+		{"type": Type.OBSERVER, "user": "Hades", "text": "Tetap waspada dengan monster nya, itu bisa nyerang kamu"},
+	],
+	"Pengecoh2":[
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "Aku mencium aroma busuk dari Tempra, sepertinya kita sudah sangat dekat"},
+	],
+	"Pengecoh3":[
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "Aura pekat hitam nya terasa nyaman, ruangan bos nya di dekat sini"},
+	],
+	"Pengecoh4":[
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "Hou, kamu menemukan jalan lain? bagus bagus"},
+	],
+	"Pengecoh5":[
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "Ruangan ruangan kecil di sini lebih busuk daripada Tempra, mungkin ini bau dari Chasy"},
+	],
+	"Pengecoh6":[
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "Di sini sangat tidak nyaman, lebih baik kau cepat temukan yang kamu cari di sini!"},
+	],
+	"Came_Earlier":[
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "oh cepat sekali kau sampai, jadi... di mana hadiahnya?", "is_offer": true, "offer_id": "placeholder"},
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "barang apa katamu?!?!?!?"},
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "aih blegug sia maneh, kau bertemu denganku tapi tidak membawa apapun?? kon pikir kon sopo???"},
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "Cari dan temukan lima kepala dari kebajikan surgawi (kebalikan nya 7 dosa besar) di seluruh alam jika kamu mau keluar!!!"},
+	],
+
+	"diam1":[
+		{"type": Type.OBSERVER, "user": "Hades", "text": "kaki mu mau ku potong saja kah? JALAN!!!"},
+	],
+	"diam2":[
+		{"type": Type.OBSERVER, "user": "Ereshkigal", "text": "Kenapa diam? apa kamu menemukan sesuatu yang mencurigakan?"},
+	],
+	"diam3":[
+		{"type": Type.OBSERVER, "user": "Lilith", "text": "hei~ kalo kamu diam doang jadi ga seru nih... ayo cepat jalan lagi!"},
+	],
+	"BigClue1":[
+		{
+			"type": Type.TROLL, 
+			"user": "Huli Jing", 
+			"text": "kayanya kamu kesusahan mencari kunci nya, mau kubantu?"
+			"is_offer": true,
+			"offer_id": "TROLL_BC_1"
+		},
+	],
+	"TROLL_BC_1_accepted":[
+		{"type": Type.TROLL, "user": "Huli Jing", "text": "Apakah kamu sudah cek di sudut realm dan realm awal mula?"},
+	],
+	"TROLL_BC_1_rejected":[
+		{"type": Type.TROLL, "user": "Huli Jing", "text": "yaudahlah, goodluck"},
+	],
+
+	"BigClue1":[
+		{
+			"type": Type.DEVIL, 
+			"user": "Lucifer", 
+			"text": "Kamu harusnya belajar dari kesalahan, aku juga bisa kasih kamu bantuan kalo kamu mau"
+			"is_offer": true,
+			"offer_id": "DEVIL_BC_1"
+		},
+	],
+	"DEVIL_BC_1_accepted":[
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "Apakah kamu sudah cek di sudut realm dan realm awal mula?"},
+	],
+	"DEVIL_BC_1_rejected":[
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "yaudahlah, goodluck"},
+	],
+
+	
 }
