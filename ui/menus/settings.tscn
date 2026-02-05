@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://dnxyfy77xdfcy"]
+
+[ext_resource type="Script" uid="uid://b84q3xa2eidmk" path="res://ui/menus/settings_menu.gd" id="1_x2hje"]
+[ext_resource type="Texture2D" uid="uid://bcn2nqa6yu1b7" path="res://assets/sprites/ui/_ (1).jpeg" id="2_3ykye"]
+[ext_resource type="Texture2D" uid="uid://bg0yj5djmi414" path="res://assets/sprites/world/button/btn-back.png" id="3_gc0em"]
+[ext_resource type="AudioStream" uid="uid://dpjddmc1g5iq8" path="res://assets/Sound/click/Menu_Select_00.mp3" id="4_gd5yh"]
+
+[node name="Control" type="Control" unique_id=1772479397 groups=["hide_chat", "hide_chat_global"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x2hje")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=821891574]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.56, 1.56)
+texture = ExtResource("2_3ykye")
+
+[node name="BackButtonMargin" type="MarginContainer" parent="." unique_id=1357002826]
+layout_mode = 1
+offset_right = 45.0
+offset_bottom = 31.0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+
+[node name="BackButton" type="TextureButton" parent="BackButtonMargin" unique_id=185220279]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="BackButtonMargin/BackButton" unique_id=733758184]
+layout_mode = 0
+offset_top = -10.0
+offset_right = 272.0
+offset_bottom = 231.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_gc0em")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1823989615]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -180.0
+offset_bottom = 321.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=2067469843]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="EditSaveBtn" type="Button" parent="CenterContainer/VBoxContainer" unique_id=187190708]
+layout_mode = 2
+text = "Edit"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1037574307]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=263195516]
+layout_mode = 2
+text = "Quit   "
+
+[node name="TriggerBtn" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=2051648968]
+layout_mode = 2
+text = "Q"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1819928752]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer2" unique_id=716606401]
+layout_mode = 2
+text = "Chat  "
+
+[node name="ChatTriggerBtn" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2" unique_id=1125136523]
+layout_mode = 2
+text = "R"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1230666242]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer3" unique_id=287019695]
+layout_mode = 2
+text = "Right "
+
+[node name="WTriggerBtn" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer3" unique_id=1572458677]
+layout_mode = 2
+text = "D"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=2072016960]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer4" unique_id=1478201655]
+layout_mode = 2
+text = "Left   "
+
+[node name="ChatTriggerBtn" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer4" unique_id=1629834832]
+layout_mode = 2
+text = "A"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=2133949875]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer5" unique_id=1838226438]
+layout_mode = 2
+text = "Down"
+
+[node name="ChatTriggerBtn" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer5" unique_id=568493640]
+layout_mode = 2
+text = "S"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=758931081]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer6" unique_id=682807905]
+layout_mode = 2
+text = "Up     "
+
+[node name="ChatTriggerBtn" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer6" unique_id=1642541381]
+layout_mode = 2
+text = "W"
+
+[node name="sfx_button" type="AudioStreamPlayer2D" parent="." unique_id=683102215]
+stream = ExtResource("4_gd5yh")

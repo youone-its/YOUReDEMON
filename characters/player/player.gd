@@ -25,6 +25,8 @@ var flashlight_enabled: bool = false
 var f_key_was_pressed: bool = false
 @export var flashlight_rotation_speed: float = 10.0
 var can_use_flashlight: bool = false
+var footstep_player: AudioStreamPlayer2D = null
+var flashlight_sfx_player: AudioStreamPlayer2D = null
 
 func _ready():
 	# Add the player to the "player" group for easy reference
@@ -41,6 +43,8 @@ func _ready():
 	can_use_flashlight = GameData.has_flashlight
 	if can_use_flashlight:
 		print("Senter dipulihkan dari Save Data")
+	
+	setup_audio()
 
 func setup_raycast():
 	# Check if raycast exists, if not skip
@@ -175,6 +179,7 @@ func _physics_process(delta):
 	# Update animation and raycast
 	update_animation()
 	update_raycast()
+	update_audio_playback()
 
 func update_animation():
 	var anim_sprite = $AnimatedSprite2D
@@ -308,6 +313,14 @@ func toggle_flashlight():
 	
 	flashlight_enabled = !flashlight_enabled
 	flashlight.visible = flashlight_enabled
+	
+	if flashlight_sfx_player:
+		if flashlight_enabled:
+			flashlight_sfx_player.stream = load("res://assets/Sound/item/Flashlight_on.ogg")
+		else:
+			flashlight_sfx_player.stream = load("res://assets/Sound/item/Flashlight_off.ogg")
+		flashlight_sfx_player.play()
+	
 	print("Flashlight: ", "ON" if flashlight_enabled else "OFF")
 
 func update_flashlight_rotation(delta):
@@ -334,3 +347,29 @@ func ambil_item(tipe, jumlah, icon_path):
 	
 	print("Error: SurvivalSystem tidak ditemukan!")
 	return false
+
+func setup_audio():
+	footstep_player = AudioStreamPlayer2D.new()
+	footstep_player.stream = load("res://assets/Sound/footstep/Footsteps Loop 1 (Rpg).wav")
+	footstep_player.volume_db = 5.0
+	add_child(footstep_player)
+	
+	flashlight_sfx_player = AudioStreamPlayer2D.new()
+	add_child(flashlight_sfx_player)
+
+func update_audio_playback():
+	if not footstep_player:
+		return
+		
+	if is_moving:
+		if not footstep_player.playing:
+			footstep_player.play()
+		
+		# Faster playback when running
+		if is_running:
+			footstep_player.pitch_scale = 1.5
+		else:
+			footstep_player.pitch_scale = 1.0
+	else:
+		if footstep_player.playing:
+			footstep_player.stop()

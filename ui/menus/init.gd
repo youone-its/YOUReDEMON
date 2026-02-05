@@ -119,6 +119,7 @@ func _refresh_inventory_ui():
 		grid_barang.add_child(btn)
 
 func _pakai_item_terpilih(btn_node: Button):
+	GameData.play_click_sound()
 	var id = btn_node.get_meta("item_id")
 	print("Menggunakan: ", id)
 	var player = get_tree().get_first_node_in_group("player")
@@ -151,6 +152,7 @@ func _show_quit_popup(is_death: bool = false):
 		$CanvasLayer/QuitConfirmation/VBoxContainer/CancelBtn.show()
 
 func _on_save_and_exit():
+	GameData.play_click_sound()
 	# 1. Cari Root Node untuk sinkronisasi posisi terakhir
 	var root = get_tree().current_scene
 	if root.has_method("prepare_save_data"):
@@ -166,10 +168,12 @@ func _on_save_and_exit():
 		get_tree().change_scene_to_file("uid://cnw4e8w572xwd")
 
 func _on_just_exit():
+	GameData.play_click_sound()
 	get_tree().paused = false
 	get_tree().change_scene_to_file("uid://cnw4e8w572xwd")
 
 func _on_cancel_pressed():
+	GameData.play_click_sound()
 	get_tree().paused = false
 	quit_confirm_popup.hide()
 

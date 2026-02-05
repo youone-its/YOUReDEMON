@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://v1s6jea7hlcr"]
+[gd_scene format=3 uid="uid://v1s6jea7hlcr"]
 
 [ext_resource type="Script" uid="uid://c3p8q6xmnjdo0" path="res://ui/menus/load_menu.gd" id="1_0al05"]
-[ext_resource type="Texture2D" uid="uid://11payjxkcnof" path="res://assets/sprites/ui/mainmenu.jpg" id="2_15hup"]
+[ext_resource type="Texture2D" uid="uid://b63smvsvyqycm" path="res://assets/sprites/ui/main-bg.jpeg" id="2_311pc"]
+[ext_resource type="AudioStream" uid="uid://dpjddmc1g5iq8" path="res://assets/Sound/click/Menu_Select_00.mp3" id="3_ed0oc"]
 
-[node name="LoadMenu" type="Control" groups=["hide_chat_global"]]
+[node name="LoadMenu" type="Control" unique_id=1579617 groups=["hide_chat_global"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,16 +15,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_0al05")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=2010337352]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_15hup")
+texture = ExtResource("2_311pc")
 
-[node name="MainHBox" type="HBoxContainer" parent="."]
+[node name="MainHBox" type="HBoxContainer" parent="." unique_id=814768547]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,88 +33,91 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
-[node name="LeftPanel" type="ScrollContainer" parent="MainHBox"]
+[node name="LeftPanel" type="ScrollContainer" parent="MainHBox" unique_id=1736286381]
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_scroll_mode = 0
 
-[node name="PanelContent" type="VBoxContainer" parent="MainHBox/LeftPanel"]
+[node name="PanelContent" type="VBoxContainer" parent="MainHBox/LeftPanel" unique_id=1397674248]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="MainHBox/LeftPanel/PanelContent"]
+[node name="MarginContainer" type="MarginContainer" parent="MainHBox/LeftPanel/PanelContent" unique_id=26034166]
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 
-[node name="BackButton" type="Button" parent="MainHBox/LeftPanel/PanelContent/MarginContainer"]
+[node name="BackButton" type="Button" parent="MainHBox/LeftPanel/PanelContent/MarginContainer" unique_id=1881981959]
 layout_mode = 2
 size_flags_vertical = 0
 text = "back"
 
-[node name="MarginContainer2" type="MarginContainer" parent="MainHBox/LeftPanel/PanelContent"]
+[node name="MarginContainer2" type="MarginContainer" parent="MainHBox/LeftPanel/PanelContent" unique_id=57007964]
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 
-[node name="SaveList" type="VBoxContainer" parent="MainHBox/LeftPanel/PanelContent/MarginContainer2"]
+[node name="SaveList" type="VBoxContainer" parent="MainHBox/LeftPanel/PanelContent/MarginContainer2" unique_id=666777269]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 theme_override_constants/separation = 10
 
-[node name="RightPanel" type="VBoxContainer" parent="MainHBox"]
+[node name="RightPanel" type="VBoxContainer" parent="MainHBox" unique_id=700584019]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="RightMargin" type="MarginContainer" parent="MainHBox/RightPanel"]
+[node name="RightMargin" type="MarginContainer" parent="MainHBox/RightPanel" unique_id=219849529]
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 
-[node name="ContentLayout" type="VBoxContainer" parent="MainHBox/RightPanel/RightMargin"]
+[node name="ContentLayout" type="VBoxContainer" parent="MainHBox/RightPanel/RightMargin" unique_id=675258086]
 layout_mode = 2
 
-[node name="DataLabel" type="Label" parent="MainHBox/RightPanel/RightMargin/ContentLayout"]
+[node name="DataLabel" type="Label" parent="MainHBox/RightPanel/RightMargin/ContentLayout" unique_id=1511477791]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Pilih Slot untuk Melihat Detail"
 horizontal_alignment = 1
 
-[node name="spacer" type="Control" parent="MainHBox/RightPanel/RightMargin/ContentLayout"]
+[node name="spacer" type="Control" parent="MainHBox/RightPanel/RightMargin/ContentLayout" unique_id=959723571]
 layout_mode = 2
 
-[node name="Thumbnail" type="TextureRect" parent="MainHBox/RightPanel/RightMargin/ContentLayout"]
+[node name="Thumbnail" type="TextureRect" parent="MainHBox/RightPanel/RightMargin/ContentLayout" unique_id=778699211]
 custom_minimum_size = Vector2(400, 225)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="spacer2" type="Control" parent="MainHBox/RightPanel/RightMargin/ContentLayout"]
+[node name="spacer2" type="Control" parent="MainHBox/RightPanel/RightMargin/ContentLayout" unique_id=2062034918]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MainHBox/RightPanel/RightMargin/ContentLayout"]
+[node name="MarginContainer" type="MarginContainer" parent="MainHBox/RightPanel/RightMargin/ContentLayout" unique_id=908453780]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainHBox/RightPanel/RightMargin/ContentLayout/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainHBox/RightPanel/RightMargin/ContentLayout/MarginContainer" unique_id=271270653]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="ConfirmLoadBtn" type="Button" parent="MainHBox/RightPanel/RightMargin/ContentLayout/MarginContainer/VBoxContainer"]
+[node name="ConfirmLoadBtn" type="Button" parent="MainHBox/RightPanel/RightMargin/ContentLayout/MarginContainer/VBoxContainer" unique_id=1039753065]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Select"
 icon_alignment = 1
 
-[node name="DeleteSlotBtn" type="Button" parent="MainHBox/RightPanel/RightMargin/ContentLayout/MarginContainer/VBoxContainer"]
+[node name="DeleteSlotBtn" type="Button" parent="MainHBox/RightPanel/RightMargin/ContentLayout/MarginContainer/VBoxContainer" unique_id=1785566678]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Delete"
 icon_alignment = 1
+
+[node name="sfx_button" type="AudioStreamPlayer2D" parent="." unique_id=1029294975]
+stream = ExtResource("3_ed0oc")

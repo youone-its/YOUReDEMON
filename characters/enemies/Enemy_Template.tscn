@@ -1,8 +1,9 @@
-[gd_scene load_steps=42 format=3 uid="uid://31vg3g8kq5eq"]
+[gd_scene format=3 uid="uid://31vg3g8kq5eq"]
 
 [ext_resource type="Script" uid="uid://cos2iwdhfc6r3" path="res://characters/enemies/enemy_roaming.gd" id="1_roaming"]
 [ext_resource type="Texture2D" uid="uid://b2cs37btheqif" path="res://assets/textures/flashlight_beam.jpg" id="2_i16us"]
 [ext_resource type="Texture2D" uid="uid://b3735ova4h0q3" path="res://assets/sprites/Enemy/shadow.png" id="2_ldlpo"]
+[ext_resource type="AudioStream" uid="uid://ykdqfuqxf84t" path="res://assets/Sound/footstep/Footsteps Loop 1 (Rpg).wav" id="4_uyegb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uyegb"]
 atlas = ExtResource("2_ldlpo")
@@ -185,7 +186,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_down",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -217,7 +218,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_left",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -249,7 +250,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_right",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -281,26 +282,26 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_up",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uyegb"]
 radius = 12.0
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" unique_id=616278094]
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_roaming")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1963179952]
 sprite_frames = SubResource("SpriteFrames_ldlpo")
-animation = &"new_animation"
+animation = &"walk_up"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=706747895]
 position = Vector2(0, 17)
 shape = SubResource("CircleShape2D_uyegb")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=961437724]
 color = Color(1, 1, 0.7254902, 1)
 energy = 0.8
 shadow_enabled = true
@@ -309,13 +310,17 @@ texture = ExtResource("2_i16us")
 offset = Vector2(0, 90)
 texture_scale = 0.14
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1615822093]
 avoidance_enabled = true
 radius = 2.0
 
-[node name="Flashlight area" type="Area2D" parent="."]
+[node name="Flashlight area" type="Area2D" parent="." unique_id=551205358]
 collision_layer = 24
 collision_mask = 3
 
-[node name="light collider" type="CollisionPolygon2D" parent="Flashlight area"]
+[node name="light collider" type="CollisionPolygon2D" parent="Flashlight area" unique_id=1789542893]
 polygon = PackedVector2Array(0, 0, 37, 132, -37, 132)
+
+[node name="sfx_footstep" type="AudioStreamPlayer2D" parent="." unique_id=1598357209]
+stream = ExtResource("4_uyegb")
+volume_db = 10.0

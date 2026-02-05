@@ -48,6 +48,15 @@ func reset_data():
 	completed_chats = []
 	chat_history = [] # Reset history saat New Game agar bersih
 	current_slot = -1
+	
+func play_click_sound():
+	var sfx = AudioStreamPlayer.new()
+	sfx.stream = load("res://assets/Sound/click/Menu_Select_00.mp3")
+	# Add to root to ensure it plays even if scene changes
+	get_tree().root.add_child(sfx)
+	sfx.play()
+	# Clean up after playing
+	sfx.finished.connect(sfx.queue_free)
 	altars_status = [false, false, false, false] # Reset saat New Game
 	current_scene_path = ""
 	is_loading_from_save = false
