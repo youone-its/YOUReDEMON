@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameData="*res://autoload/GameData.gd"
 LiveChat="*res://characters/LiveChat/live_chat.tscn"
 ChatData="*res://characters/LiveChat/ChatData.gd"
+GameProgress="*res://levels/GameProgress.gd"
 
 [display]
 

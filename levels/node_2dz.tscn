@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=4 uid="uid://cpw3bnl47ynj1"]
+[gd_scene load_steps=102 format=4 uid="uid://cpw3bnl47ynj1"]
 
 [ext_resource type="Texture2D" uid="uid://c2bb1g0d3g1gt" path="res://assets/sprites/world/TX Tileset Grass.png" id="1_epypp"]
 [ext_resource type="Script" uid="uid://b7n3gau2rwg41" path="res://levels/Tutorial/tutorial_scene.gd" id="1_lbmqg"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://c0dwq7bt16vvq" path="res://levels/props/collectible_item.tscn" id="16_3mmta"]
 [ext_resource type="Script" uid="uid://xwepoi557jtu" path="res://levels/boss_map_teleport.gd" id="16_m8srh"]
 [ext_resource type="Texture2D" uid="uid://hpprohxhgyy1" path="res://assets/items/key.jpeg" id="18_vwe11"]
+[ext_resource type="Script" uid="uid://ip2g3whj742c" path="res://levels/MainLevelTriggerLeveled.gd" id="21_tw7oy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epypp"]
 texture = ExtResource("1_epypp")
@@ -2561,20 +2562,8 @@ position = Vector2(3145, 5491)
 [node name="lamp9" parent="map/lamp/MainMapBossLamp" instance=ExtResource("10_e50u4")]
 position = Vector2(3140, 5507)
 
-[node name="lamp10" parent="map/lamp/MainMapBossLamp" instance=ExtResource("10_e50u4")]
-position = Vector2(3140, 5524)
-
 [node name="lamp11" parent="map/lamp/MainMapBossLamp" instance=ExtResource("10_e50u4")]
 position = Vector2(3210, 5474)
-
-[node name="lamp12" parent="map/lamp/MainMapBossLamp" instance=ExtResource("10_e50u4")]
-position = Vector2(3232, 5491)
-
-[node name="lamp13" parent="map/lamp/MainMapBossLamp" instance=ExtResource("10_e50u4")]
-position = Vector2(3235, 5507)
-
-[node name="lamp14" parent="map/lamp/MainMapBossLamp" instance=ExtResource("10_e50u4")]
-position = Vector2(3236, 5523)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
@@ -2747,5 +2736,98 @@ item_id = "key5"
 item_name = "key5"
 texture_icon = ExtResource("18_vwe11")
 chat_event_id = ""
+
+[node name="TriggerLocationChatMainMap" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TutorialTrigger12" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(6008, 718.00024)
+scale = Vector2(5.579018, 5.7623987)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "beginning"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger12"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger6" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(5984.0005, 3201.0002)
+scale = Vector2(5.579018, 5.7623987)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "Pengecoh1"
+layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger6"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger7" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(7647, 4402)
+scale = Vector2(5.579018, 5.7623987)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "Pengecoh2"
+layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger7"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger8" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(5532, 6407.0005)
+scale = Vector2(5.579018, 5.7623987)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "Pengecoh3"
+layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger8"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger9" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(4270, 7555.0005)
+scale = Vector2(5.579018, 5.7623987)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "Pengecoh4"
+layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger9"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger10" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(1461.9998, 6187)
+scale = Vector2(5.579018, 5.7623987)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "Pengecoh5"
+layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger10"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger11" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(1731, 4499)
+scale = Vector2(9.3636, 9.24283)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "Pengecoh6"
+layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger11"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger13" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(3803, 5804)
+scale = Vector2(9.3636, 9.24283)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "Came_Earlier"
+is_anchor = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger13"]
+shape = SubResource("RectangleShape2D_3mdvu")
 
 [connection signal="body_entered" from="TutorialTrigger2" to="Player" method="_on_tutorial_trigger_2_body_entered"]

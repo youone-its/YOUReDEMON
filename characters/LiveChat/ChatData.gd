@@ -84,6 +84,7 @@ const MESSAGES = {
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "The chat is too annoying you say? Why didn't you say so from the start?"},
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "You can click the tab button to remove it, and tab again to pop it up"},
 		{"type": Type.OBSERVER, "user": "Ereshkigal", "text": "Now you have to find the exit door of this realm, maybe it's in the bottom of the dungeon"},
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "By the way, you can use 'shift' key for run, but make sure you don't run out of stamina, you are weak tho"},
 		
 	],
 	
@@ -91,16 +92,16 @@ const MESSAGES = {
 	"tutorial_final_objective": [
 		{"type": Type.DEVIL, "user": "Lucifer", "text": "Maybe you wanna find some more stuff before you leave, but you can just leave this realm"},
 	],
-	
-	"room_entry_1": [
-		{"type": Type.DEVIL, "user": "Lucifer", "text": "Kau akan mati di sini, itu fakta."},
-		{"type": Type.TROLL, "user": "u_mad_bro", "text": "Lari aja bang, cupu amat."}
+
+	"start_main_map":[
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "Did i mention you can just leave from hell like you go out of your nanny's house?"},
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "GAHAHAHAHAHAH, you fool"},
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "You are Indonesian, you must've some attitude right? go find the owner of the house and have his permission to leave"},
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "Where you say??"},
+		{"type": Type.DEVIL, "user": "Lucifer", "text": "I don't know, goodluck boy"},
 	],
-	"near_cultist": [
-		{"type": Type.OBSERVER, "user": "Watcher", "text": "Mereka sedang melakukan ritual pemanggilan."},
-		{"type": Type.DEVIL, "user": "Beelzebub", "text": "Darahmu adalah bahan utamanya."}
+	"begining":[
+		{"type": Type.OBSERVER, "user": "Ereshkigal", "text": "I heard it from old man zeus back them, the Helheim is one of the most danger place in over realm, moreover there is tartarus there, where Nidat, the ancestor of Titan was trapped in"},
+		{"type": Type.OBSERVER, "user": "Ereshkigal", "text": "I didn't know much about this place, but i'm sure you have to turn your torch always on"},
 	],
-	"standing_still": [
-		{"type": Type.TROLL, "user": "AFK_Killer", "text": "Halo? Masih hidup?"}
-	]
 }

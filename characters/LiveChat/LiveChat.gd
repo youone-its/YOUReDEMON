@@ -9,7 +9,7 @@ var hidden_offset: float = 500.0 # Lebar UI kamu
 
 const COLORS = {
 	ChatData.Type.DEVIL: Color.RED,
-	ChatData.Type.OBSERVER: Color.WHITE,
+	ChatData.Type.OBSERVER: Color.BLACK,
 	ChatData.Type.TROLL: Color.MEDIUM_PURPLE
 }
 
