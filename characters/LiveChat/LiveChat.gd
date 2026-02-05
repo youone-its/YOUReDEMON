@@ -7,7 +7,7 @@ var is_chat_showing: bool = true
 var default_x: float = 852.0 # Posisi X awal kamu
 var hidden_offset: float = 500.0 # Lebar UI kamu
 
-const COLORS = {
+var COLORS = {
 	ChatData.Type.DEVIL: Color.RED,
 	ChatData.Type.OBSERVER: Color.BLACK,
 	ChatData.Type.TROLL: Color.MEDIUM_PURPLE

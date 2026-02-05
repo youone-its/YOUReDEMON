@@ -106,7 +106,7 @@ const MESSAGES = {
 		{
 			"type": Type.TROLL, 
 			"user": "Ghul", 
-			"text": "Hi, aku mau kasih tau ruangan bos nya, kali ini ril no fek"
+			"text": "Hi, aku mau kasih tau ruangan bos nya, kali ini ril no fek",
 			"is_offer": true,
 			"offer_id": "TROLL_M_1"
 		},
@@ -155,7 +155,7 @@ const MESSAGES = {
 		{
 			"type": Type.TROLL, 
 			"user": "Huli Jing", 
-			"text": "kayanya kamu kesusahan mencari kunci nya, mau kubantu?"
+			"text": "kayanya kamu kesusahan mencari kunci nya, mau kubantu?",
 			"is_offer": true,
 			"offer_id": "TROLL_BC_1"
 		},
@@ -167,11 +167,11 @@ const MESSAGES = {
 		{"type": Type.TROLL, "user": "Huli Jing", "text": "yaudahlah, goodluck"},
 	],
 
-	"BigClue1":[
+	"BigClue1D":[
 		{
 			"type": Type.DEVIL, 
 			"user": "Lucifer", 
-			"text": "Kamu harusnya belajar dari kesalahan, aku juga bisa kasih kamu bantuan kalo kamu mau"
+			"text": "Kamu harusnya belajar dari kesalahan, aku juga bisa kasih kamu bantuan kalo kamu mau",
 			"is_offer": true,
 			"offer_id": "DEVIL_BC_1"
 		},
