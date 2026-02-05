@@ -64,12 +64,15 @@ func _input(event):
 
 	# 3. Logika Chat (TAB) - Fitur Lamamu
 	if event is InputEventKey and event.pressed:
-		# Toggle Chat (TAB)
-		if has_node("/root/LiveChat"):
-			var chat = get_node("/root/LiveChat")
-			if event.keycode == GameData.chat_toggle_key:
-				chat.visible = !chat.visible
-				get_viewport().set_input_as_handled()
+		if event.keycode == GameData.chat_toggle_key:
+			if has_node("/root/LiveChat"):
+				var chat = get_node("/root/LiveChat")
+				
+				# Pastikan ini memanggil toggle_chat() sesuai nama baru
+				if chat.has_method("toggle_chat"): 
+					chat.toggle_chat()
+					get_viewport().set_input_as_handled() # Hentikan input di sini
+					return # Keluar agar tidak kena check_chat_input lagi di bawah
 				
 	if has_node("/root/LiveChat"):
 		var chat = get_node("/root/LiveChat")
