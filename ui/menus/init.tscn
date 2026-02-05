@@ -53,6 +53,7 @@ ProgressBar/styles/fill = SubResource("StyleBoxFlat_ggcy8")
 process_mode = 3
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 1
 script = ExtResource("1_l5jql")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -163,33 +164,29 @@ layout_mode = 2
 theme = SubResource("Theme_hft3m")
 step = 1.0
 
-[node name="InventoryBar" type="HBoxContainer" parent="CanvasLayer"]
-anchors_preset = 7
+[node name="InventoryWindow" type="Panel" parent="CanvasLayer"]
+process_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -152.0
+anchor_bottom = 0.5
+offset_left = -200.0
 offset_top = -100.0
-offset_right = 148.0
+offset_right = 200.0
+offset_bottom = 100.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 
-[node name="Slot_L" type="TextureRect" parent="CanvasLayer/InventoryBar"]
+[node name="GridBarang" type="GridContainer" parent="CanvasLayer/InventoryWindow"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/InventoryWindow/GridBarang"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 3.0
-
-[node name="ItemIcon_L" type="Sprite2D" parent="CanvasLayer/InventoryBar/Slot_L"]
-
-[node name="Control" type="Control" parent="CanvasLayer/InventoryBar"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Slot_R" type="TextureRect" parent="CanvasLayer/InventoryBar"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 3.0
-
-[node name="ItemIcon_R" type="Sprite2D" parent="CanvasLayer/InventoryBar/Slot_R"]
+text = "\"Tekan 1 untuk Pakai\""

@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://cnw4e8w572xwd"]
 
 [ext_resource type="Script" uid="uid://c3pla6o3yhm30" path="res://ui/menus/main_scene.gd" id="1_gyfs4"]
-[ext_resource type="Texture2D" uid="uid://bcn2nqa6yu1b7" path="res://assets/sprites/ui/_ (1).jpeg" id="2_66tet"]
+[ext_resource type="Texture2D" uid="uid://b63smvsvyqycm" path="res://assets/sprites/ui/main-bg.jpeg" id="2_66tet"]
 [ext_resource type="Script" uid="uid://cqhfnym1ly5qk" path="res://ui/menus/background.gd" id="3_d5x1h"]
 [ext_resource type="Texture2D" uid="uid://b6ccpfv8bjp48" path="res://assets/sprites/world/logo.png" id="4_7ycvg"]
 [ext_resource type="Texture2D" uid="uid://bmayshqbpo34w" path="res://assets/sprites/world/button/btn-newgame.png" id="4_d5x1h"]
@@ -72,10 +72,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -60.0
-offset_top = -30.0
-offset_right = -60.0
-offset_bottom = -30.0
+offset_left = -119.0
+offset_top = -75.0
+offset_right = -56.454712
+offset_bottom = -12.272827
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.1, 1.1)
@@ -93,8 +93,9 @@ texture = ExtResource("4_7ycvg")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = -100.0
+offset_right = 170.0
+offset_bottom = 450.0
 theme_override_constants/margin_left = 170
 theme_override_constants/margin_top = 400
 

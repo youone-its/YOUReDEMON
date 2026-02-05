@@ -1,6 +1,7 @@
-[gd_scene load_steps=90 format=4 uid="uid://cpw3bnl47ynj1"]
+[gd_scene load_steps=102 format=4 uid="uid://cpw3bnl47ynj1"]
 
 [ext_resource type="Texture2D" uid="uid://c2bb1g0d3g1gt" path="res://assets/sprites/world/TX Tileset Grass.png" id="1_epypp"]
+[ext_resource type="Script" uid="uid://b7n3gau2rwg41" path="res://levels/Tutorial/tutorial_scene.gd" id="1_lbmqg"]
 [ext_resource type="Texture2D" uid="uid://di1brhu018nxn" path="res://assets/sprites/world/TX Tileset Stone Ground.png" id="1_wtcfe"]
 [ext_resource type="Texture2D" uid="uid://8wpwool4sb16" path="res://assets/sprites/world/Full Spritesheet.png" id="2_kdubu"]
 [ext_resource type="Texture2D" uid="uid://dwy82hndi3tlk" path="res://assets/sprites/world/TX Tileset Wall.png" id="3_0hol4"]
@@ -11,6 +12,15 @@
 [ext_resource type="Texture2D" uid="uid://sqvqpt2r7j8v" path="res://assets/sprites/world/Sprite-0001.png" id="7_lbmqg"]
 [ext_resource type="PackedScene" uid="uid://31vg3g8kq5eq" path="res://characters/enemies/Enemy_Template.tscn" id="9_j081x"]
 [ext_resource type="PackedScene" uid="uid://c5bego3noluuu" path="res://levels/props/lamp.tscn" id="10_e50u4"]
+[ext_resource type="PackedScene" uid="uid://bae2wiyqxmjrm" path="res://ui/menus/init.tscn" id="12_sri32"]
+[ext_resource type="Script" uid="uid://ceg7r2kum2a3g" path="res://levels/Tutorial/tutorial_trigger.gd" id="13_uij8h"]
+[ext_resource type="Script" uid="uid://dds5id3mdjh04" path="res://levels/Tutorial/switch_scene.gd" id="14_vehym"]
+[ext_resource type="Script" uid="uid://bx7lafr7wjc7d" path="res://levels/Tutorial/tutorial_teleport.gd" id="15_bcylt"]
+[ext_resource type="Texture2D" uid="uid://cyqhyv4sk8tyb" path="res://assets/items/flashlight.jpeg" id="15_vwe11"]
+[ext_resource type="PackedScene" uid="uid://c0dwq7bt16vvq" path="res://levels/props/collectible_item.tscn" id="16_3mmta"]
+[ext_resource type="Script" uid="uid://xwepoi557jtu" path="res://levels/boss_map_teleport.gd" id="16_m8srh"]
+[ext_resource type="Texture2D" uid="uid://hpprohxhgyy1" path="res://assets/items/key.jpeg" id="18_vwe11"]
+[ext_resource type="Script" uid="uid://ip2g3whj742c" path="res://levels/MainLevelTriggerLeveled.gd" id="21_tw7oy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epypp"]
 texture = ExtResource("1_epypp")
@@ -2027,8 +2037,14 @@ parsed_collision_mask = 4294901893
 source_geometry_mode = 1
 agent_radius = 8.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mdvu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3mmta"]
+radius = 36.05551
+
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_lbmqg")
 
 [node name="map" type="Node2D" parent="." groups=["navigation_polygon_source_geometry_group"]]
 y_sort_enabled = true
@@ -2069,6 +2085,486 @@ position = Vector2(265, 390)
 [node name="lamp5" parent="map/lamp" instance=ExtResource("10_e50u4")]
 position = Vector2(2, -18)
 
+[node name="MainMapLamp" type="Control" parent="map/lamp"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="lamp6" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4805, 120)
+
+[node name="lamp7" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5377, 398)
+
+[node name="lamp15" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4805, 720)
+
+[node name="lamp10" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5918, 120)
+
+[node name="lamp11" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5918, 720)
+
+[node name="lamp20" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5295, 1180)
+
+[node name="lamp21" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5429, 1283)
+
+[node name="lamp22" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6943, 1178)
+
+[node name="lamp29" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5829, 1290)
+
+[node name="lamp27" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6943, 2555)
+
+[node name="lamp28" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5830, 2553)
+
+[node name="lamp30" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6391, 1910)
+
+[node name="lamp16" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3988, 1186)
+
+[node name="lamp17" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3990, 1273)
+
+[node name="lamp18" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3879, 753)
+
+[node name="lamp19" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3965, 751)
+
+[node name="lamp158" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5659, 1596)
+
+[node name="lamp159" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5664, 1849)
+
+[node name="lamp160" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5093, 1870)
+
+[node name="lamp161" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5089, 1602)
+
+[node name="lamp23" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4125, 125)
+
+[node name="lamp24" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3749, 125)
+
+[node name="lamp25" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3804, 495)
+
+[node name="lamp26" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3808, 411)
+
+[node name="lamp31" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4130, 727)
+
+[node name="lamp32" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3748, 727)
+
+[node name="lamp33" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3703, 381)
+
+[node name="lamp34" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3703, 475)
+
+[node name="lamp35" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2561, 381)
+
+[node name="lamp36" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2559, 485)
+
+[node name="lamp37" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2518, 259)
+
+[node name="lamp38" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2519, 987)
+
+[node name="lamp39" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(1868, 987)
+
+[node name="lamp40" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(1869, 260)
+
+[node name="lamp41" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2180, 602)
+
+[node name="lamp42" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2563, 888)
+
+[node name="lamp43" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2563, 1017)
+
+[node name="lamp44" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3711, 902)
+
+[node name="lamp45" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2881, 662)
+
+[node name="lamp46" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3562, 1318)
+
+[node name="lamp47" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2925, 1365)
+
+[node name="lamp48" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2940, 2179)
+
+[node name="lamp49" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3954, 2186)
+
+[node name="lamp50" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3451, 1779)
+
+[node name="lamp51" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5317, 2812)
+
+[node name="lamp52" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5397, 2966)
+
+[node name="lamp55" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3574, 2938)
+
+[node name="lamp56" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3010, 2851)
+
+[node name="lamp57" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3550, 3768)
+
+[node name="lamp58" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3189, 3770)
+
+[node name="lamp59" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2983, 3298)
+
+[node name="lamp60" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2983, 3482)
+
+[node name="lamp61" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(998, 3290)
+
+[node name="lamp62" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(1247, 3481)
+
+[node name="lamp63" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(388, 3836)
+
+[node name="lamp64" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(388, 4218)
+
+[node name="lamp86" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(37, 4444)
+
+[node name="lamp87" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(39, 4946)
+
+[node name="lamp88" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(801, 4946)
+
+[node name="lamp89" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(799, 4524)
+
+[node name="lamp90" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(1004, 4418)
+
+[node name="lamp91" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(998, 5830)
+
+[node name="lamp92" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(1000, 5940)
+
+[node name="lamp93" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(670, 5309)
+
+[node name="lamp94" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(324, 5309)
+
+[node name="lamp95" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(669, 5829)
+
+[node name="lamp96" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(38, 6212)
+
+[node name="lamp97" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(35, 6648)
+
+[node name="lamp98" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(729, 6648)
+
+[node name="lamp99" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(735, 6218)
+
+[node name="lamp100" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(1819, 6025)
+
+[node name="lamp101" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(1001, 6778)
+
+[node name="lamp102" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(1819, 6778)
+
+[node name="lamp65" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(798, 4218)
+
+[node name="lamp66" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(800, 3930)
+
+[node name="lamp67" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(1249, 4154)
+
+[node name="lamp68" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(1249, 4218)
+
+[node name="lamp69" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2307, 4026)
+
+[node name="lamp70" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2844, 4028)
+
+[node name="lamp71" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2309, 4379)
+
+[node name="lamp72" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2842, 4379)
+
+[node name="lamp73" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3007, 4414)
+
+[node name="lamp74" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3717, 4532)
+
+[node name="lamp75" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4024, 4131)
+
+[node name="lamp76" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3850, 4663)
+
+[node name="lamp77" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3972, 4798)
+
+[node name="lamp78" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4101, 4920)
+
+[node name="lamp79" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4232, 5051)
+
+[node name="lamp103" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4360, 6057)
+
+[node name="lamp104" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4357, 6159)
+
+[node name="lamp127" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4361, 7139)
+
+[node name="lamp128" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6134, 6926)
+
+[node name="lamp129" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6123, 7165)
+
+[node name="lamp130" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6559, 7358)
+
+[node name="lamp131" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6114, 7703)
+
+[node name="lamp132" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(7050, 7637)
+
+[node name="lamp133" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(7193, 7637)
+
+[node name="lamp134" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(7721, 7714)
+
+[node name="lamp135" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(7595, 7235)
+
+[node name="lamp136" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(7589, 6787)
+
+[node name="lamp137" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(7709, 6433)
+
+[node name="lamp138" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(7041, 6298)
+
+[node name="lamp139" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6655, 5915)
+
+[node name="lamp140" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5030, 5788)
+
+[node name="lamp141" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5664, 5788)
+
+[node name="lamp142" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5664, 6491)
+
+[node name="lamp143" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5027, 6488)
+
+[node name="lamp144" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6527, 5823)
+
+[node name="lamp145" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(7072, 5592)
+
+[node name="lamp146" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6116, 5289)
+
+[node name="lamp147" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6125, 5592)
+
+[node name="lamp148" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5224, 5473)
+
+[node name="lamp149" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5909, 5124)
+
+[node name="lamp150" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5123, 5115)
+
+[node name="lamp151" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(5123, 3975)
+
+[node name="lamp152" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6607, 3989)
+
+[node name="lamp153" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6621, 4485)
+
+[node name="lamp154" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6970, 4099)
+
+[node name="lamp155" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6791, 4733)
+
+[node name="lamp156" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(7062, 5597)
+
+[node name="lamp157" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4434, 3361)
+
+[node name="lamp105" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4057, 5149)
+
+[node name="lamp106" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3935, 5019)
+
+[node name="lamp107" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3805, 4893)
+
+[node name="lamp108" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3678, 4761)
+
+[node name="lamp109" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3552, 4635)
+
+[node name="lamp110" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(1679, 4657)
+
+[node name="lamp111" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(1685, 5713)
+
+[node name="lamp112" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2437, 5849)
+
+[node name="lamp113" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2566, 5983)
+
+[node name="lamp114" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2693, 6108)
+
+[node name="lamp115" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2821, 6233)
+
+[node name="lamp116" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2949, 6362)
+
+[node name="lamp117" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3076, 7162)
+
+[node name="lamp118" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4190, 7163)
+
+[node name="lamp119" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3564, 7159)
+
+[node name="lamp120" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3703, 7159)
+
+[node name="lamp121" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3677, 7637)
+
+[node name="lamp122" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2308, 7829)
+
+[node name="lamp123" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2650, 7837)
+
+[node name="lamp124" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(2650, 6530)
+
+[node name="lamp125" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(1700, 7132)
+
+[node name="lamp126" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(1700, 7510)
+
+[node name="lamp80" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4159, 4217)
+
+[node name="lamp81" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4288, 4313)
+
+[node name="lamp82" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4415, 4409)
+
+[node name="lamp83" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4544, 4505)
+
+[node name="lamp84" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4669, 4600)
+
+[node name="lamp85" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(4799, 4700)
+
+[node name="lamp53" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(7100, 2934)
+
+[node name="lamp54" parent="map/lamp/MainMapLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(6957, 2934)
+
+[node name="MainMapBossLamp" type="Control" parent="map/lamp"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="lamp6" parent="map/lamp/MainMapBossLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3187, 5471)
+
+[node name="lamp7" parent="map/lamp/MainMapBossLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3164, 5475)
+
+[node name="lamp8" parent="map/lamp/MainMapBossLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3145, 5491)
+
+[node name="lamp9" parent="map/lamp/MainMapBossLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3140, 5507)
+
+[node name="lamp11" parent="map/lamp/MainMapBossLamp" instance=ExtResource("10_e50u4")]
+position = Vector2(3210, 5474)
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
 color = Color(0.11858138, 0.11858138, 0.11858138, 1)
@@ -2084,7 +2580,254 @@ texture = SubResource("GradientTexture2D_e50u4")
 navigation_polygon = SubResource("NavigationPolygon_lbmqg")
 
 [node name="Player" parent="." instance=ExtResource("7_4h7uv")]
-position = Vector2(336, 706)
+position = Vector2(337, 696)
+
+[node name="Node2D" parent="." instance=ExtResource("12_sri32")]
+
+[node name="TutorialTrigger" type="Area2D" parent="." groups=["player"]]
+position = Vector2(574, 587)
+collision_mask = 3
+script = ExtResource("13_uij8h")
+chat_event_id = "tutorial_torch"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger2" type="Area2D" parent="." groups=["player"]]
+position = Vector2(337, 708)
+collision_mask = 3
+script = ExtResource("13_uij8h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger2"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger3" type="Area2D" parent="." groups=["player"]]
+position = Vector2(1322, 623)
+collision_mask = 3
+script = ExtResource("13_uij8h")
+chat_event_id = "tutorial_chat"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger3"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger4" type="Area2D" parent="." groups=["player"]]
+position = Vector2(1210, 844)
+collision_mask = 3
+script = ExtResource("13_uij8h")
+chat_event_id = "tutorial_final_objective"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger4"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger5" type="Area2D" parent="." groups=["player"]]
+position = Vector2(1215, 868)
+collision_mask = 3
+script = ExtResource("14_vehym")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTrigger5"]
+shape = SubResource("CircleShape2D_3mmta")
+
+[node name="Button" type="Button" parent="TutorialTrigger5"]
+visible = false
+z_index = 100
+offset_left = -3.0
+offset_top = -58.0
+offset_right = 31.0
+offset_bottom = -27.0
+scale = Vector2(0.3304072, 0.35982928)
+text = "[M]"
+
+[node name="TutorialTeleport" type="Area2D" parent="." groups=["player"]]
+position = Vector2(5999, 717)
+collision_mask = 3
+script = ExtResource("15_bcylt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTeleport"]
+shape = SubResource("CircleShape2D_3mmta")
+
+[node name="Button" type="Button" parent="TutorialTeleport"]
+visible = false
+z_index = 100
+offset_left = -3.0
+offset_top = -58.0
+offset_right = 31.0
+offset_bottom = -27.0
+scale = Vector2(0.3304072, 0.35982928)
+text = "[M]"
+
+[node name="BossMapTeleport" type="Area2D" parent="." groups=["player"]]
+position = Vector2(3810, 5825)
+collision_mask = 3
+script = ExtResource("16_m8srh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossMapTeleport"]
+shape = SubResource("CircleShape2D_3mmta")
+
+[node name="Button" type="Button" parent="BossMapTeleport"]
+visible = false
+z_index = 100
+offset_left = -3.0
+offset_top = -58.0
+offset_right = 31.0
+offset_bottom = -27.0
+scale = Vector2(0.3304072, 0.35982928)
+text = "[M]"
 
 [node name="Enemy" parent="." instance=ExtResource("9_j081x")]
-position = Vector2(404, 632)
+position = Vector2(434, 301)
+light_rotation_speed = 60.0
+
+[node name="CollectibleItem" parent="." instance=ExtResource("16_3mmta")]
+position = Vector2(275, 277)
+scale = Vector2(0.6537564, 0.6394761)
+collision_layer = 2
+collision_mask = 11
+item_id = "flashlight"
+item_name = "flashlight"
+texture_icon = ExtResource("15_vwe11")
+chat_event_id = "found_torch"
+
+[node name="CollectibleItem2" parent="." instance=ExtResource("16_3mmta")]
+position = Vector2(776.0001, 221)
+scale = Vector2(0.6537564, 0.6394761)
+collision_layer = 2
+collision_mask = 11
+item_id = "key1"
+item_name = "key1"
+texture_icon = ExtResource("18_vwe11")
+chat_event_id = ""
+
+[node name="CollectibleItem3" parent="." instance=ExtResource("16_3mmta")]
+position = Vector2(4642.0005, 738)
+scale = Vector2(0.6537564, 0.6394761)
+collision_layer = 2
+collision_mask = 11
+item_id = "key2"
+item_name = "key2"
+texture_icon = ExtResource("18_vwe11")
+chat_event_id = ""
+
+[node name="CollectibleItem4" parent="." instance=ExtResource("16_3mmta")]
+position = Vector2(1198, 4349)
+scale = Vector2(0.6537564, 0.6394761)
+collision_layer = 2
+collision_mask = 11
+item_id = "key3"
+item_name = "key3"
+texture_icon = ExtResource("18_vwe11")
+chat_event_id = ""
+
+[node name="CollectibleItem5" parent="." instance=ExtResource("16_3mmta")]
+position = Vector2(7514.0005, 5766)
+scale = Vector2(0.6537564, 0.6394761)
+collision_layer = 2
+collision_mask = 11
+item_id = "key4"
+item_name = "key4"
+texture_icon = ExtResource("18_vwe11")
+chat_event_id = ""
+
+[node name="CollectibleItem6" parent="." instance=ExtResource("16_3mmta")]
+position = Vector2(8291, 7982)
+scale = Vector2(0.6537564, 0.6394761)
+collision_layer = 2
+collision_mask = 11
+item_id = "key5"
+item_name = "key5"
+texture_icon = ExtResource("18_vwe11")
+chat_event_id = ""
+
+[node name="TriggerLocationChatMainMap" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TutorialTrigger12" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(6008, 718.00024)
+scale = Vector2(5.579018, 5.7623987)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "beginning"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger12"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger6" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(5984.0005, 3201.0002)
+scale = Vector2(5.579018, 5.7623987)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "Pengecoh1"
+layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger6"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger7" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(7647, 4402)
+scale = Vector2(5.579018, 5.7623987)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "Pengecoh2"
+layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger7"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger8" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(5532, 6407.0005)
+scale = Vector2(5.579018, 5.7623987)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "Pengecoh3"
+layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger8"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger9" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(4270, 7555.0005)
+scale = Vector2(5.579018, 5.7623987)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "Pengecoh4"
+layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger9"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger10" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(1461.9998, 6187)
+scale = Vector2(5.579018, 5.7623987)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "Pengecoh5"
+layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger10"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger11" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(1731, 4499)
+scale = Vector2(9.3636, 9.24283)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "Pengecoh6"
+layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger11"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[node name="TutorialTrigger13" type="Area2D" parent="TriggerLocationChatMainMap" groups=["player"]]
+position = Vector2(3803, 5804)
+scale = Vector2(9.3636, 9.24283)
+collision_mask = 3
+script = ExtResource("21_tw7oy")
+chat_event_id = "Came_Earlier"
+is_anchor = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger13"]
+shape = SubResource("RectangleShape2D_3mdvu")
+
+[connection signal="body_entered" from="TutorialTrigger2" to="Player" method="_on_tutorial_trigger_2_body_entered"]

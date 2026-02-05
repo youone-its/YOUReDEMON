@@ -9,7 +9,7 @@ var hidden_offset: float = 500.0 # Lebar UI kamu
 
 const COLORS = {
 	ChatData.Type.DEVIL: Color.RED,
-	ChatData.Type.OBSERVER: Color.WHITE,
+	ChatData.Type.OBSERVER: Color.BLACK,
 	ChatData.Type.TROLL: Color.MEDIUM_PURPLE
 }
 
@@ -145,20 +145,26 @@ func _process(_delta):
 			# Aktifkan kembali jika bukan di grup menu
 			if not self.visible: self.visible = true
 
-func toggle_chat_ui():
+func toggle_chat():
+	# Pastikan default_x sudah terisi (terkadang _ready belum sempat ambil nilai)
+	if default_x == 0:
+		default_x = ui_shell.position.x
+		
 	var tween = create_tween().set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 	
 	if is_chat_showing:
-		# MENUTUP: Geser ke kanan sejauh lebar UI (852 + 300 = 1152)
+		# MENUTUP: Geser ke kanan
 		var target_x = default_x + hidden_offset
 		tween.tween_property(ui_shell, "position:x", target_x, 0.4)
 		is_chat_showing = false
+		print("Chat ditutup ke X: ", target_x)
 	else:
-		# MEMBUKA: Kembali ke posisi awal (852)
+		# MEMBUKA: Kembali ke posisi awal
 		tween.tween_property(ui_shell, "position:x", default_x, 0.4)
 		is_chat_showing = true
+		print("Chat dibuka ke X: ", default_x)
 		
 func check_chat_input(event: InputEvent):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == GameData.chat_toggle_key:
-			toggle_chat_ui()
+			toggle_chat()

@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var interaction_label = $InteractionLabel # Sesuaikan nama node labelmu
+#@onready var interaction_label = $InteractionLabel # Sesuaikan nama node labelmu
 var is_player_inside: bool = false
 var target_scene: String = "uid://cpw3bnl47ynj1"
 
@@ -8,18 +8,25 @@ func _ready():
 	# Hubungkan sinyal secara internal
 	self.body_entered.connect(_on_body_entered)
 	self.body_exited.connect(_on_body_exited)
-	interaction_label.hide() # Pastikan tersembunyi saat awal
+	#interaction_label.hide() # Pastikan tersembunyi saat awal
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
 		is_player_inside = true
-		interaction_label.show() # Tampilkan notif "M"
+		#interaction_label.show() # Tampilkan notif "M"
+		if has_node("Button"):
+			var btn = $Button
+			btn.show()
+			btn.z_index = 10 # Paksa Z-Index via script
+			print("Label [M] seharusnya muncul sekarang.")
 		print("Player bisa berinteraksi (Tekan M)")
 
 func _on_body_exited(body):
 	if body.is_in_group("player"):
 		is_player_inside = false
-		interaction_label.hide() # Sembunyikan notif "M"
+		if has_node("Button"):
+			$yButton.hide()
+		#interaction_label.hide() # Sembunyikan notif "M"
 
 func _input(event):
 	# Cek apakah player di dalam area dan menekan tombol M
@@ -29,8 +36,11 @@ func _input(event):
 
 func _change_scene():
 	print("Pindah ke scene baru...")
-	# Simpan data sebelum pindah jika diperlukan
-	if GameData.has_method("save_game"):
-		GameData.save_game()
-	
-	get_tree().change_scene_to_file(target_scene)
+	# Cari pemain di dalam group "player"
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		print("Teleporting player ke posisi baru...")
+		# Ubah posisi global pemain ke koordinat yang kamu inginkan
+		player.global_position = Vector2(5987.0, 474.0)
+	else:
+		print("Error: Player tidak ditemukan!")

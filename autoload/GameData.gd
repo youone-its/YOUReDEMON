@@ -19,6 +19,11 @@ signal stats_changed
 var is_loading_from_save: bool = false
 var item_left: String = "none"
 var item_right: String = "none"
+var has_flashlight: bool = false # Simpan status kepemilikan senter
+var last_scene: String = ""      # Opsional: Untuk fitur "Continue"
+var current_map_state: String = "tutorial" # "tutorial", "main", "boss"
+
+var defeated_enemy_names: Array = []
 
 func find_empty_slot() -> int:
 	for i in range(1, 4):
@@ -46,6 +51,7 @@ func reset_data():
 	altars_status = [false, false, false, false] # Reset saat New Game
 	current_scene_path = ""
 	is_loading_from_save = false
+	defeated_enemy_names = []
 
 func save_game():
 	if current_slot == -1:
@@ -69,8 +75,10 @@ func save_game():
 			"pos_x_boss": boss_position.x,
 			"completed_chats": completed_chats,
 			"chat_history": chat_history,
-			"scene_path": current_scene_path, # TAMBAHKAN INI
-			"altars_status": altars_status
+			"scene_path": current_scene_path,
+			"has_flashlight": has_flashlight, # TAMBAHKAN INI
+			"altars_status": altars_status,
+			"defeated_enemy_names": defeated_enemy_names,
 		}
 		file.store_var(data)
 		file.close()
@@ -105,7 +113,9 @@ func load_data_from_slot(slot: int):
 		completed_chats = data.get("completed_chats", []) 
 		chat_history = data.get("chat_history", []) # Ambil data history
 		current_scene_path = data.get("scene_path", "")
+		has_flashlight = data.get("has_flashlight", false)
 		altars_status = data.get("altars_status", [false, false, false, false])
+		defeated_enemy_names = data.get("defeated_enemy_names", [])
 		
 		current_slot = slot 
 		file.close()

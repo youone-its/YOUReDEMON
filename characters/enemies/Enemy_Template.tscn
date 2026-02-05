@@ -150,6 +150,11 @@ region = Rect2(512, 512, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ldlpo"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uyegb")
@@ -289,8 +294,7 @@ script = ExtResource("1_roaming")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ldlpo")
-animation = &"walk_down"
-frame_progress = 0.488224
+animation = &"new_animation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 17)
@@ -310,7 +314,8 @@ avoidance_enabled = true
 radius = 2.0
 
 [node name="Flashlight area" type="Area2D" parent="."]
-collision_layer = 16
+collision_layer = 24
+collision_mask = 3
 
 [node name="light collider" type="CollisionPolygon2D" parent="Flashlight area"]
 polygon = PackedVector2Array(0, 0, 37, 132, -37, 132)

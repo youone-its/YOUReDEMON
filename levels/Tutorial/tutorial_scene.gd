@@ -3,8 +3,8 @@ extends Node2D
 # --- Node References ---
 @onready var player = $Player
 @onready var game_ui = $Node2D  # Ini adalah node hijau (Instanced Scene UI)
-@onready var chat_box = $Node2D/LiveChat/Control/ScrollContainer/ChatBox # Sesuaikan path-nya
-@onready var scroll_container = $Node2D/LiveChat/Control/ScrollContainer
+@onready var chat_box = $LiveChat/Control/ScrollContainer/ChatBox # Sesuaikan path-nya
+@onready var scroll_container = $LiveChat/Control/ScrollContainer
 
 # --- Data untuk Save System ---
 var save_path = "user://tutorial_data.save"
@@ -16,6 +16,10 @@ var tutorial_stats = {
 
 func _ready():
 	# Memuat data lama jika ada
+	if GameData.is_loading_from_save and GameData.player_position != Vector2(-1, -1):
+		player.global_position = GameData.player_position
+		# Reset flag setelah digunakan agar tidak teleport terus saat ganti scene biasa
+		GameData.is_loading_from_save = false
 	load_game()
 	
 	# Update Status Bar saat mulai
@@ -78,3 +82,21 @@ func show_quit_menu():
 		# Jika tidak ada fungsi di dalam, kita paksa show node-nya
 		var quit_node = game_ui.find_child("Quit*", true, false)
 		if quit_node: quit_node.show()
+
+func prepare_save_data():
+	# 1. Update Posisi & Scene
+	GameData.player_position = player.global_position
+	GameData.current_scene_path = get_tree().current_scene.scene_file_path
+	
+	# 2. Update Status Senter dari Player
+	# Kita simpan variabel 'can_use_flashlight' milik player ke GameData
+	GameData.has_flashlight = player.can_use_flashlight
+	
+	# 3. Update Item dari Inventory (init.gd)
+	# Karena init.gd biasanya adalah anak dari Root atau di CanvasLayer
+	# Pastikan path-nya benar. Jika script init.gd menempel di node 'UI'
+	var ui_node = $CanvasLayer/UI # Sesuaikan dengan nama node init.gd mu
+	if ui_node:
+		# Kita ambil array items dari script init.gd dan pindahkan ke GameData
+		GameData.items = ui_node.items_di_tas 
+		# Catatan: Pastikan di init.gd kamu punya variabel 'items' yang menampung data

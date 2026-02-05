@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 # States
 enum State { ROAMING, CHASING, SEARCHING, STUNNED }
+enum EnemyTier { LOW, MID, HIGH }
 var current_state: State = State.ROAMING
 var previous_state: State = State.ROAMING
 
@@ -9,6 +10,8 @@ var previous_state: State = State.ROAMING
 @export var roam_speed: float = 50.0
 @export var chase_speed: float = 100.0
 @export var roam_radius: float = 200.0
+@export var tier: EnemyTier = EnemyTier.LOW
+var has_attacked: bool = false
 
 # Detection
 @export var light_rotation_speed: float = 45.0  # Degrees per second
@@ -51,6 +54,9 @@ func _ready():
 	await get_tree().process_frame
 	_find_player_flashlight()
 	call_deferred("_setup_navigation")
+	if name in GameData.defeated_enemy_names:
+		queue_free()
+		return
 
 func _setup_navigation():
 	if nav_agent:
@@ -77,7 +83,32 @@ func _physics_process(delta):
 	# Move based on navigation (skip if stunned)
 	if current_state != State.STUNNED:
 		_move_toward_target(delta)
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().is_in_group("player"):
+			_apply_possession_effect(collision.get_collider())
 
+func _apply_possession_effect(player_node):
+	if has_attacked: return
+	has_attacked = true # Kunci agar tidak terkena berkali-kali dalam 1 frame
+	
+	print("Enemy merasuki player! Tier: ", tier)
+	
+	match tier:
+		EnemyTier.LOW:
+			player_node.demonized(10)
+			player_node.take_damage(5)
+		EnemyTier.MID:
+			player_node.demonized(10)
+			player_node.take_damage(15)
+		EnemyTier.HIGH:
+			player_node.demonized(20)
+			player_node.take_damage(15)
+			
+	# Efek suara atau partikel bisa ditambah di sini sebelum queue_free
+	queue_free() # Enemy menghilang (ceritanya merasuki)
+	
 func _process_roaming(delta):
 	# Slowly rotate light while roaming
 	if roam_wait_timer > 0:
