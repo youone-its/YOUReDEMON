@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://b5w8qxm7ymjfd"]
+[gd_scene format=3 uid="uid://b5w8qxm7ymjfd"]
 
 [ext_resource type="Script" uid="uid://cf4l2nrlnyflk" path="res://characters/player/player.gd" id="1_p8wc7"]
 [ext_resource type="Texture2D" uid="uid://dv05m2wpdvjcf" path="res://assets/sprites/player/TX Player.png" id="2_xxgcw"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://qgeka7oktumh" path="res://levels/props/fog.tscn" id="3_exd8k"]
 [ext_resource type="Texture2D" uid="uid://b2cs37btheqif" path="res://assets/textures/flashlight_beam.jpg" id="5_ixbpm"]
 [ext_resource type="Texture2D" uid="uid://dgyy6atvr56sm" path="res://assets/sprites/player/Shadow.png" id="6_c6leb"]
+[ext_resource type="AudioStream" uid="uid://bd77yn58qo6yu" path="res://assets/Sound/footstep/Footsteps Loop 3 (Rpg).wav" id="7_dirf7"]
+[ext_resource type="AudioStream" uid="uid://utq3spgojgss" path="res://assets/Sound/item/Flashlight_on.ogg" id="8_rpf03"]
+[ext_resource type="AudioStream" uid="uid://dagmuf5gl3xdm" path="res://assets/Sound/item/Flashlight_off.ogg" id="9_x5dtk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_exd8k"]
 atlas = ExtResource("2_xxgcw")
@@ -405,70 +408,71 @@ fill_from = Vector2(0.47863248, 0.50427353)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ixbpm"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1716555222 groups=["player"]]
 y_sort_enabled = true
 collision_layer = 10
 collision_mask = 11
 script = ExtResource("1_p8wc7")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1813092953]
 scale = Vector2(0.17, 0.17)
 sprite_frames = SubResource("SpriteFrames_player")
 animation = &"idle_topright"
 autoplay = "idle_down"
 
-[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D"]
+[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D" unique_id=1746962434]
+visible = false
 z_as_relative = false
 position = Vector2(0, 121.94116)
 scale = Vector2(2.9411762, 2.9411762)
 texture = ExtResource("6_c6leb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1108319993]
 position = Vector2(0.5, 13)
 shape = SubResource("CircleShape2D_xxgcw")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2053884998]
 zoom = Vector2(2, 2)
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=872393105]
 position = Vector2(0.5, 13)
 target_position = Vector2(-0.5, 30)
 collision_mask = 4
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1500046099]
 position = Vector2(0, 7.885)
 scale = Vector2(4.22, 4.22)
-energy = 0.5
+energy = 0.3
 shadow_enabled = true
 shadow_filter = 2
 texture = SubResource("GradientTexture2D_xxgcw")
 texture_scale = 1.73
 
-[node name="fog" parent="." instance=ExtResource("3_exd8k")]
+[node name="fog" parent="." unique_id=541496225 instance=ExtResource("3_exd8k")]
 visible = false
 
-[node name="PointLight2D2" type="PointLight2D" parent="."]
+[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=66179974]
 position = Vector2(0, 13)
 color = Color(1, 1, 0.7254902, 1)
-energy = 0.8
+energy = 0.9
 shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("5_ixbpm")
 offset = Vector2(0, 96.87)
 texture_scale = 0.14
 
-[node name="Flashlight area" type="Area2D" parent="PointLight2D2"]
+[node name="Flashlight area" type="Area2D" parent="PointLight2D2" unique_id=938531209]
 position = Vector2(0, 6.8700027)
 collision_layer = 16
 collision_mask = 8
 
-[node name="light collider" type="CollisionPolygon2D" parent="PointLight2D2/Flashlight area"]
+[node name="light collider" type="CollisionPolygon2D" parent="PointLight2D2/Flashlight area" unique_id=1983454312]
 polygon = PackedVector2Array(0, 0, 37, 132, -37, 132)
 
-[node name="StaminaUI" type="CanvasLayer" parent="."]
+[node name="StaminaUI" type="CanvasLayer" parent="." unique_id=1379896338]
 layer = 100
 
-[node name="StaminaBarRight" type="ProgressBar" parent="StaminaUI"]
+[node name="StaminaBarRight" type="ProgressBar" parent="StaminaUI" unique_id=1398874322]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -485,7 +489,7 @@ max_value = 5.0
 value = 5.0
 show_percentage = false
 
-[node name="StaminaBarLeft" type="ProgressBar" parent="StaminaUI"]
+[node name="StaminaBarLeft" type="ProgressBar" parent="StaminaUI" unique_id=1054806832]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -502,3 +506,17 @@ max_value = 5.0
 value = 5.0
 fill_mode = 1
 show_percentage = false
+
+[node name="sfx" type="Node2D" parent="." unique_id=962894439]
+
+[node name="sfx_footstep" type="AudioStreamPlayer2D" parent="sfx" unique_id=1084542459]
+stream = ExtResource("7_dirf7")
+volume_db = 10.0
+
+[node name="sfx_flashlight_on" type="AudioStreamPlayer2D" parent="sfx" unique_id=955538796]
+stream = ExtResource("8_rpf03")
+volume_db = 10.0
+
+[node name="sfx_flashlight_off" type="AudioStreamPlayer2D" parent="sfx" unique_id=1146910735]
+stream = ExtResource("9_x5dtk")
+volume_db = 10.0

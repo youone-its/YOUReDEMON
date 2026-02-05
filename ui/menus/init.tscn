@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://bae2wiyqxmjrm"]
+[gd_scene format=3 uid="uid://bae2wiyqxmjrm"]
 
 [ext_resource type="Script" uid="uid://dim48v67bq8ta" path="res://ui/menus/init.gd" id="1_l5jql"]
 [ext_resource type="Texture2D" uid="uid://dyry12urjursx" path="res://assets/sprites/world/button/background_button.png" id="2_jfiip"]
 [ext_resource type="Texture2D" uid="uid://pfxh7qs2qf1c" path="res://assets/sprites/world/button/btn-save.png" id="3_rl1sc"]
 [ext_resource type="Texture2D" uid="uid://bfhpwyqq7vwks" path="res://assets/sprites/world/button/btn-quit.png" id="4_biyos"]
 [ext_resource type="Texture2D" uid="uid://hfhtfeekk3u3" path="res://assets/sprites/world/button/btn-cancel.png" id="5_b74tb"]
+[ext_resource type="AudioStream" uid="uid://dpjddmc1g5iq8" path="res://assets/Sound/click/Menu_Select_00.mp3" id="6_rl1sc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lqjjr"]
 
@@ -49,16 +50,16 @@ bg_color = Color(0.2410156, 0.08625394, 0.67543423, 1)
 [sub_resource type="Theme" id="Theme_hft3m"]
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_ggcy8")
 
-[node name="Node2D" type="Control"]
+[node name="Node2D" type="Control" unique_id=546266785]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1
 script = ExtResource("1_l5jql")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=915041295]
 
-[node name="QuitConfirmation" type="Panel" parent="CanvasLayer"]
+[node name="QuitConfirmation" type="Panel" parent="CanvasLayer" unique_id=1838531126]
 custom_minimum_size = Vector2(300, 100)
 anchors_preset = 8
 anchor_left = 0.5
@@ -73,7 +74,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_lqjjr")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/QuitConfirmation"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/QuitConfirmation" unique_id=1530258138]
 visible = false
 layout_mode = 1
 offset_right = 40.0
@@ -81,7 +82,7 @@ offset_bottom = 40.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_jfiip")
 
-[node name="StatusLabel" type="Label" parent="CanvasLayer/QuitConfirmation"]
+[node name="StatusLabel" type="Label" parent="CanvasLayer/QuitConfirmation" unique_id=1545126774]
 layout_mode = 0
 offset_right = 439.0
 offset_bottom = 23.0
@@ -90,14 +91,14 @@ text = "
    Are You Sure Want to quit?"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/QuitConfirmation"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/QuitConfirmation" unique_id=1665465661]
 layout_mode = 0
 offset_left = 165.0
 offset_top = 55.0
 offset_right = 217.0
 offset_bottom = 178.0
 
-[node name="SaveExitBtn" type="Button" parent="CanvasLayer/QuitConfirmation/VBoxContainer"]
+[node name="SaveExitBtn" type="Button" parent="CanvasLayer/QuitConfirmation/VBoxContainer" unique_id=1342930783]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_qcqaj")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_amf1g")
@@ -107,14 +108,14 @@ text = "Save
 
 "
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/QuitConfirmation/VBoxContainer/SaveExitBtn"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/QuitConfirmation/VBoxContainer/SaveExitBtn" unique_id=2084054166]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.07, 0.07)
 texture = ExtResource("3_rl1sc")
 
-[node name="JustExitBtn" type="Button" parent="CanvasLayer/QuitConfirmation/VBoxContainer"]
+[node name="JustExitBtn" type="Button" parent="CanvasLayer/QuitConfirmation/VBoxContainer" unique_id=814283250]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_y4i7e")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_fkamf")
@@ -125,14 +126,14 @@ text = "Exit
 
 "
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/QuitConfirmation/VBoxContainer/JustExitBtn"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/QuitConfirmation/VBoxContainer/JustExitBtn" unique_id=1977078491]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.07, 0.07)
 texture = ExtResource("4_biyos")
 
-[node name="CancelBtn" type="Button" parent="CanvasLayer/QuitConfirmation/VBoxContainer"]
+[node name="CancelBtn" type="Button" parent="CanvasLayer/QuitConfirmation/VBoxContainer" unique_id=776858114]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8qwin")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_xruft")
@@ -141,30 +142,30 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_af5jb")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_idqt6")
 text = "Cancel"
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/QuitConfirmation/VBoxContainer/CancelBtn"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/QuitConfirmation/VBoxContainer/CancelBtn" unique_id=575275766]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.14, 0.14)
 texture = ExtResource("5_b74tb")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=20584450]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HPBar" type="ProgressBar" parent="CanvasLayer/VBoxContainer"]
+[node name="HPBar" type="ProgressBar" parent="CanvasLayer/VBoxContainer" unique_id=378958471]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = SubResource("Theme_q245y")
 step = 1.0
 rounded = true
 
-[node name="DemonBar" type="ProgressBar" parent="CanvasLayer/VBoxContainer"]
+[node name="DemonBar" type="ProgressBar" parent="CanvasLayer/VBoxContainer" unique_id=1710416719]
 layout_mode = 2
 theme = SubResource("Theme_hft3m")
 step = 1.0
 
-[node name="InventoryWindow" type="Panel" parent="CanvasLayer"]
+[node name="InventoryWindow" type="Panel" parent="CanvasLayer" unique_id=1108666233]
 process_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -181,12 +182,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="GridBarang" type="GridContainer" parent="CanvasLayer/InventoryWindow"]
+[node name="GridBarang" type="GridContainer" parent="CanvasLayer/InventoryWindow" unique_id=169153850]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 columns = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/InventoryWindow/GridBarang"]
+[node name="Label" type="Label" parent="CanvasLayer/InventoryWindow/GridBarang" unique_id=117802631]
 layout_mode = 2
 text = "\"Tekan 1 untuk Pakai\""
+
+[node name="sfx_button" type="AudioStreamPlayer2D" parent="." unique_id=1422589606]
+stream = ExtResource("6_rl1sc")

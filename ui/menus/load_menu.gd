@@ -60,6 +60,7 @@ func _create_slot_button(slot_num: int):
 	save_list.add_child(btn)
 
 func _show_preview(slot_num: int):
+	GameData.play_click_sound()
 	selected_slot = slot_num
 	var data = GameData.load_data_from_slot(slot_num)
 	
@@ -85,6 +86,7 @@ func _show_preview(slot_num: int):
 		confirm_btn.grab_focus()
 
 func _on_confirm_load_btn_pressed():
+	GameData.play_click_sound()
 	if selected_slot > 0:
 		# Panggil ulang load untuk memastikan is_loading_from_save = true
 		GameData.load_data_from_slot(selected_slot)
@@ -96,6 +98,7 @@ func _on_confirm_load_btn_pressed():
 			get_tree().change_scene_to_file("uid://bae2wiyqxmjrm")
 
 func _on_delete_pressed():
+	GameData.play_click_sound()
 	if selected_slot > 0:
 		# Jalankan penghapusan file
 		GameData.delete_save_slot(selected_slot)
@@ -112,6 +115,7 @@ func _reset_preview_ui():
 	delete_btn.hide()
 
 func _on_back_btn_pressed():
+	GameData.play_click_sound()
 	get_tree().change_scene_to_file("uid://cnw4e8w572xwd")
 
 func _input(event):

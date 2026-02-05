@@ -34,6 +34,7 @@ var roam_wait_timer: float = 0.0
 var roam_wait_duration: float = 2.0
 var is_stunned: bool = false
 var player_flashlight_area: Area2D = null
+var footstep_player: AudioStreamPlayer2D = null
 
 func _ready():
 	spawn_position = global_position
@@ -57,6 +58,8 @@ func _ready():
 	if name in GameData.defeated_enemy_names:
 		queue_free()
 		return
+	
+	setup_audio()
 
 func _setup_navigation():
 	if nav_agent:
@@ -88,6 +91,34 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		if collision.get_collider().is_in_group("player"):
 			_apply_possession_effect(collision.get_collider())
+			
+	update_audio_playback()
+
+func setup_audio():
+	footstep_player = AudioStreamPlayer2D.new()
+	# Use a different footstep sound for the enemy to differentiate
+	footstep_player.stream = load("res://assets/Sound/footstep/Footsteps Loop 2 (Rpg).wav")
+	footstep_player.volume_db = 10
+	footstep_player.max_distance = 500 # Spatial audio - only hear when close
+	add_child(footstep_player)
+
+func update_audio_playback():
+	if not footstep_player:
+		return
+		
+	# Check if moving (velocity > 0) and not stunned
+	if velocity.length() > 0 and current_state != State.STUNNED:
+		if not footstep_player.playing:
+			footstep_player.play()
+		
+		# Faster pitch when chasing
+		if current_state == State.CHASING:
+			footstep_player.pitch_scale = 1.5
+		else:
+			footstep_player.pitch_scale = 1.0
+	else:
+		if footstep_player.playing:
+			footstep_player.stop()
 
 func _apply_possession_effect(player_node):
 	if has_attacked: return

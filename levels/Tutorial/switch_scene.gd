@@ -25,7 +25,7 @@ func _on_body_exited(body):
 	if body.is_in_group("player"):
 		is_player_inside = false
 		if has_node("Button"):
-			$yButton.hide()
+			$Button.hide()
 		#interaction_label.hide() # Sembunyikan notif "M"
 
 func _input(event):

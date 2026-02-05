@@ -27,6 +27,7 @@ func _update_ui():
 	selected_command = ""
 
 func _on_edit_save_pressed():
+	GameData.play_click_sound()
 	if not is_editing:
 		is_editing = true
 		edit_save_btn.text = "Save"
@@ -38,6 +39,7 @@ func _on_edit_save_pressed():
 		_update_ui() # Reset status editing dan teks tombol
 		
 func _on_trigger_pressed(command_name: String):
+	GameData.play_click_sound()
 	if is_editing:
 		selected_command = command_name
 		# Hanya tombol yang diklik yang berubah jadi ???
@@ -66,4 +68,5 @@ func _input(event):
 			get_node("/root/LiveChat").check_chat_input(event)
 			
 func _on_back_pressed():
+	GameData.play_click_sound()
 	get_tree().change_scene_to_file("uid://cnw4e8w572xwd")

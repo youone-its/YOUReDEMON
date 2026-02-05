@@ -30,6 +30,8 @@ func _on_button_hover(btn: Button, is_hover: bool):
 
 # --- SISTEM NAVIGASI ---
 func _on_button_pressed(button_name: String):
+	play_click_sound()
+	
 	match button_name:
 		"NewGameBtn":
 			var empty_slot = GameData.find_empty_slot()
@@ -62,3 +64,12 @@ func _input(event):
 	# Menjalankan pengecekan tombol Q (Quit) dari GameData
 	# Karena ini di Main Menu, GameData akan memicu get_tree().quit()
 	GameData.check_quit_input(event)
+
+func play_click_sound():
+	var sfx = AudioStreamPlayer.new()
+	sfx.stream = load("res://assets/Sound/click/Menu_Select_00.mp3")
+	# Add to root to ensure it plays even if scene changes
+	get_tree().root.add_child(sfx)
+	sfx.play()
+	# Clean up after playing
+	sfx.finished.connect(sfx.queue_free)
