@@ -27,6 +27,10 @@ var f_key_was_pressed: bool = false
 var can_use_flashlight: bool = false
 var footstep_player: AudioStreamPlayer2D = null
 var flashlight_sfx_player: AudioStreamPlayer2D = null
+var demon_vignette: ColorRect = null
+var vignette_layer: CanvasLayer = null
+
+@export_range(0.0, 1.0) var vignette_max_depth: float = 0.5 # 0.5 = Moderate fog at max level
 
 func _ready():
 	# Add the player to the "player" group for easy reference
@@ -45,6 +49,48 @@ func _ready():
 		print("Senter dipulihkan dari Save Data")
 	
 	setup_audio()
+	setup_demon_vignette()
+
+func setup_demon_vignette():
+	# Create a dedicated CanvasLayer for the vignette
+	# Layer 0 ensures it renders ABOVE the game world but BELOW standard UI (usually Layer 1+)
+	vignette_layer = CanvasLayer.new()
+	vignette_layer.name = "VignetteLayer"
+	vignette_layer.layer = 0 
+	add_child(vignette_layer)
+	
+	# Create ColorRect for Vignette
+	demon_vignette = ColorRect.new()
+	demon_vignette.name = "DemonVignette"
+	demon_vignette.set_anchors_preset(Control.PRESET_FULL_RECT)
+	demon_vignette.mouse_filter = Control.MOUSE_FILTER_IGNORE # Don't block clicks
+	
+	# Setup Shader Material
+	var shader = load("res://shader/demon_vignette.gdshader")
+	var vignette_mat = ShaderMaterial.new()
+	vignette_mat.shader = shader
+	demon_vignette.material = vignette_mat
+	
+	# Add to the dedicated layer
+	vignette_layer.add_child(demon_vignette)
+	
+	update_demon_vignette()
+
+func update_demon_vignette():
+	if not demon_vignette or not demon_vignette.material:
+		return
+	
+	# Current Demon Level (0.0 to 1.0)
+	var raw_level = float(GameData.demonized_level) / 100.0
+	
+	# Pass Intensity to Shader
+	# We scale the raw level by max_depth.
+	# If max_depth is 0.5, then "intensity" sent to shader is 0.5 at level 100.
+	# The shader handles logic scaling based on this intensity.
+	var final_intensity = raw_level * vignette_max_depth
+	
+	var mat = demon_vignette.material as ShaderMaterial
+	mat.set_shader_parameter("intensity", final_intensity)
 
 func setup_raycast():
 	# Check if raycast exists, if not skip
@@ -180,6 +226,7 @@ func _physics_process(delta):
 	update_animation()
 	update_raycast()
 	update_audio_playback()
+	update_demon_vignette()
 
 func update_animation():
 	var anim_sprite = $AnimatedSprite2D
