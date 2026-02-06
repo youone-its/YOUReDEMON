@@ -11,9 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://b5w8qxm7ymjfd" path="res://characters/player/player.tscn" id="7_4h7uv"]
 [ext_resource type="Texture2D" uid="uid://sqvqpt2r7j8v" path="res://assets/sprites/world/Sprite-0001.png" id="7_lbmqg"]
 [ext_resource type="PackedScene" uid="uid://31vg3g8kq5eq" path="res://characters/enemies/Enemy_Template.tscn" id="9_j081x"]
+[ext_resource type="PackedScene" uid="uid://dtxf6jidy0qn3" path="res://characters/save_point.tscn" id="10_7u4c1"]
 [ext_resource type="PackedScene" uid="uid://c5bego3noluuu" path="res://levels/props/lamp.tscn" id="10_e50u4"]
 [ext_resource type="Script" uid="uid://yatvt0aosag3" path="res://levels/CameraSystem.gd" id="11_kgb5v"]
-[ext_resource type="PackedScene" uid="uid://bae2wiyqxmjrm" path="res://ui/menus/init.tscn" id="12_sri32"]
 [ext_resource type="Script" uid="uid://ceg7r2kum2a3g" path="res://levels/Tutorial/tutorial_trigger.gd" id="13_uij8h"]
 [ext_resource type="Script" uid="uid://dds5id3mdjh04" path="res://levels/Tutorial/switch_scene.gd" id="14_vehym"]
 [ext_resource type="Script" uid="uid://bx7lafr7wjc7d" path="res://levels/Tutorial/tutorial_teleport.gd" id="15_bcylt"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://kebx5r22ore0" path="res://assets/items/flashlight.png" id="21_kgb5v"]
 [ext_resource type="Script" uid="uid://ip2g3whj742c" path="res://levels/MainLevelTriggerLeveled.gd" id="21_tw7oy"]
 [ext_resource type="AudioStream" uid="uid://br25u3ebf6w2n" path="res://assets/Sound/ambiance/da.ogg" id="22_0bu0r"]
+[ext_resource type="VideoStream" uid="uid://b6lx28ns2t816" path="res://assets/cutscenes/intro.ogv" id="24_7u4c1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epypp"]
 texture = ExtResource("1_epypp")
@@ -2084,7 +2085,7 @@ tile_set = SubResource("TileSet_d21ai")
 
 [node name="propsTileMapLayer" type="TileMapLayer" parent="map" unique_id=1481849055 groups=["navigation_polygon_source_geometry_group"]]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAARAAoAAgAJAAIAAAAHAA4AAgALAAUAAAAMAA4AAgALAAUAAAAMAAwAAgALAAUAAAAVAA0AAgANAAYAAAAVAAcAAgANAAYAAAAHAAYAAgALAAUAAAAJAAkAAgANAAAAAAA=")
+tile_map_data = PackedByteArray("AAARAAoAAgAJAAIAAAAHAA4AAgALAAUAAAAMAA4AAgALAAUAAAAMAAwAAgALAAUAAAAVAA0AAgANAAYAAAAVAAcAAgANAAYAAAAHAAYAAgALAAUAAAA=")
 tile_set = SubResource("TileSet_kdubu")
 
 [node name="world boundary" type="StaticBody2D" parent="map" unique_id=565253712]
@@ -2107,6 +2108,17 @@ shape = SubResource("SegmentShape2D_0bu0r")
 [node name="wb4" type="CollisionShape2D" parent="map/world boundary" unique_id=1559830036]
 position = Vector2(811, 1216)
 shape = SubResource("SegmentShape2D_0bu0r")
+
+[node name="Savepoint" type="Node2D" parent="map" unique_id=1672532280]
+position = Vector2(304, 304)
+
+[node name="tutor" parent="map/Savepoint" unique_id=1391185146 instance=ExtResource("10_7u4c1")]
+
+[node name="StaticBody2D" parent="map/Savepoint" unique_id=1620448192 instance=ExtResource("10_7u4c1")]
+position = Vector2(4336, 312)
+
+[node name="StaticBody2D2" parent="map/Savepoint" unique_id=1119706939 instance=ExtResource("10_7u4c1")]
+position = Vector2(5704, 296)
 
 [node name="lamp" type="Node2D" parent="map" unique_id=1660847368 groups=["navigation_polygon_source_geometry_group"]]
 position = Vector2(622, 290)
@@ -2642,8 +2654,6 @@ stream = ExtResource("22_0bu0r")
 autoplay = true
 parameters/looping = true
 
-[node name="Node2D" parent="." unique_id=717950574 instance=ExtResource("12_sri32")]
-
 [node name="Trigger" type="Node2D" parent="." unique_id=1585142129]
 
 [node name="TutorialTrigger" type="Area2D" parent="Trigger" unique_id=1286671938 groups=["player"]]
@@ -2703,7 +2713,7 @@ text = "[M]"
 position = Vector2(574, 587)
 
 [node name="Enemy" parent="Enemies" unique_id=115557959 instance=ExtResource("9_j081x")]
-position = Vector2(-140, -286)
+position = Vector2(642, 39)
 
 [node name="TutorialTeleport" type="Area2D" parent="." unique_id=2086332610 groups=["player"]]
 position = Vector2(5999, 717)
@@ -2897,22 +2907,13 @@ is_anchor = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLocationChatMainMap/TutorialTrigger13" unique_id=659233000]
 shape = SubResource("RectangleShape2D_3mdvu")
 
-[node name="Enemy" parent="." unique_id=616278094 instance=ExtResource("9_j081x")]
-position = Vector2(312, 371)
+[node name="Cutscenes" type="Node" parent="." unique_id=13047708]
 
-[node name="Enemy2" parent="." unique_id=106310904 instance=ExtResource("9_j081x")]
-position = Vector2(549, 389)
-
-[node name="Enemy3" parent="." unique_id=1625985615 instance=ExtResource("9_j081x")]
-position = Vector2(344, 258)
-
-[node name="Enemy4" parent="." unique_id=322732878 instance=ExtResource("9_j081x")]
-position = Vector2(507, 248)
-
-[node name="Enemy5" parent="." unique_id=1127360324 instance=ExtResource("9_j081x")]
-position = Vector2(397, 234)
-
-[node name="Enemy6" parent="." unique_id=316671979 instance=ExtResource("9_j081x")]
-position = Vector2(595, 254)
+[node name="Intro" type="VideoStreamPlayer" parent="Cutscenes" unique_id=93579652]
+offset_left = 1216.0
+offset_top = 626.0
+offset_right = 3136.0
+offset_bottom = 1706.0
+stream = ExtResource("24_7u4c1")
 
 [connection signal="body_entered" from="Trigger/TutorialTrigger2" to="Player" method="_on_tutorial_trigger_2_body_entered"]

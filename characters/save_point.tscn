@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dtxf6jidy0qn3"]
 
 [ext_resource type="Texture2D" uid="uid://dpt13gpmrnob8" path="res://assets/sprites/world/TX Props.png" id="1_xy5p0"]
+[ext_resource type="Script" path="res://characters/save_point.gd" id="2_script"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q6n12"]
 size = Vector2(37, 25)
@@ -376,6 +377,7 @@ fill = 1
 fill_from = Vector2(0.47863248, 0.50427353)
 
 [node name="StaticBody2D" type="StaticBody2D" unique_id=1391185146]
+script = ExtResource("2_script")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1863858193]
 position = Vector2(-0.5, 0.5)

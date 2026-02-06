@@ -25,6 +25,7 @@ var current_map_state: String = "tutorial" # "tutorial", "main", "boss"
 var needs_transition_entry: bool = false # For scene transitions
 
 var defeated_enemy_names: Array = []
+var visited_save_points: Dictionary = {}
 
 func find_empty_slot() -> int:
 	for i in range(1, 4):
@@ -49,6 +50,7 @@ func reset_data():
 	completed_chats = []
 	chat_history = [] # Reset history saat New Game agar bersih
 	current_slot = -1
+	visited_save_points = {}
 	
 func play_click_sound():
 	var sfx = AudioStreamPlayer.new()
@@ -89,6 +91,7 @@ func save_game():
 			"has_flashlight": has_flashlight, # TAMBAHKAN INI
 			"altars_status": altars_status,
 			"defeated_enemy_names": defeated_enemy_names,
+			"visited_save_points": visited_save_points,
 		}
 		file.store_var(data)
 		file.close()
@@ -126,6 +129,7 @@ func load_data_from_slot(slot: int):
 		has_flashlight = data.get("has_flashlight", false)
 		altars_status = data.get("altars_status", [false, false, false, false])
 		defeated_enemy_names = data.get("defeated_enemy_names", [])
+		visited_save_points = data.get("visited_save_points", {})
 		
 		current_slot = slot 
 		file.close()
