@@ -286,7 +286,6 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uyegb"]
-radius = 12.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=616278094]
 collision_layer = 8

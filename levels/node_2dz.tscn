@@ -17,10 +17,10 @@
 [ext_resource type="Script" uid="uid://ceg7r2kum2a3g" path="res://levels/Tutorial/tutorial_trigger.gd" id="13_uij8h"]
 [ext_resource type="Script" uid="uid://dds5id3mdjh04" path="res://levels/Tutorial/switch_scene.gd" id="14_vehym"]
 [ext_resource type="Script" uid="uid://bx7lafr7wjc7d" path="res://levels/Tutorial/tutorial_teleport.gd" id="15_bcylt"]
-[ext_resource type="Texture2D" uid="uid://cyqhyv4sk8tyb" path="res://assets/items/flashlight.png" id="15_vwe11"]
 [ext_resource type="PackedScene" uid="uid://c0dwq7bt16vvq" path="res://levels/props/collectible_item.tscn" id="16_3mmta"]
 [ext_resource type="Script" uid="uid://xwepoi557jtu" path="res://levels/boss_map_teleport.gd" id="16_m8srh"]
-[ext_resource type="Texture2D" uid="uid://hpprohxhgyy1" path="res://assets/items/key.png" id="18_vwe11"]
+[ext_resource type="Texture2D" uid="uid://dvpscb8j7jqk1" path="res://assets/items/key.png" id="21_0bu0r"]
+[ext_resource type="Texture2D" uid="uid://kebx5r22ore0" path="res://assets/items/flashlight.png" id="21_kgb5v"]
 [ext_resource type="Script" uid="uid://ip2g3whj742c" path="res://levels/MainLevelTriggerLeveled.gd" id="21_tw7oy"]
 [ext_resource type="AudioStream" uid="uid://br25u3ebf6w2n" path="res://assets/Sound/ambiance/da.ogg" id="22_0bu0r"]
 
@@ -2050,6 +2050,18 @@ agent_radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_3mmta"]
 radius = 36.05551
 
+[sub_resource type="Resource" id="Resource_kgb5v"]
+metadata/__load_path__ = "res://assets/items/key.jpeg"
+
+[sub_resource type="Resource" id="Resource_7u4c1"]
+metadata/__load_path__ = "res://assets/items/key.jpeg"
+
+[sub_resource type="Resource" id="Resource_gcb48"]
+metadata/__load_path__ = "res://assets/items/key.jpeg"
+
+[sub_resource type="Resource" id="Resource_o7s4o"]
+metadata/__load_path__ = "res://assets/items/key.jpeg"
+
 [node name="Node2D" type="Node2D" unique_id=982536775]
 y_sort_enabled = true
 script = ExtResource("1_lbmqg")
@@ -2692,7 +2704,6 @@ position = Vector2(574, 587)
 
 [node name="Enemy" parent="Enemies" unique_id=115557959 instance=ExtResource("9_j081x")]
 position = Vector2(-140, -286)
-light_rotation_speed = 60.0
 
 [node name="TutorialTeleport" type="Area2D" parent="." unique_id=2086332610 groups=["player"]]
 position = Vector2(5999, 717)
@@ -2740,7 +2751,7 @@ collision_layer = 2
 collision_mask = 11
 item_id = "flashlight"
 item_name = "flashlight"
-texture_icon = ExtResource("15_vwe11")
+texture_icon = ExtResource("21_kgb5v")
 chat_event_id = "found_torch"
 
 [node name="CollectibleItem2" parent="Items" unique_id=1731129314 instance=ExtResource("16_3mmta")]
@@ -2750,7 +2761,7 @@ collision_layer = 2
 collision_mask = 11
 item_id = "key1"
 item_name = "key1"
-texture_icon = ExtResource("18_vwe11")
+texture_icon = ExtResource("21_0bu0r")
 chat_event_id = ""
 
 [node name="CollectibleItem3" parent="Items" unique_id=1914835797 instance=ExtResource("16_3mmta")]
@@ -2760,7 +2771,7 @@ collision_layer = 2
 collision_mask = 11
 item_id = "key2"
 item_name = "key2"
-texture_icon = ExtResource("18_vwe11")
+texture_icon = SubResource("Resource_kgb5v")
 chat_event_id = ""
 
 [node name="CollectibleItem4" parent="Items" unique_id=440924470 instance=ExtResource("16_3mmta")]
@@ -2770,7 +2781,7 @@ collision_layer = 2
 collision_mask = 11
 item_id = "key3"
 item_name = "key3"
-texture_icon = ExtResource("18_vwe11")
+texture_icon = SubResource("Resource_7u4c1")
 chat_event_id = ""
 
 [node name="CollectibleItem5" parent="Items" unique_id=737409474 instance=ExtResource("16_3mmta")]
@@ -2780,7 +2791,7 @@ collision_layer = 2
 collision_mask = 11
 item_id = "key4"
 item_name = "key4"
-texture_icon = ExtResource("18_vwe11")
+texture_icon = SubResource("Resource_gcb48")
 chat_event_id = ""
 
 [node name="CollectibleItem6" parent="Items" unique_id=1142980413 instance=ExtResource("16_3mmta")]
@@ -2790,7 +2801,7 @@ collision_layer = 2
 collision_mask = 11
 item_id = "key5"
 item_name = "key5"
-texture_icon = ExtResource("18_vwe11")
+texture_icon = SubResource("Resource_o7s4o")
 chat_event_id = ""
 
 [node name="TriggerLocationChatMainMap" type="Control" parent="." unique_id=1632662498]

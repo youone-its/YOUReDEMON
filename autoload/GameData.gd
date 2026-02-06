@@ -181,10 +181,17 @@ func is_quit_pressed(event: InputEvent) -> bool:
 func execute_offer_effect(offer_id: String):
 	match offer_id:
 		"soul_trade_01":
+			var scene_tree = get_tree().current_scene
 			var player = get_tree().current_scene.find_child("Player", true, false)
+			var canvas_mod = scene_tree.find_child("CanvasModulate", true, false)
+			
 			if player:
-				player.demonized(10) # Memanggil fungsi di player.gd
+				player.demonized(10)
 				print("Efek dieksekusi ke Player")
+			if canvas_mod:
+				# RGBA(0, 0, 0, 255) di Godot dibaca sebagai Color(0, 0, 0, 1)
+				canvas_mod.color = Color(0, 0, 0, 1) 
+				print("Layar menjadi hitam")
 		"TROLL_1":
 			var player = get_tree().current_scene.find_child("Player", true, false)
 			if player:
@@ -197,6 +204,20 @@ func execute_offer_effect(offer_id: String):
 			var player = get_tree().current_scene.find_child("Player", true, false)
 			if player:
 				player.demonized(5)
+		"TROLL_M_1":
+			var player = get_tree().current_scene.find_child("Player", true, false)
+			if player:
+				player.take_damage(5)
+		"TROLL_BC_1":
+			var player = get_tree().current_scene.find_child("Player", true, false)
+			if player:
+				player.take_damage(5)
+				player.demonized(5)
+		"DEVIL_BC_1":
+			var player = get_tree().current_scene.find_child("Player", true, false)
+			if player:
+				player.take_damage(15)
+				player.demonized(15)
 				
 func execute_offer_effect_rejection(offer_id: String):
 	match offer_id:
