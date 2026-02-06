@@ -57,7 +57,13 @@ func _input(event):
 		return
 
 	# 2. Toggle Inventory (SPACE) - Fitur Baru
-	if event.is_action_pressed("toggle_inventory"):
+	# Fallback manual key check incase input action is missing/borked
+	var is_toggle = event.is_action_pressed("toggle_inventory")
+	if not is_toggle and event is InputEventKey and event.pressed:
+		if event.keycode == KEY_SPACE or event.keycode == KEY_I:
+			is_toggle = true
+			
+	if is_toggle:
 		_toggle_inventory()
 		get_viewport().set_input_as_handled()
 		return
@@ -82,6 +88,7 @@ func _input(event):
 # --- LOGIKA INVENTORY ---
 
 func _toggle_inventory():
+	print("Toggling Inventory! Current: ", inventory_window.visible)
 	inventory_window.visible = !inventory_window.visible
 	get_tree().paused = inventory_window.visible # Pause game saat buka tas
 	

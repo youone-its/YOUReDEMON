@@ -57,7 +57,14 @@ func _on_body_exited(body):
 
 func _input(event):
 	# Hanya eksekusi jika player di dalam area dan tekan tombol interact
-	if player_in_range and event.is_action_pressed("interact"):
+	# Tambahkan check KEY_C manual untuk debug/fallback
+	var is_interact = event.is_action_pressed("interact")
+	if not is_interact and event is InputEventKey and event.pressed:
+		if event.keycode == KEY_C or event.keycode == KEY_E or event.keycode == KEY_F:
+			is_interact = true
+			
+	if player_in_range and is_interact:
+		print("Interaction detected! Collecting...")
 		collect_item()
 
 #func collect_item():

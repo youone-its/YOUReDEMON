@@ -26,6 +26,7 @@ var needs_transition_entry: bool = false # For scene transitions
 
 var defeated_enemy_names: Array = []
 var visited_save_points: Dictionary = {}
+var intro_played: bool = false
 
 func find_empty_slot() -> int:
 	for i in range(1, 4):
@@ -50,6 +51,7 @@ func reset_data():
 	completed_chats = []
 	chat_history = [] # Reset history saat New Game agar bersih
 	current_slot = -1
+	intro_played = false
 	visited_save_points = {}
 	
 func play_click_sound():
