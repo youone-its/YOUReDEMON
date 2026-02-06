@@ -17,10 +17,10 @@
 [ext_resource type="Script" uid="uid://ceg7r2kum2a3g" path="res://levels/Tutorial/tutorial_trigger.gd" id="13_uij8h"]
 [ext_resource type="Script" uid="uid://dds5id3mdjh04" path="res://levels/Tutorial/switch_scene.gd" id="14_vehym"]
 [ext_resource type="Script" uid="uid://bx7lafr7wjc7d" path="res://levels/Tutorial/tutorial_teleport.gd" id="15_bcylt"]
-[ext_resource type="Texture2D" uid="uid://cyqhyv4sk8tyb" path="res://assets/items/flashlight.jpeg" id="15_vwe11"]
+[ext_resource type="Texture2D" uid="uid://cyqhyv4sk8tyb" path="res://assets/items/flashlight.png" id="15_vwe11"]
 [ext_resource type="PackedScene" uid="uid://c0dwq7bt16vvq" path="res://levels/props/collectible_item.tscn" id="16_3mmta"]
 [ext_resource type="Script" uid="uid://xwepoi557jtu" path="res://levels/boss_map_teleport.gd" id="16_m8srh"]
-[ext_resource type="Texture2D" uid="uid://hpprohxhgyy1" path="res://assets/items/key.jpeg" id="18_vwe11"]
+[ext_resource type="Texture2D" uid="uid://hpprohxhgyy1" path="res://assets/items/key.png" id="18_vwe11"]
 [ext_resource type="Script" uid="uid://ip2g3whj742c" path="res://levels/MainLevelTriggerLeveled.gd" id="21_tw7oy"]
 [ext_resource type="AudioStream" uid="uid://br25u3ebf6w2n" path="res://assets/Sound/ambiance/da.ogg" id="22_0bu0r"]
 
