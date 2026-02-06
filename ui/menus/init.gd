@@ -64,6 +64,9 @@ func _input(event):
 			is_toggle = true
 			
 	if is_toggle:
+		if GameData.is_cutscene_playing:
+			return
+			
 		_toggle_inventory()
 		get_viewport().set_input_as_handled()
 		return
@@ -151,7 +154,12 @@ func _pakai_item_terpilih(btn_node: Button):
 func _show_quit_popup(is_death: bool = false):
 	get_tree().paused = true
 	quit_confirm_popup.show()
+	
 	if is_death:
+		$CanvasLayer.layer = 1200 # Pastikan di atas Death Layer (1100)
+		if has_node("CanvasLayer/VBoxContainer"): # Hide HUD
+			$CanvasLayer/VBoxContainer.hide()
+			
 		$CanvasLayer/QuitConfirmation/StatusLabel.text = "YOU ARE DEAD"
 		$CanvasLayer/QuitConfirmation/VBoxContainer/CancelBtn.hide()
 	else:

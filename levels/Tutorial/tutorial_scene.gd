@@ -49,6 +49,7 @@ func _check_and_play_intro():
 		play_intro_sequence()
 
 func play_intro_sequence():
+	GameData.is_cutscene_playing = true
 	var video_player = $Cutscenes/Intro
 	
 	# Hide LiveChat during intro
@@ -160,14 +161,20 @@ func play_intro_sequence():
 	print("Intro Finished - Starting Transition Out")
 	
 	# Fade Out Black (Transition Open - Black Version)
+	# Use set_pause_mode to ensure it runs even if something paused the tree
 	var tw = create_tween()
+	tw.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tw.tween_property(color_rect, "modulate:a", 0.0, 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	await tw.finished
+	
+	# Wait for timer instead of tween finished signal (safer)
+	await get_tree().create_timer(1.1).timeout
 	
 	print("Transition Done - Restoring Game State")
+	GameData.is_cutscene_playing = false
 	
 	# Cleanup
-	cutscene_layer.queue_free() # Ini akan menghapus video player juga, hati-hati jika perlu lagi
+	if is_instance_valid(cutscene_layer):
+		cutscene_layer.queue_free()
 	# Jika ingin video player kembali ke world, reparent balik. Tapi intro biasanya sekali.
 	
 	# Restore Live Chat

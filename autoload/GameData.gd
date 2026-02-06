@@ -18,6 +18,8 @@ signal quit_requested
 signal stats_changed
 var is_loading_from_save: bool = false
 var item_left: String = "none"
+var is_cutscene_playing: bool = false
+var intro_played: bool = false # Added to track if intro has played globally in session if needed, though tutorial_scene handles it locally usually. But let's check tutorial_scene usage.
 var item_right: String = "none"
 var has_flashlight: bool = false # Simpan status kepemilikan senter
 var last_scene: String = ""      # Opsional: Untuk fitur "Continue"
@@ -26,7 +28,6 @@ var needs_transition_entry: bool = false # For scene transitions
 
 var defeated_enemy_names: Array = []
 var visited_save_points: Dictionary = {}
-var intro_played: bool = false
 
 func find_empty_slot() -> int:
 	for i in range(1, 4):

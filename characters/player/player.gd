@@ -32,6 +32,8 @@ var transition_vignette: ColorRect = null
 var vignette_layer: CanvasLayer = null
 
 @export_range(0.0, 1.0) var vignette_max_depth: float = 0.5 # 0.5 = Moderate fog at max level
+@export var death_texture: Texture2D
+var is_dying: bool = false
 
 func _ready():
 	# Add the player to the "player" group for easy reference
@@ -414,7 +416,7 @@ func demonized(amount: int):
 	print("LOG: Demonized Level bertambah! Sekarang: ", GameData.demonized_level)
 	
 	# Batasi maksimal 100
-	if GameData.demonized_level > 100:
+	if GameData.demonized_level >= 100:
 		GameData.demonized_level = 100
 		die()
 
@@ -424,9 +426,59 @@ func undemonized(amount: int):
 		GameData.demonized_level = 0
 		
 func die():
+	if is_dying: return
+	is_dying = true
 	print("Player Mati!")
-	# Logika mati bisa memunculkan popup quit atau restart
+	
+	# Stop movement and input
+	speed = 0
+	run_speed = 0
+	set_physics_process(false)
+	
+	# 1. Bloody Transition In (Cover Screen)
+	if transition_vignette and transition_vignette.material:
+		var mat = transition_vignette.material as ShaderMaterial
+		var tw = create_tween()
+		tw.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS) # Run even if paused
+		# Intensity 2.5 ensures full redness
+		tw.tween_method(func(val): mat.set_shader_parameter("intensity", val), 0.0, 2.5, 2.0)\
+			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		await tw.finished
+
+	# 2. Show Death Sprite
+	var death_layer = CanvasLayer.new()
+	death_layer.name = "DeathLayer"
+	# Layer 1100 to be above LiveChat (1000) but below Menu UI (which we will bump to 1200)
+	death_layer.layer = 1100 
+	add_child(death_layer)
+	
+	# Hide Stamina UI if it exists
+	if has_node("StaminaUI"):
+		get_node("StaminaUI").visible = false
+	
+	var tex_rect = TextureRect.new()
+	if death_texture:
+		tex_rect.texture = death_texture
+	else:
+		# Fallback if no texture assigned
+		tex_rect.modulate = Color(0, 0, 0) # Black screen
+	
+	tex_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	# Ensure it covers everything
+	tex_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	death_layer.add_child(tex_rect)
+
+	# 3. Show UI (Pause Game + Quit Buttons)
+	# This will show generic "YOU ARE DEAD" popup from init.gd
 	GameData.quit_requested.emit()
+	
+	# 4. Transition Out (Reveal Death Sprite + UI)
+	if transition_vignette and transition_vignette.material:
+		var mat = transition_vignette.material as ShaderMaterial
+		var tw = create_tween()
+		tw.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+		tw.tween_method(func(val): mat.set_shader_parameter("intensity", val), 2.5, 0.0, 1.0)\
+			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func toggle_flashlight():
 	if not flashlight:

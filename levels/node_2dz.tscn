@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://ip2g3whj742c" path="res://levels/MainLevelTriggerLeveled.gd" id="21_tw7oy"]
 [ext_resource type="AudioStream" uid="uid://br25u3ebf6w2n" path="res://assets/Sound/ambiance/da.ogg" id="22_0bu0r"]
 [ext_resource type="VideoStream" uid="uid://bis488whs66ch" path="res://assets/cutscenes/output2.ogv" id="24_7u4c1"]
+[ext_resource type="Texture2D" uid="uid://bl8hkb4jd5m83" path="res://assets/cutscenes/Death Scene.png" id="25_o7s4o"]
 [ext_resource type="PackedScene" uid="uid://bae2wiyqxmjrm" path="res://ui/menus/init.tscn" id="25_ui_init"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epypp"]
@@ -2631,10 +2632,12 @@ smoothing_speed = 0.02
 
 [node name="Player" parent="." unique_id=993465265 instance=ExtResource("7_4h7uv")]
 position = Vector2(321, 722)
+death_texture = ExtResource("25_o7s4o")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player" unique_id=712060705]
 position = Vector2(237, -109)
 stream = ExtResource("22_0bu0r")
+volume_db = 4.0
 autoplay = true
 parameters/looping = true
 
@@ -2894,6 +2897,11 @@ shape = SubResource("RectangleShape2D_3mdvu")
 [node name="Cutscenes" type="Node" parent="." unique_id=13047708]
 
 [node name="Intro" type="VideoStreamPlayer" parent="Cutscenes" unique_id=93579652]
+offset_right = 1920.0
+offset_bottom = 1080.0
+stream = ExtResource("24_7u4c1")
+
+[node name="Intro2" type="VideoStreamPlayer" parent="Cutscenes" unique_id=751973381]
 offset_right = 1920.0
 offset_bottom = 1080.0
 stream = ExtResource("24_7u4c1")
