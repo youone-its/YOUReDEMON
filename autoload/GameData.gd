@@ -22,6 +22,7 @@ var item_right: String = "none"
 var has_flashlight: bool = false # Simpan status kepemilikan senter
 var last_scene: String = ""      # Opsional: Untuk fitur "Continue"
 var current_map_state: String = "tutorial" # "tutorial", "main", "boss"
+var needs_transition_entry: bool = false # For scene transitions
 
 var defeated_enemy_names: Array = []
 

@@ -28,6 +28,7 @@ var can_use_flashlight: bool = false
 var footstep_player: AudioStreamPlayer2D = null
 var flashlight_sfx_player: AudioStreamPlayer2D = null
 var demon_vignette: ColorRect = null
+var transition_vignette: ColorRect = null
 var vignette_layer: CanvasLayer = null
 
 @export_range(0.0, 1.0) var vignette_max_depth: float = 0.5 # 0.5 = Moderate fog at max level
@@ -50,31 +51,109 @@ func _ready():
 	
 	setup_audio()
 	setup_demon_vignette()
+	
+	if GameData.needs_transition_entry:
+		GameData.needs_transition_entry = false
+		play_transition_open()
 
 func setup_demon_vignette():
 	# Create a dedicated CanvasLayer for the vignette
-	# Layer 0 ensures it renders ABOVE the game world but BELOW standard UI (usually Layer 1+)
 	vignette_layer = CanvasLayer.new()
 	vignette_layer.name = "VignetteLayer"
 	vignette_layer.layer = 0 
 	add_child(vignette_layer)
 	
-	# Create ColorRect for Vignette
+	# Create ColorRect for Demon Vignette (Permanent)
 	demon_vignette = ColorRect.new()
 	demon_vignette.name = "DemonVignette"
 	demon_vignette.set_anchors_preset(Control.PRESET_FULL_RECT)
-	demon_vignette.mouse_filter = Control.MOUSE_FILTER_IGNORE # Don't block clicks
+	demon_vignette.mouse_filter = Control.MOUSE_FILTER_IGNORE 
 	
-	# Setup Shader Material
 	var shader = load("res://shader/demon_vignette.gdshader")
 	var vignette_mat = ShaderMaterial.new()
 	vignette_mat.shader = shader
 	demon_vignette.material = vignette_mat
-	
-	# Add to the dedicated layer
 	vignette_layer.add_child(demon_vignette)
 	
+	# Create separate CanvasLayer for Transition (Highest Priority)
+	var transition_layer = CanvasLayer.new()
+	transition_layer.name = "TransitionLayer"
+	transition_layer.layer = 127 # Covers UI and everything else
+	add_child(transition_layer)
+	
+	# Create ColorRect for Transition Vignette
+	# Reuse the same shader because it looks cool like "fog closing in"
+	transition_vignette = ColorRect.new()
+	transition_vignette.name = "TransitionVignette"
+	transition_vignette.set_anchors_preset(Control.PRESET_FULL_RECT)
+	transition_vignette.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	var trans_mat = ShaderMaterial.new()
+	trans_mat.shader = shader
+	transition_vignette.material = trans_mat
+	transition_layer.add_child(transition_vignette)
+	
+	# Initialize transition state (Invisible)
+	trans_mat.set_shader_parameter("intensity", 0.0) 
+	
 	update_demon_vignette()
+
+# --- TRANSITION SYSTEM ---
+func trigger_teleport_sequence(target_type: String, target_value: Variant):
+	# Block player input
+	speed = 0
+	run_speed = 0
+	set_physics_process(false)
+	
+	# 1. Close the fog (Transition In)
+	var tw = create_tween()
+	var mat = transition_vignette.material as ShaderMaterial
+	# Intensity 2.5 ensures full screen coverage based on our shader logic
+	tw.tween_method(func(val): mat.set_shader_parameter("intensity", val), 0.0, 2.5, 1.5)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	await tw.finished
+	
+	# 2. Perform Action (Move or Change Scene)
+	if target_type == "position":
+		global_position = target_value
+		
+		# Snap Camera immediately (no waiting)
+		var camera = get_viewport().get_camera_2d()
+		if camera:
+			camera.global_position = global_position
+			camera.reset_smoothing()
+			
+		# Open fog
+		play_transition_open()
+		
+	elif target_type == "scene":
+		GameData.needs_transition_entry = true
+		get_tree().change_scene_to_file(target_value)
+		# Note: The rest of this function won't run because node is destroyed
+		return
+
+func play_transition_open():
+	if not transition_vignette: return
+	
+	# Ensure blocked initially (if coming from scene change)
+	speed = 0 
+	set_physics_process(false)
+	
+	var mat = transition_vignette.material as ShaderMaterial
+	mat.set_shader_parameter("intensity", 2.5) # Ensure closed
+	
+	var tw = create_tween()
+	tw.tween_method(func(val): mat.set_shader_parameter("intensity", val), 2.5, 0.0, 1.5)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	await tw.finished
+	
+	# Restore Movement
+	# Restore default values (Make sure these match your export defaults)
+	speed = 100.0 
+	run_speed = 150.0
+	set_physics_process(true)
 
 func update_demon_vignette():
 	if not demon_vignette or not demon_vignette.material:

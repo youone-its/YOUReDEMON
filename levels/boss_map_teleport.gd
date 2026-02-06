@@ -71,4 +71,9 @@ func _check_requirement_and_teleport():
 
 func _change_scene():
 	print("Pindah ke scene baru...")
-	get_tree().change_scene_to_file(target_scene)
+	
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		player.trigger_teleport_sequence("scene", target_scene)
+	else:
+		get_tree().change_scene_to_file(target_scene)

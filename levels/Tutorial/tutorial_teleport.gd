@@ -41,6 +41,6 @@ func _change_scene():
 	if player:
 		print("Teleporting player ke posisi baru...")
 		# Ubah posisi global pemain ke koordinat yang kamu inginkan
-		player.global_position = Vector2(1215.0, 859.0)
+		player.trigger_teleport_sequence("position", Vector2(1215.0, 859.0))
 	else:
 		print("Error: Player tidak ditemukan!")
