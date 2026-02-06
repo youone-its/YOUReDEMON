@@ -1,3 +1,4 @@
+
 extends Control
 
 # --- HUD & SYSTEM ---
@@ -180,7 +181,8 @@ func _on_save_and_exit():
 	if GameData.save_game():
 		print("Save Berhasil!")
 		get_tree().paused = false
-		get_tree().change_scene_to_file("uid://cnw4e8w572xwd")
+		#get_tree().change_scene_to_file("uid://cnw4e8w572xwd")
+		get_tree().change_scene_to_file("uid://c1mn8w4qr4mkj")
 
 func _on_just_exit():
 	GameData.play_click_sound()
