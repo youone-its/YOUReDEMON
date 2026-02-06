@@ -2610,6 +2610,7 @@ position = Vector2(3140, 5507)
 position = Vector2(3210, 5474)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.11764706, 0.11764706, 0.11764706, 0)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
@@ -2632,6 +2633,7 @@ smoothing_speed = 0.02
 [node name="Player" parent="." instance=ExtResource("7_4h7uv")]
 position = Vector2(338, 695)
 death_texture = ExtResource("25_o7s4o")
+idle_threshold = 15.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 position = Vector2(237, -109)

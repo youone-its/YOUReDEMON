@@ -3,6 +3,8 @@ extends CharacterBody2D
 # Movement speed in pixels per second
 @export var speed: float = 100.0
 @export var run_speed: float = 150.0
+@export var idle_threshold: float = 10.0
+@export var clue_timeout: float = 300.0
 
 # Stamina system
 @export var max_stamina: float = 5.0  # 5 seconds of running
@@ -10,7 +12,11 @@ var current_stamina: float = 5.0
 var stamina_drain_rate: float = 1.0  # Drains 1 per second
 var stamina_recharge_rate: float = 0.5  # Recharges 0.5 per second
 var is_running: bool = false
-
+var idle_timer: float = 0.0
+ # Berapa detik diam sebelum chat muncul
+var has_complained_about_idle: bool = false
+var key_timer: float = 0.0
+var is_searching_final_key: bool = false
 # Current direction for animations
 var current_direction: String = "down"
 var is_moving: bool = false
@@ -219,7 +225,7 @@ func setup_flashlight():
 		print("ERROR: PointLight2D2 not found!")
 
 func _physics_process(delta):
-	# Toggle flashlight with F key (detect single press)
+	# 1. Flashlight Toggle Logic
 	if Input.is_key_pressed(KEY_F):
 		if not f_key_was_pressed:
 			toggle_flashlight()
@@ -227,16 +233,12 @@ func _physics_process(delta):
 	else:
 		f_key_was_pressed = false
 	
-	# Update flashlight rotation to follow mouse
 	update_flashlight_rotation(delta)
 	
-	# Check if player wants to run (Shift key)
+	# 2. Movement Input Logic
 	var want_to_run = Input.is_key_pressed(KEY_SHIFT)
-	
-	# Get input direction
 	var input_direction = Vector2.ZERO
 	
-	# Check WASD keys
 	if Input.is_action_pressed("ui_up") or Input.is_key_pressed(KEY_W):
 		input_direction.y -= 1
 	if Input.is_action_pressed("ui_down") or Input.is_key_pressed(KEY_S):
@@ -246,68 +248,69 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_right") or Input.is_key_pressed(KEY_D):
 		input_direction.x += 1
 	
-	# Determine direction based on input (8 directions)
+	# 3. Movement & Direction States
 	if input_direction.length() > 0:
 		is_moving = true
-		
-		# Normalize for consistent speed
 		input_direction = input_direction.normalized()
 		
-		# Determine 8-directional facing
-		var angle = rad_to_deg(input_direction.angle())
+		# Reset Idle Timer saat bergerak
+		idle_timer = 0.0
+		has_complained_about_idle = false
 		
-		if angle >= -22.5 and angle < 22.5:
-			current_direction = "right"
-		elif angle >= 22.5 and angle < 67.5:
-			current_direction = "downright"
-		elif angle >= 67.5 and angle < 112.5:
-			current_direction = "down"
-		elif angle >= 112.5 and angle < 157.5:
-			current_direction = "downleft"
-		elif angle >= 157.5 or angle < -157.5:
-			current_direction = "left"
-		elif angle >= -157.5 and angle < -112.5:
-			current_direction = "topleft"
-		elif angle >= -112.5 and angle < -67.5:
-			current_direction = "up"
-		elif angle >= -67.5 and angle < -22.5:
-			current_direction = "topright"
+		var angle = rad_to_deg(input_direction.angle())
+		if angle >= -22.5 and angle < 22.5: current_direction = "right"
+		elif angle >= 22.5 and angle < 67.5: current_direction = "downright"
+		elif angle >= 67.5 and angle < 112.5: current_direction = "down"
+		elif angle >= 112.5 and angle < 157.5: current_direction = "downleft"
+		elif angle >= 157.5 or angle < -157.5: current_direction = "left"
+		elif angle >= -157.5 and angle < -112.5: current_direction = "topleft"
+		elif angle >= -112.5 and angle < -67.5: current_direction = "up"
+		elif angle >= -67.5 and angle < -22.5: current_direction = "topright"
 	else:
 		is_moving = false
+		
+		# --- LOGIKA IDLE TIMER ---
+		idle_timer += delta
+		if idle_timer >= idle_threshold and not has_complained_about_idle:
+			trigger_idle_chat()
+			has_complained_about_idle = true
 	
-	# Determine actual speed based on running and stamina
+	# 4. Stamina & Speed Calculation
 	var actual_speed = speed
 	is_running = false
 	
 	if want_to_run and is_moving and current_stamina > 0:
 		actual_speed = run_speed
 		is_running = true
-		# Drain stamina
 		current_stamina -= stamina_drain_rate * delta
-		if current_stamina < 0:
-			current_stamina = 0
-		# No stamina regeneration while running
+		if current_stamina < 0: current_stamina = 0
 	else:
-		# Recharge stamina only when not running
 		if not is_running and current_stamina < max_stamina:
 			current_stamina += stamina_recharge_rate * delta
-			if current_stamina > max_stamina:
-				current_stamina = max_stamina
+			if current_stamina > max_stamina: current_stamina = max_stamina
+			
+	check_final_key_timer(delta)
 	
-	# Update stamina bar
+	# 5. Physics & Execution
 	update_stamina_bar()
-	
-	# Set velocity
 	velocity = input_direction * actual_speed
-	
-	# Move the character
 	move_and_slide()
 	
-	# Update animation and raycast
+	# 6. Update Visuals & Audio
 	update_animation()
 	update_raycast()
 	update_audio_playback()
 	update_demon_vignette()
+
+# --- FUNGSI TRIGGER CHAT ---
+func trigger_idle_chat():
+	var idle_chats = ["diam1", "diam2", "diam3"]
+	var random_id = idle_chats[randi() % idle_chats.size()]
+	
+	var live_chat = get_node_or_null("/root/LiveChat")
+	if live_chat:
+		live_chat.trigger_chat(random_id, 1.0)
+		print("Player diam, memicu chat: ", random_id)
 
 func update_animation():
 	var anim_sprite = $AnimatedSprite2D
@@ -551,3 +554,45 @@ func update_audio_playback():
 	else:
 		if footstep_player.playing:
 			footstep_player.stop()
+
+func check_final_key_timer(delta):
+	# Hitung jumlah kunci yang mengandung kata "key" di inventory
+	var key_count = 0
+	for item in GameData.items:
+		if str(item).contains("key"):
+			key_count += 1
+	
+	# Jika punya 4 kunci dan belum menemukan yang ke-5
+	if key_count == 4:
+		if not is_searching_final_key:
+			is_searching_final_key = true
+			key_timer = 0.0
+			print("Sistem: Player punya 4 kunci. Timer 5 menit dimulai...")
+		
+		# Jalankan timer
+		key_timer += delta
+		
+		# Jika waktu habis (5 menit)
+		if key_timer >= clue_timeout:
+			trigger_big_clues()
+			# Reset agar tidak trigger berulang kali dalam satu sesi
+			is_searching_final_key = false 
+			key_timer = -999999 # Matikan timer selamanya sampai ganti status
+			
+	# Jika player akhirnya menemukan kunci ke-5 sebelum 5 menit
+	elif key_count >= 5:
+		is_searching_final_key = false
+		key_timer = 0.0
+
+func trigger_big_clues():
+	var live_chat = get_node_or_null("/root/LiveChat")
+	if live_chat:
+		# Memicu BigClue1 (Huli Jing)
+		live_chat.trigger_chat("BigClue1", 1.0)
+		
+		# Memicu BigClue1D (Lucifer) setelah delay sangat singkat 
+		# agar keduanya muncul hampir bersamaan di UI
+		await get_tree().create_timer(0.5).timeout
+		live_chat.trigger_chat("BigClue1D", 1.0)
+		
+		print("Sistem: 5 menit berlalu! Memicu tawaran dari Huli Jing dan Lucifer.")
